@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>One Piece Universe</title>
+</head>
+<body>
+  <h1>ONE PIECE UNIVERSE</h1>
+  <form action="/addCharacter" method="POST">
+    <input type="text" placeholder="Character Name" name="charName">
+    <input type="text" placeholder="Character Age" name="charAge">
+    <input type="text" placeholder="Fruit Type" name="charFruit">
+    <input type="text" placeholder="Haki Type" name="charHaki">
+    <input type="text" placeholder="Img URL" name="imgURL">
+    <input id="addCharBtn" type="submit">
+  </form>
+
+    <section id="cardSection">
+      <%for(let i = 0; i < info.length; i++){%>
+        <div class="characterCard" id=<%=info[i]._id%>>
+          <img src=<%=info[i].imgURL%>>
+          <div>
+          <span><%=info[i].charName%></span>
+          </div>
+          <span><%=info[i].charAge%> years old</span>
+          <div>
+          <span><%=info[i].charhaki%></span>
+          <span><%=info[i].charFruit%></span>
+          </div>
+          <button class="editCard" id=<%=info[i].id%>>Edit</button>
+        </div>
+      <%}%>
+    </section>
+    <div class="updateCard">
+      <input type="text" id="charNameU">
+      <input type="text" id="charAgeU">
+      <input type="text" id="charFruitU">
+      <input type="text" id="charHakiU">
+      <input type="text" id="imgURLU">
+      <button id="updateCardBtn">Update</button>
+    </div>
+  
+  <script src="js/main.js"></script>
+</body>
+</html>
