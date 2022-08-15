@@ -37,7 +37,7 @@ app.post('/addCharacter', (request, response) =>{
     {charName: request.body.charName, charAge: request.body.charAge,
       charFruit: request.body.charFruit, charhaki: request.body.charHaki,
       imgURL: request.body.imgURL,
-      id: Math.ceil(Math.random()*1000).toString()
+      id: Math.ceil(Math.random()*Date.now()).toString()
     })
   .then(result =>{
     console.log('Character added!');

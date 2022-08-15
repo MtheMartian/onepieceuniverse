@@ -2,6 +2,7 @@ const characterCard = {
   submitChar: document.querySelector('#addCharBtn'),
   updateCharCard: document.querySelectorAll('.editCard'),
   actualUpdateBtn: document.querySelector('#updateCardBtn'),
+  updateForm: document.querySelector('.updateCard'),
   characterId: ""
 }
 
@@ -9,6 +10,7 @@ Array.from(characterCard.updateCharCard).forEach((x, i) =>{
   characterCard.updateCharCard[i].onclick = getCardId;
 })
 
+characterCard.updateForm.classList.add('hidden');
 characterCard.actualUpdateBtn.addEventListener('click', updateCard);
 
 async function updateCard(){
@@ -43,4 +45,9 @@ async function updateCard(){
 function getCardId(event){
   characterCard.characterId = event.srcElement.id
   console.log(characterCard.characterId);
+  unHideIt(characterCard.updateForm);
+}
+
+function unHideIt(element){
+  element.classList.remove('hidden');
 }
