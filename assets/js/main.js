@@ -3,6 +3,7 @@ const characterCard = {
   updateCharCard: document.querySelectorAll('.editCard'),
   actualUpdateBtn: document.querySelector('#updateCardBtn'),
   updateForm: document.querySelector('.updateCard'),
+  deleteCard: document.querySelector('#deleteCard'),
   characterId: ""
 }
 
@@ -12,6 +13,7 @@ Array.from(characterCard.updateCharCard).forEach((x, i) =>{
 
 characterCard.updateForm.classList.add('hidden');
 characterCard.actualUpdateBtn.addEventListener('click', updateCard);
+characterCard.deleteCard.addEventListener('click', deleteCard);
 
 async function updateCard(){
   const cardId = characterCard.characterId;
@@ -40,6 +42,25 @@ async function updateCard(){
     console.log(`Didn't work! ${err}`);
     location.reload();
   }
+}
+
+async function deleteCard(){
+  try{
+    const response = await fetch('/deleteCard',{
+      method: 'delete',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'itemFromJS': characterCard.characterId
+      })
+    })
+    const data = await response.json();
+    location.reload();
+  }
+  catch(err){
+    console.log(`Woopsie! ${err}`);
+    location.reload();
+  }
+
 }
 
 function getCardId(event){

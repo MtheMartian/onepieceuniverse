@@ -70,6 +70,17 @@ app.put('/updateCard', (request, response) =>{
   })
 })
 
+app.delete('/deleteCard', (request, response) =>{
+  db.collection('characters').deleteOne({id: request.body.itemFromJS})
+  .then(result =>{
+    console.log('Deleted!');
+    response.redirect('/');
+  })
+  .catch(err =>{
+    console.log(`Shoot, it didn't work! ${err}`);
+  })
+})
+
 app.listen(process.env.PORT || PORT, () =>{
   console.log(`Server running on port ${PORT}`);
 })
