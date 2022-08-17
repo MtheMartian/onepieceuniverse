@@ -4,7 +4,18 @@ const characterCard = {
   actualUpdateBtn: document.querySelector('#updateCardBtn'),
   updateForm: document.querySelector('.updateCard'),
   deleteCard: document.querySelector('#deleteCard'),
+  createChar: document.querySelector('#createChar'),
+  addCharacter: document.querySelector('.addCharacter'),
+  characterCard: document.querySelectorAll('.characterCard'),
   characterId: ""
+}
+
+const cardEditSection = {
+  charNameU: document.querySelector('#charNameU'),
+  charAgeU: document.querySelector('#charAgeU'),
+  charFruitU: document.querySelector('#charHakiU'),
+  imgURLU: document.querySelector('#imgURLU'),
+  charHakiU: document.querySelector('#charHakiU')
 }
 
 Array.from(characterCard.updateCharCard).forEach((x, i) =>{
@@ -12,8 +23,22 @@ Array.from(characterCard.updateCharCard).forEach((x, i) =>{
 })
 
 characterCard.updateForm.classList.add('hidden');
+characterCard.addCharacter.classList.add('hidden');
 characterCard.actualUpdateBtn.addEventListener('click', updateCard);
 characterCard.deleteCard.addEventListener('click', deleteCard);
+characterCard.createChar.addEventListener('click', appear);
+
+function getInfo(){
+  Array.from(characterCard.characterCard).forEach(element =>{
+    if(data.id == characterCard.characterId){
+      cardEditSection.charNameU.value = data.
+      cardEditSection.charAgeU.value = charAge.innerText;
+      cardEditSection.charFruitU.value = charFruit.innerText;
+      cardEditSection.charHakiU.value = charHaki.innerText;
+      cardEditSection.imgURLU.value = imgURL.innerText;
+    }
+  })
+}
 
 async function updateCard(){
   const cardId = characterCard.characterId;
@@ -67,8 +92,13 @@ function getCardId(event){
   characterCard.characterId = event.srcElement.id
   console.log(characterCard.characterId);
   unHideIt(characterCard.updateForm);
+  getInfo();
 }
 
 function unHideIt(element){
   element.classList.remove('hidden');
+}
+
+function appear(){
+  characterCard.addCharacter.classList.remove('hidden');
 }

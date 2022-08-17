@@ -35,4 +35,5 @@ div > img{
 
 .hidden{
   display: none;
+  background: black;
 }
