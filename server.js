@@ -32,6 +32,16 @@ app.get('/', (request, response) =>{
   })
 })
 
+app.get('/getInfo', (request, response) =>{
+  db.collection('characters').find().toArray()
+  .then(data =>{
+    response.send(data);
+  })
+  .catch(err =>{
+    console.log(`Nooo! ${err}`);
+  })
+})
+
 app.post('/addCharacter', (request, response) =>{
   db.collection('characters').insertOne(
     {charName: request.body.charName, charAge: request.body.charAge,
