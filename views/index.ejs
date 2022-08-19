@@ -9,15 +9,6 @@
 <body>
   <h1>ONE PIECE UNIVERSE</h1>
   <button id="createChar">Add Character</button>
-  <form class="hidden addCharacter" action="/addCharacter" method="POST">
-    <input type="text" placeholder="Character Name" name="charName">
-    <input type="text" placeholder="Character Age" name="charAge">
-    <input type="text" placeholder="Fruit Type" name="charFruit">
-    <input type="text" placeholder="Haki Type" name="charHaki">
-    <input type="text" placeholder="Img URL" name="imgURL">
-    <input id="addCharBtn" type="submit">
-  </form>
-
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
         <div class="characterCard" id=<%=info[i]._id%>>
@@ -33,16 +24,24 @@
           <button class="editCard" id=<%=info[i].id%>>Edit</button>
         </div>
       <%}%>
+      <form class="hidden addCharacter" action="/addCharacter" method="POST">
+        <input type="text" placeholder="Character Name" name="charName" class="createChar">
+        <input type="text" placeholder="Character Age" name="charAge" class="createChar">
+        <input type="text" placeholder="Fruit Name" name="charFruit" class="createChar">
+        <input type="text" placeholder="Haki Strength/Type" name="charHaki" class="createChar">
+        <input type="text" placeholder="Image URL" name="imgURL" class="createChar">
+        <input id="addCharBtn" type="submit">
+      </form>
+      <div class="updateCard hidden">
+        <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
+        <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
+        <input type="text" id="charFruitU" class="cardDisplayInfo" placeholder="Fruit Name">
+        <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength/Type">
+        <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
+        <button id="updateCardBtn">Update</button>
+        <button id="deleteCard">Remove</button>
+      </div>
     </section>
-    <div class="updateCard hidden">
-      <input type="text" id="charNameU">
-      <input type="text" id="charAgeU">
-      <input type="text" id="charFruitU">
-      <input type="text" id="charHakiU">
-      <input type="text" id="imgURLU">
-      <button id="updateCardBtn">Update</button>
-      <button id="deleteCard">Remove</button>
-    </div>
   
   <script src="js/main.js"></script>
 </body>

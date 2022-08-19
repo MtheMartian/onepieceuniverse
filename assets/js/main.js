@@ -28,9 +28,7 @@ async function storeInfo(){
       method: 'get'
     })
     const data = await response.json();
-    for(let i = 0; i < data.length; i++){
-      characterCard.charArray.push(data[i]);
-    }
+      characterCard.charArray = data; 
   }
   catch(err){
     console.log(`Couldn't do it! ${err}`);
