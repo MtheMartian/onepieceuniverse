@@ -55,32 +55,27 @@ async function updateCard(){
         'imgURLU': imgURLU
       })
     });
-    const data = await response.json();
     location.reload();
   }
   catch(err){
     console.log(`Didn't work! ${err}`);
-    location.reload();
   }
 }
 
 async function deleteCard(){
   try{
-    const response = await fetch('/deleteCard',{
+    const response = await fetch('/deletecard',{
       method: 'delete',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         'itemFromJS': characterCard.characterId
       })
     })
-    const data = await response.json();
     location.reload();
   }
   catch(err){
     console.log(`Woopsie! ${err}`);
-    location.reload();
   }
-
 }
 
 function getCardId(event){
