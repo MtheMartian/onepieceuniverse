@@ -1,20 +1,22 @@
+const Character = require('../models/Character');
+
 module.exports = {
-  getIndex: (request, response) =>{
-    db.collection('characters').find().toArray()
-    .then(data =>{
-      response.render('index.ejs', {info: data});
-    })
-    .catch(err =>{
-      console.log(`Something went wrong! ${err}`);
-    })
+  getIndex: async (request, response) =>{
+    try{
+      const characters = await Character.find()
+      response.render('index.ejs', {info: characters});
+    }
+    catch(err){
+      console.log(`Didn't find anything! ${err}`);
+    }
   },
-  getInfo:(request, response) =>{
-    db.collection('characters').find().toArray()
-    .then(data =>{
-      response.send(data);
-    })
-    .catch(err =>{
-      console.log(`Nooo! ${err}`);
-    })
+  getInfo: async (request, response) =>{
+    try{
+      const characters = await Character.find()
+      response.send(characters);
+    }
+    catch(err){
+      console.log(`Where they at? ${err}`);
+    }
   }
 }

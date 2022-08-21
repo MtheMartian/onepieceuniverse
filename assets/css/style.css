@@ -56,6 +56,22 @@ div > img{
   border-radius: 10px;
 }
 
+.closeIt{
+  border: none;
+  font-family: Montserrat ExtraBold, Arial;
+  color: white;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  transition: color 0.15s;
+}
+
+.closeIt:hover{
+  color: red;
+}
+
 .cardDisplayInfo, .createChar{
   height: 2rem;
   width: 30rem;

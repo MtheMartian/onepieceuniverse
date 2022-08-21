@@ -10,10 +10,22 @@ const characterCard = {
   charArray: [],
   characterId: ""
 }
+
+const generalButtons = {
+  xOut: document.querySelectorAll('.closeIt'),
+  hideIt: function(event){
+    console.log(event);
+    event.path[1].classList.add('hidden');
+  },
+}
 storeInfo();
 
 Array.from(characterCard.updateCharCard).forEach((x, i) =>{
   characterCard.updateCharCard[i].onclick = getCardId;
+})
+
+Array.from(generalButtons.xOut).forEach((element) =>{
+  element.onclick = generalButtons.hideIt;
 })
 
 characterCard.updateForm.classList.add('hidden');
