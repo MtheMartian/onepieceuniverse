@@ -8,7 +8,6 @@
 </head>
 <body>
   <h1>ONE PIECE UNIVERSE</h1>
-  <button id="createChar">Add Character</button>
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
         <div class="characterCard" id=<%=info[i]._id%>>
@@ -44,7 +43,15 @@
         <button class="closeIt">X</button>
       </div>
     </section>
-  
+    <nav id="navigation">
+      <ul>
+        <li>
+          <button id="createChar">Add Character</button>
+        </li>
+        <li>Map</li>
+        <li>Sign In</li>
+      </ul>
+    </nav>
   <script src="js/main.js"></script>
 </body>
 </html>
