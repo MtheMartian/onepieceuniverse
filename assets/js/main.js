@@ -8,6 +8,7 @@ const characterCard = {
   addCharacter: document.querySelector('.addCharacter'),
   characterCard: document.querySelectorAll('.characterCard'),
   charArray: [],
+  charInfo: document.querySelectorAll('.characterInfo'),
   characterId: ""
 }
 
@@ -28,11 +29,26 @@ Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
 })
 
+// Array.from(characterCard.charInfo).forEach((element) =>{
+//   element.addEventListener('click', seeMore);
+// })
+
 characterCard.updateForm.classList.add('hidden');
 characterCard.addCharacter.classList.add('hidden');
 characterCard.actualUpdateBtn.addEventListener('click', updateCard);
 characterCard.deleteCard.addEventListener('click', deleteCard);
 characterCard.createChar.addEventListener('click', appear);
+
+// async function seeMore(){
+//   try{
+//     const response = await fetch('/moreinfo', {
+//       method: 'get'
+//     })
+//   }
+//   catch(err){
+//     console.log(`Couldn't get it! ${err}`);
+//   }
+// }
 
 async function storeInfo(){
   try{
