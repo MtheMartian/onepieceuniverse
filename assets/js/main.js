@@ -29,9 +29,9 @@ Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
 })
 
-// Array.from(characterCard.charInfo).forEach((element) =>{
-//   element.addEventListener('click', seeMore);
-// })
+Array.from(characterCard.charInfo).forEach((element) =>{
+  element.addEventListener('click', seeMore);
+})
 
 characterCard.updateForm.classList.add('hidden');
 characterCard.addCharacter.classList.add('hidden');
@@ -39,16 +39,16 @@ characterCard.actualUpdateBtn.addEventListener('click', updateCard);
 characterCard.deleteCard.addEventListener('click', deleteCard);
 characterCard.createChar.addEventListener('click', appear);
 
-// async function seeMore(){
-//   try{
-//     const response = await fetch('/moreinfo', {
-//       method: 'get'
-//     })
-//   }
-//   catch(err){
-//     console.log(`Couldn't get it! ${err}`);
-//   }
-// }
+ function seeMore(event){
+  const seeMoreCharName = document.querySelector('#seeMoreCharName');
+  characterCard.characterId = event.path[1].id;
+  console.log(event);
+  for(let i = 0; i < characterCard.charArray.length; i++){
+    if(characterCard.characterId === characterCard.charArray[i].id){
+      seeMoreCharName.textContent = characterCard.charArray[i].charName;
+    }
+  } 
+}
 
 async function storeInfo(){
   try{

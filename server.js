@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/', homeRoutes);
 app.use('/', characterCardRoutes);
-app.use('/moreinfo', characterInfoRoutes);
+//app.use('/moreinfo', characterInfoRoutes);
 
 app.listen(process.env.PORT, () =>{
   console.log(`Server running on port ${process.env.PORT}`);

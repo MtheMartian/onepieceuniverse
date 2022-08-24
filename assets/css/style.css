@@ -104,6 +104,15 @@ div > img{
 #navigation > ul li{
   list-style-type: none;
 }
+/*----------------More info on character-----------------*/
+#characterMoreInfo{
+  height: 50%;
+  width: 15%;
+  background-color: white;
+  position: absolute;
+  top: 2%;
+  right: 0;
+}
 /*-------------Stuff---------------------*/
 .hidden{
   display: none;

@@ -10,7 +10,7 @@
   <h1>ONE PIECE UNIVERSE</h1>
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
-        <div class="characterCard" id=<%=info[i]._id%>>
+        <div class="characterCard" id=<%=info[i].id%>>
           <img src=<%=info[i].imgURL%>>
           <div>
           <span><%=info[i].charName%></span>
@@ -20,7 +20,7 @@
           <span><%=info[i].charhaki%></span>
           <span><%=info[i].charFruit%></span>
           </div>
-          <span class="characterInfo"><a href="/moreinfo">See more</a></span>
+          <span class="characterInfo">See more</span>
           <button class="editCard" id=<%=info[i].id%>>Edit</button>
         </div>
       <%}%>
@@ -53,6 +53,10 @@
         <li>Sign In</li>
       </ul>
     </nav>
+
+    <div id="characterMoreInfo">
+      <h1 id="seeMoreCharName"></h1>
+    </div>
   <script src="js/main.js"></script>
 </body>
 </html>
