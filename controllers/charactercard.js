@@ -7,7 +7,13 @@ module.exports = {
         {charName: request.body.charName, charAge: request.body.charAge,
           charFruit: request.body.charFruit, charhaki: request.body.charHaki,
           imgURL: request.body.imgURL,
-          id: Math.ceil(Math.random()*Date.now()).toString()
+          id: Math.ceil(Math.random()*Date.now()).toString(),
+          pirate: request.body.pirate,
+          description: [{
+            bounty: request.body.bounty,
+            imgBountyURL: request.body.bountyImgURL,
+            location: request.body.location
+          }]                
         })
         console.log('Character added!');
         response.redirect('/');

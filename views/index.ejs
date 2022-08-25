@@ -24,15 +24,21 @@
           <button class="editCard" id=<%=info[i].id%>>Edit</button>
         </div>
       <%}%>
-      <form class="hidden addCharacter" action="/addCharacter" method="POST">
-        <input type="text" placeholder="Character Name" name="charName" class="createChar">
-        <input type="text" placeholder="Character Age" name="charAge" class="createChar">
-        <input type="text" placeholder="Fruit Name" name="charFruit" class="createChar">
-        <input type="text" placeholder="Haki Strength/Type" name="charHaki" class="createChar">
-        <input type="text" placeholder="Image URL" name="imgURL" class="createChar">
-        <input id="addCharBtn" type="submit">
+      <div class="hidden addCharacter">
+        <input type="text" placeholder="Character Name" id="charName" class="createChar">
+        <input type="text" placeholder="Character Age" id="charAge" class="createChar">
+        <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
+        <input type="text" placeholder="Haki Strength/Type" id="charHaki" class="createChar">
+        <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
+        <input type="text" placeholder="Bounty" id="bounty" class="createChar">
+        <input type="text" placeholder="Bounty Image" id="bountyImgURL" class="createChar">
+        <input type="text" placeholder="Location" id="location" class="createChar">
+        <input type="text" placeholder="Number of abilities" id="numAbilities" class="createChar">
+        <input type="text" placeholder="List abilities" id="abilities" class="createChar">
+        <label for="isPirate">Pirate</label><input type="checkbox" id="isPirate" class="createChar">
+        <button id="addCharBtn">Submit</button>
         <button class="closeIt">X</button>
-      </form>
+      </div>
       <div class="updateCard hidden">
         <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
         <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">

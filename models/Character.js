@@ -24,7 +24,15 @@ const CharacterSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true
-  }
+  },
+  pirate: {
+    type: Boolean,
+    required: true
+  },
+  description: {
+    type: Array,
+    required: true
+  } 
 })
 
 module.exports = mongoose.model('characters', CharacterSchema);

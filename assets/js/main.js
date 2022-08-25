@@ -1,11 +1,12 @@
+//----------------------General-----------------------------------------
 const characterCard = {
   submitChar: document.querySelector('#addCharBtn'),
   updateCharCard: document.querySelectorAll('.editCard'),
   actualUpdateBtn: document.querySelector('#updateCardBtn'),
   updateForm: document.querySelector('.updateCard'),
   deleteCard: document.querySelector('#deleteCard'),
-  createChar: document.querySelector('#createChar'),
-  addCharacter: document.querySelector('.addCharacter'),
+  addCharBtn: document.querySelector('#createChar'),
+  addCharacterFormBtn: document.querySelector('#addCharacter'),
   characterCard: document.querySelectorAll('.characterCard'),
   charArray: [],
   charInfo: document.querySelectorAll('.characterInfo'),
@@ -19,27 +20,73 @@ const generalButtons = {
     event.path[1].classList.add('hidden');
   },
 }
-storeInfo();
 
-Array.from(characterCard.updateCharCard).forEach((x, i) =>{
-  characterCard.updateCharCard[i].onclick = getCardId;
-})
+function unHideIt(element){
+  element.classList.remove('hidden');
+}
+
+storeInfo();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
 })
 
+//-------------------------Create Character-----------------------------
+const addCharForm = document.querySelector('.addCharacter');
+const createCharacterButton = document.querySelector('#createChar');
+const formAddCharButton = document.querySelector('#addCharBtn');
+function appear(){
+  addCharForm.classList.remove('hidden');
+}
+addCharForm.classList.add('hidden');
+
+createCharacterButton.addEventListener('click', appear);
+formAddCharButton.addEventListener('click', createCharacter);
+
+async function createCharacter(){
+  const charName = document.querySelector('#charName');
+  const charAge = document.querySelector('#charAge');
+  const charFruit = document.querySelector('#charFruit');
+  const charHaki = document.querySelector('#charHaki');
+  const imgURL = document.querySelector('#imgURL');
+  const isItChecked = document.querySelector('#isPirate');
+  const bounty = document.querySelector('#bounty');
+  const bountyImgURL = document.querySelector('#bountyImgURL');
+  const charLocation = document.querySelector('#location');
+  let isItPirate = false;
+  if(isItChecked.checked){
+    isItPirate = true;
+  }
+  try{
+    const response = await fetch('/addCharacter', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        'charName': charName.value,
+        'charAge': charAge.value,
+        'charFruit': charFruit.value,
+        'charHaki': charHaki.value,
+        'imgURL': imgURL.value,
+        'bounty': bounty.value,
+        'bountyImgURL': bountyImgURL.value,
+        'location': charLocation.value,
+        'pirate': isItPirate
+      })
+    })
+    location.reload();
+  }
+  catch(err){
+    console.log(`Was unable to add to Database! ${err}`);
+  }
+}
+
+//--------------More info on the character----------------------------
 Array.from(characterCard.charInfo).forEach((element) =>{
   element.addEventListener('click', seeMore);
 })
 
-characterCard.updateForm.classList.add('hidden');
-characterCard.addCharacter.classList.add('hidden');
-characterCard.actualUpdateBtn.addEventListener('click', updateCard);
-characterCard.deleteCard.addEventListener('click', deleteCard);
-characterCard.createChar.addEventListener('click', appear);
-
- function seeMore(event){
+function seeMore(event){
   const seeMoreCharName = document.querySelector('#seeMoreCharName');
   characterCard.characterId = event.path[1].id;
   console.log(event);
@@ -49,6 +96,11 @@ characterCard.createChar.addEventListener('click', appear);
     }
   } 
 }
+
+//------------------Store character info-------------------------------
+Array.from(characterCard.updateCharCard).forEach((x, i) =>{
+  characterCard.updateCharCard[i].onclick = getCardId;
+})
 
 async function storeInfo(){
   try{
@@ -62,6 +114,18 @@ async function storeInfo(){
     console.log(`Couldn't do it! ${err}`);
   }
 }
+
+function getCardId(event){
+  characterCard.characterId = event.srcElement.id
+  addInfoToEdit();
+  console.log(characterCard.characterId);
+  unHideIt(characterCard.updateForm);
+}
+
+//-----------------------Update character card-------------------------
+characterCard.deleteCard.addEventListener('click', deleteCard);
+characterCard.actualUpdateBtn.addEventListener('click', updateCard);
+characterCard.updateForm.classList.add('hidden');
 
 async function updateCard(){
   const cardId = characterCard.characterId;
@@ -90,37 +154,6 @@ async function updateCard(){
   }
 }
 
-async function deleteCard(){
-  try{
-    const response = await fetch('/deletecard',{
-      method: 'delete',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        'itemFromJS': characterCard.characterId
-      })
-    })
-    location.reload();
-  }
-  catch(err){
-    console.log(`Woopsie! ${err}`);
-  }
-}
-
-function getCardId(event){
-  characterCard.characterId = event.srcElement.id
-  addInfoToEdit();
-  console.log(characterCard.characterId);
-  unHideIt(characterCard.updateForm);
-}
-
-function unHideIt(element){
-  element.classList.remove('hidden');
-}
-
-function appear(){
-  characterCard.addCharacter.classList.remove('hidden');
-}
-
 function addInfoToEdit(){
   const charNameU = document.querySelector('#charNameU');
   const charAgeU = document.querySelector('#charAgeU');
@@ -135,5 +168,21 @@ function addInfoToEdit(){
       charHakiU.value = characterCard.charArray[i].charhaki;
       imgURLU.value = characterCard.charArray[i].imgURL;
     }
+  }
+}
+
+async function deleteCard(){
+  try{
+    const response = await fetch('/deletecard',{
+      method: 'delete',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'itemFromJS': characterCard.characterId
+      })
+    })
+    location.reload();
+  }
+  catch(err){
+    console.log(`Woopsie! ${err}`);
   }
 }
