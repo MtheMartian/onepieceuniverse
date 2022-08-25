@@ -51,18 +51,27 @@ async function createCharacter(){
   const charHaki = document.querySelector('#charHaki');
   const imgURL = document.querySelector('#imgURL');
   const isItChecked = document.querySelector('#isPirate');
+  const isMarineChecked = document.querySelector('#isMarine');
   const bounty = document.querySelector('#bounty');
   const charLocation = document.querySelector('#location');
   const numAbilities = document.querySelector('#numAbilities');
+  const charFruitType = document.querySelector('#charFruitType');
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
+  const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: ""};
+  const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   for(let i = 1; i <= Number(numAbilities.value); i++){
     characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: ""});
   }
 
   let isItPirate = false;
+  let isItMarine = false;
   if(isItChecked.checked){
     isItPirate = true;
   }
+  else if(isMarineChecked.checked){
+    isItMarine = true;
+  }
+
   try{
     const response = await fetch('/addCharacter', {
       method: 'POST',
@@ -71,12 +80,13 @@ async function createCharacter(){
       body: JSON.stringify({
         'charName': charName.value,
         'charAge': charAge.value,
-        'charFruit': charFruit.value,
-        'charHaki': charHaki.value,
+        'charFruit': fruitInfo,
+        'charHaki': hakiInfo,
         'imgURL': imgURL.value,
         'bounty': bountyInfo,
         'location': charLocation.value,
         'pirate': isItPirate,
+        'marine': isItMarine,
         'numAbilities': characterCard.listOfAbilities
       })
     })
@@ -170,8 +180,8 @@ function addInfoToEdit(){
     if(characterCard.characterId == characterCard.charArray[i].id){
       charNameU.value = characterCard.charArray[i].charName;
       charAgeU.value = characterCard.charArray[i].charAge;
-      charFruitU.value = characterCard.charArray[i].charFruit;
-      charHakiU.value = characterCard.charArray[i].charhaki;
+      charFruitU.value = characterCard.charArray[i].charFruit.fruitName;
+      charHakiU.value = characterCard.charArray[i].charhaki.hakiUsageLevel;
       imgURLU.value = characterCard.charArray[i].imgURL;
     }
   }

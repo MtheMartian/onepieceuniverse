@@ -17,8 +17,8 @@
           </div>
           <span><%=info[i].charAge%> years old</span>
           <div>
-          <span><%=info[i].charhaki%></span>
-          <span><%=info[i].charFruit%></span>
+          <span><%=info[i].charhaki.hakiUsageLevel%></span>
+          <span><%=info[i].charFruit.fruitName%></span>
           </div>
           <span class="characterInfo">See more</span>
           <button class="editCard" id=<%=info[i].id%>>Edit</button>
@@ -28,12 +28,14 @@
         <input type="text" placeholder="Character Name" id="charName" class="createChar">
         <input type="text" placeholder="Character Age" id="charAge" class="createChar">
         <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
+        <input type="text" placeholder="Fruit Type" id="charFruitType" class="createChar">
         <input type="text" placeholder="Haki Strength/Type" id="charHaki" class="createChar">
         <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
         <input type="text" placeholder="Bounty" id="bounty" class="createChar">
         <input type="text" placeholder="Location" id="location" class="createChar">
         <input type="text" placeholder="Number of abilities" id="numAbilities" class="createChar">
         <label for="isPirate">Pirate</label><input type="checkbox" id="isPirate" class="createChar">
+        <label for="isMarine">Marine</label><input type="checkbox" id="isMarine" class="createChar">
         <button id="addCharBtn">Submit</button>
         <button class="closeIt">X</button>
       </div>

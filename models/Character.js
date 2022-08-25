@@ -10,11 +10,11 @@ const CharacterSchema = new mongoose.Schema({
     required: true
   },
   charFruit: {
-    type: String,
+    type: Object,
     required: false
   },
   charhaki: {
-    type: String,
+    type: Object,
     required: true
   },
   imgURL: {
@@ -26,6 +26,10 @@ const CharacterSchema = new mongoose.Schema({
     required: true
   },
   pirate: {
+    type: Boolean,
+    required: true
+  },
+  marine: {
     type: Boolean,
     required: true
   },

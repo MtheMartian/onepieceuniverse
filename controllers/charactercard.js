@@ -9,6 +9,7 @@ module.exports = {
           imgURL: request.body.imgURL,
           id: Math.ceil(Math.random()*Date.now()).toString(),
           pirate: request.body.pirate,
+          marine: request.body.marine,
           description: [{
             bounty: request.body.bounty,
             imgBountyURL: request.body.bountyImgURL,
