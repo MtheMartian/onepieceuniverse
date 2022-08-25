@@ -12,7 +12,9 @@ module.exports = {
           description: [{
             bounty: request.body.bounty,
             imgBountyURL: request.body.bountyImgURL,
-            location: request.body.location
+            location: request.body.location,
+            numAbilities: request.body.numAbilities,
+            altCharImg: ""
           }]                
         })
         console.log('Character added!');

@@ -8,6 +8,7 @@ const characterCard = {
   addCharBtn: document.querySelector('#createChar'),
   addCharacterFormBtn: document.querySelector('#addCharacter'),
   characterCard: document.querySelectorAll('.characterCard'),
+  listOfAbilities: [],
   charArray: [],
   charInfo: document.querySelectorAll('.characterInfo'),
   characterId: ""
@@ -51,8 +52,13 @@ async function createCharacter(){
   const imgURL = document.querySelector('#imgURL');
   const isItChecked = document.querySelector('#isPirate');
   const bounty = document.querySelector('#bounty');
-  const bountyImgURL = document.querySelector('#bountyImgURL');
   const charLocation = document.querySelector('#location');
+  const numAbilities = document.querySelector('#numAbilities');
+  const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
+  for(let i = 1; i <= Number(numAbilities.value); i++){
+    characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: ""});
+  }
+
   let isItPirate = false;
   if(isItChecked.checked){
     isItPirate = true;
@@ -68,10 +74,10 @@ async function createCharacter(){
         'charFruit': charFruit.value,
         'charHaki': charHaki.value,
         'imgURL': imgURL.value,
-        'bounty': bounty.value,
-        'bountyImgURL': bountyImgURL.value,
+        'bounty': bountyInfo,
         'location': charLocation.value,
-        'pirate': isItPirate
+        'pirate': isItPirate,
+        'numAbilities': characterCard.listOfAbilities
       })
     })
     location.reload();
