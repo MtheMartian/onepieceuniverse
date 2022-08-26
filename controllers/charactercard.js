@@ -11,6 +11,7 @@ module.exports = {
           pirate: request.body.pirate,
           marine: request.body.marine,
           description: [{
+            charDesc: "",
             bounty: request.body.bounty,
             imgBountyURL: request.body.bountyImgURL,
             location: request.body.location,

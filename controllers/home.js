@@ -1,4 +1,5 @@
 const Character = require('../models/Character');
+const charactercard = require('./charactercard');
 
 module.exports = {
   getIndex: async (request, response) =>{

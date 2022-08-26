@@ -11,7 +11,7 @@ const characterCard = {
   listOfAbilities: [],
   charArray: [],
   charInfo: document.querySelectorAll('.characterInfo'),
-  characterId: ""
+  characterId: "",
 }
 
 const generalButtons = {
@@ -103,12 +103,33 @@ Array.from(characterCard.charInfo).forEach((element) =>{
 })
 
 function seeMore(event){
-  const seeMoreCharName = document.querySelector('#seeMoreCharName');
+  const bountyImg = document.querySelector('#bountyImg');
+  const charDesc = document.querySelector('#charDesc');
+  const imagery = document.createElement('iframe');
+  const ability = document.createElement('span');
+  const abilityDesc = document.createElement('p');
+  const container = document.createElement('div');
+  const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
   characterCard.characterId = event.path[1].id;
   console.log(event);
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId === characterCard.charArray[i].id){
-      seeMoreCharName.textContent = characterCard.charArray[i].charName;
+      bountyImg.src = characterCard.charArray[i].description[0].bounty.posterBountyURL;
+      charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
+
+      for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+        const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
+        abilityDiv.className = "abilityDiv";
+        const abilityName = abilityDiv.appendChild(ability.cloneNode());
+        abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
+        const abilityDescription = abilityDiv.appendChild(abilityDesc.cloneNode());
+        abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+        const abilityTrailer = abilityDiv.appendChild(imagery.cloneNode());
+        abilityTrailer.width = 400;
+        abilityTrailer.height = 400;
+        abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+      }
+
     }
   } 
 }
