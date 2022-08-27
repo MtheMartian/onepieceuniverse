@@ -90,6 +90,7 @@ async function createCharacter(){
         'numAbilities': characterCard.listOfAbilities
       })
     })
+    characterCard.listOfAbilities = [];
     location.reload();
   }
   catch(err){
@@ -116,7 +117,7 @@ function seeMore(event){
     if(characterCard.characterId === characterCard.charArray[i].id){
       bountyImg.src = characterCard.charArray[i].description[0].bounty.posterBountyURL;
       charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
-
+      
       for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
         const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
         abilityDiv.className = "abilityDiv";
@@ -134,6 +135,79 @@ function seeMore(event){
   } 
 }
 
+//-----------------------Update More Info-----------------------------
+async function openSeeMoreForm(){
+  const updateSeeMoreForm = document.querySelector('.updateSeeMore');
+  updateSeeMoreForm.classList.remove('hidden');
+}
+async function addInfoToSeeMoreEdit(){
+  const abilityName = document.createElement('input');
+  const abilityDesc = document.createElement('input');
+  const abilityView = document.createElement('input');
+  const abilitySection = document.querySelector('#abilitySection');
+  const bountyImgURL = document.querySelector('#bountyImgURL');
+  const charDescription = document.querySelector('#charDescription');
+  
+  for(let i = 0; i < characterCard.charArray.length; i++){
+    if(characterCard.characterId == characterCard.charArray[i].id){
+      for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+        const abilityNameInput = abilitySection.appendChild(abilityName.cloneNode());
+        abilityNameInput.className = "cardDisplayInfo";
+        abilityNameInput.placeholder = "Ability Name";
+        abilityNameInput.type = "text";
+        abilityNameInput.id = "abilityName";
+        abilityNameInput.value = characterCard.charArray[i].description[0].numAbilities[j].ability;
+
+        const abilityDescInput = abilitySection.appendChild(abilityDesc.cloneNode());
+        abilityDescInput.className = "cardDisplayInfo";
+        abilityDescInput.placeholder = "Ability Description";
+        abilityDescInput.type = "text";
+        abilityDescInput.id = "abilityDescription";
+        abilityDescInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+
+        const abilityViewInput = abilitySection.appendChild(abilityView.cloneNode());
+        abilityViewInput.className = "cardDisplayInfo";
+        abilityViewInput.placeholder = "Video URL/Image URL";
+        abilityViewInput.id = "abilityTrailer";
+        abilityViewInput.type = "text";
+        abilityViewInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+      }
+      bountyImgURL.value = characterCard.charArray[i].description[0].bounty.posterBountyURL;
+      charDescription.value = characterCard.charArray[i].description[0].charDesc;
+    }
+  }
+  openSeeMoreForm();
+}
+
+async function updateSeeMore(){
+    const abilityName = document.querySelector('#abilityName');
+    const abilityDescription = document.querySelector('#abilityDescription');
+    const abilityTrailer = document.querySelector('#abilityTrailer');
+    const bountyImgURL = document.querySelector('#bountyImgURL');
+    const charDescription = document.querySelector('#charDescription');
+    const cardId = characterCard.characterId;
+    try{
+      const response = await fetch('/updateseemore', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          'cardId': cardId,
+          'abilityName': abilityName,
+          'abilityDesc': abilityDescription,
+          'abilityURL': abilityTrailer,
+          'bountyImgURL': bountyImgURL,
+          'charDesc': charDescription
+        })
+      });
+      location.reload();
+    }
+    catch(err){
+      console.log(`Didn't work! ${err}`);
+    }
+}
+
+document.querySelector('#editSeeMoreButton').addEventListener('click', addInfoToSeeMoreEdit);
+document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeMore.updateSeeMore)
 //------------------Store character info-------------------------------
 Array.from(characterCard.updateCharCard).forEach((x, i) =>{
   characterCard.updateCharCard[i].onclick = getCardId;

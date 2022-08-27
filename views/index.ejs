@@ -7,6 +7,7 @@
   <title>One Piece Universe</title>
 </head>
 <body>
+  <main>
   <h1>ONE PIECE UNIVERSE</h1>
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
@@ -50,22 +51,31 @@
         <button class="closeIt">X</button>
       </div>
     </section>
-    <nav id="navigation">
-      <ul>
-        <li>
-          <button id="createChar">Add Character</button>
-        </li>
-        <li>Marine World</li>
-        <li>Sign In</li>
-      </ul>
-    </nav>
-
     <div id="characterMoreInfo">
       <div>
         <img id="bountyImg" src="" atl="Bounty"></img>
         <p id="charDesc"></p>
       </div>
+      <button id="editSeeMoreButton">Edit</button>
     </div>
+    <div class="updateSeeMore hidden">
+      <div id="abilitySection">
+        <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Bounty Image URL">
+        <input type="text" id="charDescription" class="cardDisplayInfo" placeholder="Character Description">
+      </div>
+      <button id="updateSeeMoreBtn">Update</button>
+      <button class="closeIt">X</button>
+    </div>
+  </main>
+  <nav id="navigation">
+    <ul>
+      <li>
+        <button id="createChar">Add Character</button>
+      </li>
+      <li>Marine World</li>
+      <li>Sign In</li>
+    </ul>
+  </nav>
   <script src="js/main.js"></script>
 </body>
 </html>
