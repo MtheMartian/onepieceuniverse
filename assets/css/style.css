@@ -60,7 +60,7 @@ div > img{
   justify-content: center;
   align-items: center;
   width: 35%;
-  height: 70%;
+  height: 100%;
   row-gap: 1rem;
   border-radius: 10px;
   overflow: auto;
@@ -124,6 +124,12 @@ div > img{
   height: 115%;
   width: 50%;
   overflow: auto;
+}
+
+#bountyImg{
+  width: 40%;
+  height: 45%;
+  object-fit: cover;
 }
 /*-------------Stuff---------------------*/
 .hidden{

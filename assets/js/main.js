@@ -56,8 +56,9 @@ async function createCharacter(){
   const charLocation = document.querySelector('#location');
   const numAbilities = document.querySelector('#numAbilities');
   const charFruitType = document.querySelector('#charFruitType');
+  const charHakiType = document.querySelector('#charHakiTypeU');
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
-  const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: ""};
+  const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   for(let i = 1; i <= Number(numAbilities.value); i++){
     characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: ""});
@@ -130,12 +131,15 @@ function seeMore(event){
         abilityTrailer.height = 400;
         abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
       }
-
+      characterMoreInfoDiv.classList.remove('hidden');
     }
   } 
 }
 
 //-----------------------Update More Info-----------------------------
+document.querySelector('#editSeeMoreButton').addEventListener('click', addInfoToSeeMoreEdit);
+document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeMore);
+
 async function openSeeMoreForm(){
   const updateSeeMoreForm = document.querySelector('.updateSeeMore');
   updateSeeMoreForm.classList.remove('hidden');
@@ -180,11 +184,37 @@ async function addInfoToSeeMoreEdit(){
 }
 
 async function updateSeeMore(){
-    const abilityName = document.querySelector('#abilityName');
-    const abilityDescription = document.querySelector('#abilityDescription');
-    const abilityTrailer = document.querySelector('#abilityTrailer');
+    const abilityName = document.querySelectorAll('#abilityName');
+    const abilityDescription = document.querySelectorAll('#abilityDescription');
+    const abilityTrailer = document.querySelectorAll('#abilityTrailer');
     const bountyImgURL = document.querySelector('#bountyImgURL');
     const charDescription = document.querySelector('#charDescription');
+    let abilitiesArray = [];
+    const abilitiesArrLength = Array.from(abilityName).length;
+
+    let abilityNameArr = [];
+    Array.from(abilityName).forEach((element) =>{
+      abilityNameArr.push(element.value);
+    })
+    let abilityDescArr = [];
+    Array.from(abilityDescription).forEach((element) =>{
+      abilityDescArr.push(element.value);
+    });
+    let abilityURLArr = [];
+    Array.from(abilityTrailer).forEach((element) =>{
+      abilityURLArr.push(element.value);
+    })
+
+    for(let i = 0; i < abilitiesArrLength; i++){
+      abilitiesArray.push({
+        ability: abilityNameArr[i],
+        abilityDesc: abilityDescArr[i],
+        abilityURL: abilityURLArr[i] 
+      })
+    }
+
+    console.log(abilitiesArray);
+
     const cardId = characterCard.characterId;
     try{
       const response = await fetch('/updateseemore', {
@@ -192,11 +222,9 @@ async function updateSeeMore(){
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           'cardId': cardId,
-          'abilityName': abilityName,
-          'abilityDesc': abilityDescription,
-          'abilityURL': abilityTrailer,
-          'bountyImgURL': bountyImgURL,
-          'charDesc': charDescription
+          'numAbilities': abilitiesArray,
+          'bountyImgURL': bountyImgURL.value,
+          'charDesc': charDescription.value
         })
       });
       location.reload();
@@ -205,9 +233,6 @@ async function updateSeeMore(){
       console.log(`Didn't work! ${err}`);
     }
 }
-
-document.querySelector('#editSeeMoreButton').addEventListener('click', addInfoToSeeMoreEdit);
-document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeMore.updateSeeMore)
 //------------------Store character info-------------------------------
 Array.from(characterCard.updateCharCard).forEach((x, i) =>{
   characterCard.updateCharCard[i].onclick = getCardId;
@@ -243,7 +268,12 @@ async function updateCard(){
   const charNameU = document.querySelector('#charNameU').value;
   const charAgeU = document.querySelector('#charAgeU').value;
   const charFruitU = document.querySelector('#charFruitU').value;
+  const charFruitTypeU = document.querySelector('#charFruitTypeU');
+  const charFruit = {fruitType: charFruitTypeU.value, fruitName: charFruitU};
   const charHakiU = document.querySelector('#charHakiU').value;
+  const charHakiTypeU = document.querySelector('#charHakiTypeU');
+  const charHaki = {hakiUsageLevel: charHakiU, hakiType: charHakiTypeU.value};
+
   const imgURLU = document.querySelector('#imgURLU').value;
   try{
     const response = await fetch('/updateCard', {
@@ -253,8 +283,8 @@ async function updateCard(){
         'itemFromJS': cardId,
         'charNameU': charNameU,
         'charAgeU': charAgeU,
-        'charFruitU': charFruitU,
-        'charHakiU': charHakiU,
+        'charFruitU': charFruit,
+        'charHakiU': charHaki,
         'imgURLU': imgURLU
       })
     });
@@ -269,14 +299,18 @@ function addInfoToEdit(){
   const charNameU = document.querySelector('#charNameU');
   const charAgeU = document.querySelector('#charAgeU');
   const charFruitU = document.querySelector('#charFruitU');
+  const charFruitTypeU = document.querySelector('#charFruitTypeU');
   const charHakiU = document.querySelector('#charHakiU');
+  const charHakiTypeU = document.querySelector('#charHakiTypeU');
   const imgURLU = document.querySelector('#imgURLU');
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId == characterCard.charArray[i].id){
       charNameU.value = characterCard.charArray[i].charName;
       charAgeU.value = characterCard.charArray[i].charAge;
       charFruitU.value = characterCard.charArray[i].charFruit.fruitName;
+      charFruitTypeU.value = characterCard.charArray[i].charFruit.fruitType;
       charHakiU.value = characterCard.charArray[i].charhaki.hakiUsageLevel;
+      charHakiTypeU.value = characterCard.charArray[i].charhaki.hakiType;
       imgURLU.value = characterCard.charArray[i].imgURL;
     }
   }

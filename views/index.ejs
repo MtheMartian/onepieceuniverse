@@ -30,7 +30,8 @@
         <input type="text" placeholder="Character Age" id="charAge" class="createChar">
         <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
         <input type="text" placeholder="Fruit Type" id="charFruitType" class="createChar">
-        <input type="text" placeholder="Haki Strength/Type" id="charHaki" class="createChar">
+        <input type="text" placeholder="Haki Strength" id="charHaki" class="createChar">
+        <input type="text" placeholder="Haki Type" id="charHakiType" class="createChar">
         <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
         <input type="text" placeholder="Bounty" id="bounty" class="createChar">
         <input type="text" placeholder="Location" id="location" class="createChar">
@@ -44,19 +45,22 @@
         <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
         <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
         <input type="text" id="charFruitU" class="cardDisplayInfo" placeholder="Fruit Name">
-        <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength/Type">
+        <input type="text" id="charFruitTypeU" class="cardDisplayInfo" placeholder="Fruit Type">
+        <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength">
+        <input type="text" id="charHakiTypeU" class="cardDisplayInfo" placeholder="Haki Type">
         <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
         <button id="updateCardBtn">Update</button>
         <button id="deleteCard">Remove</button>
         <button class="closeIt">X</button>
       </div>
     </section>
-    <div id="characterMoreInfo">
+    <div id="characterMoreInfo" class="hidden">
       <div>
         <img id="bountyImg" src="" atl="Bounty"></img>
         <p id="charDesc"></p>
       </div>
       <button id="editSeeMoreButton">Edit</button>
+      <button class="closeIt">X</button>
     </div>
     <div class="updateSeeMore hidden">
       <div id="abilitySection">
