@@ -100,10 +100,23 @@ async function createCharacter(){
 }
 
 //--------------More info on the character----------------------------
+const customSeeMore = {
+  closeButton: document.querySelector('.closeSeeMore'),
+  isItOpen: false,
+}
+
+customSeeMore.closeButton.addEventListener('click', closeSeeMore);
+
 Array.from(characterCard.charInfo).forEach((element) =>{
   element.addEventListener('click', seeMore);
-})
+});
 
+function closeSeeMore(event){
+  console.log(event);
+  event.path[1].classList.add('hidden');
+  customSeeMore.isItOpen = false;
+  location.reload();
+}
 function seeMore(event){
   const bountyImg = document.querySelector('#bountyImg');
   const charDesc = document.querySelector('#charDesc');
@@ -112,28 +125,34 @@ function seeMore(event){
   const abilityDesc = document.createElement('p');
   const container = document.createElement('div');
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
-  characterCard.characterId = event.path[1].id;
+  characterCard.characterId = event.path[3].id;
   console.log(event);
-  for(let i = 0; i < characterCard.charArray.length; i++){
-    if(characterCard.characterId === characterCard.charArray[i].id){
-      bountyImg.src = characterCard.charArray[i].description[0].bounty.posterBountyURL;
-      charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
-      
-      for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
-        const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
-        abilityDiv.className = "abilityDiv";
-        const abilityName = abilityDiv.appendChild(ability.cloneNode());
-        abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
-        const abilityDescription = abilityDiv.appendChild(abilityDesc.cloneNode());
-        abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
-        const abilityTrailer = abilityDiv.appendChild(imagery.cloneNode());
-        abilityTrailer.width = 400;
-        abilityTrailer.height = 400;
-        abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+  if(customSeeMore.isItOpen){
+
+  }
+  else{
+    for(let i = 0; i < characterCard.charArray.length; i++){
+      if(characterCard.characterId === characterCard.charArray[i].id){
+        bountyImg.src = characterCard.charArray[i].description[0].bounty.posterBountyURL;
+        charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
+        
+        for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+          const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
+          abilityDiv.className = "abilityDiv";
+          const abilityName = abilityDiv.appendChild(ability.cloneNode());
+          abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
+          const abilityDescription = abilityDiv.appendChild(abilityDesc.cloneNode());
+          abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+          const abilityTrailer = abilityDiv.appendChild(imagery.cloneNode());
+          abilityTrailer.width = 400;
+          abilityTrailer.height = 400;
+          abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+        }
+        characterMoreInfoDiv.classList.remove('hidden');
+        customSeeMore.isItOpen = true;
       }
-      characterMoreInfoDiv.classList.remove('hidden');
-    }
-  } 
+    } 
+  }
 }
 
 //-----------------------Update More Info-----------------------------
@@ -252,9 +271,9 @@ async function storeInfo(){
 }
 
 function getCardId(event){
-  characterCard.characterId = event.srcElement.id
+  characterCard.characterId = event.path[3].id
   addInfoToEdit();
-  console.log(characterCard.characterId);
+  console.log(event);
   unHideIt(characterCard.updateForm);
 }
 
@@ -273,6 +292,7 @@ async function updateCard(){
   const charHakiU = document.querySelector('#charHakiU').value;
   const charHakiTypeU = document.querySelector('#charHakiTypeU');
   const charHaki = {hakiUsageLevel: charHakiU, hakiType: charHakiTypeU.value};
+  const bountyU = document.querySelector('#bountyU').value;
 
   const imgURLU = document.querySelector('#imgURLU').value;
   try{
@@ -285,7 +305,8 @@ async function updateCard(){
         'charAgeU': charAgeU,
         'charFruitU': charFruit,
         'charHakiU': charHaki,
-        'imgURLU': imgURLU
+        'imgURLU': imgURLU,
+        'bountyU': bountyU
       })
     });
     location.reload();
@@ -303,6 +324,7 @@ function addInfoToEdit(){
   const charHakiU = document.querySelector('#charHakiU');
   const charHakiTypeU = document.querySelector('#charHakiTypeU');
   const imgURLU = document.querySelector('#imgURLU');
+  const bountyU = document.querySelector('#bountyU');
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId == characterCard.charArray[i].id){
       charNameU.value = characterCard.charArray[i].charName;
@@ -312,6 +334,7 @@ function addInfoToEdit(){
       charHakiU.value = characterCard.charArray[i].charhaki.hakiUsageLevel;
       charHakiTypeU.value = characterCard.charArray[i].charhaki.hakiType;
       imgURLU.value = characterCard.charArray[i].imgURL;
+      bountyU.value = characterCard.charArray[i].description[0].bounty.bountyAmount;
     }
   }
 }
@@ -331,3 +354,25 @@ async function deleteCard(){
     console.log(`Woopsie! ${err}`);
   }
 }
+
+//------------------------Style Cards------------------------------------
+setTimeout(function whosStronger(){
+  if(characterCard.charArray.length >= 1){
+    for(let i = 0; i < characterCard.charArray.length; i++){
+      switch(characterCard.charArray[i].charhaki.hakiUsageLevel)
+      {
+        case "Supreme": 
+        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('supreme');
+        break;
+
+        case "Legendary": 
+        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('legendary');
+        break;
+
+        case "Strong": 
+        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('strong');
+        break;
+      } 
+    }
+  }
+}, "100");

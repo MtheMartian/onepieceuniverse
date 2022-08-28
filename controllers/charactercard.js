@@ -35,6 +35,7 @@ module.exports = {
             charFruit: request.body.charFruitU,
             charhaki: request.body.charHakiU,
             imgURL: request.body.imgURLU,
+            'description.$[].bounty.bountyAmount': request.body.bountyU
           }
         },
         {

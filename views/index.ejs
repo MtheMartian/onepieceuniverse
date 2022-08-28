@@ -12,18 +12,34 @@
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
         <div class="characterCard" id=<%=info[i].id%>>
-          <img src=<%=info[i].imgURL%>>
-          <div>
-          <span><%=info[i].charName%></span>
+          <div class="cardName">
+            <span><%=info[i].charName%></span>
           </div>
-          <span><%=info[i].charAge%> years old</span>
-          <div>
-          <span><%=info[i].charhaki.hakiUsageLevel%></span>
-          <span><%=info[i].charFruit.fruitName%></span>
+          <div class="cardCharImg">
+            <img class="cardImg" src=<%=info[i].imgURL%>>
           </div>
-          <span class="characterInfo">See more</span>
-          <button class="editCard" id=<%=info[i].id%>>Edit</button>
+          <div class="cardHaki">
+            <span><%=info[i].charhaki.hakiUsageLevel%></span>
+          </div>
+          <div class="cardInfo">
+            <div class="cardAge">
+              <span><%=info[i].charAge%> years old</span>
+            </div>
+            <div class="cardFruitName">
+              <img class="fruitImg" src="images/fruit.webp"><span><%=info[i].charFruit.fruitName%></span>
+            </div>
+            <div class="cardFruitType">
+              <span class="typeSpan">Type:</span><span><%=info[i].charFruit.fruitType%></span>
+            </div>
+            <div class="cardBounty">
+              <img class="bounty" src="images/Beli.webp"><span><%=info[i].description[0].bounty.bountyAmount%></span>
+            </div>
+            <div class="seeMore">
+              <span class="characterInfo">See more</span>
+            </div>
+          <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
         </div>
+      </div>
       <%}%>
       <div class="hidden addCharacter">
         <input type="text" placeholder="Character Name" id="charName" class="createChar">
@@ -48,6 +64,7 @@
         <input type="text" id="charFruitTypeU" class="cardDisplayInfo" placeholder="Fruit Type">
         <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength">
         <input type="text" id="charHakiTypeU" class="cardDisplayInfo" placeholder="Haki Type">
+        <input type="text" placeholder="Bounty" id="bountyU" class="cardDisplayInfo">
         <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
         <button id="updateCardBtn">Update</button>
         <button id="deleteCard">Remove</button>
@@ -60,7 +77,7 @@
         <p id="charDesc"></p>
       </div>
       <button id="editSeeMoreButton">Edit</button>
-      <button class="closeIt">X</button>
+      <button class="closeSeeMore">X</button>
     </div>
     <div class="updateSeeMore hidden">
       <div id="abilitySection">
