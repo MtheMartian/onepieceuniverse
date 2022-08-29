@@ -13,6 +13,10 @@ button, #addCharBtn{
 
  main{
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }  
@@ -31,7 +35,7 @@ button, #addCharBtn{
 
 .characterCard{
   width: 20rem;
-  height: 21.3rem;
+  height: 22.5rem;
   border-radius: 10px;
   padding: 0.5rem;
   border: 1px solid black;
@@ -67,7 +71,7 @@ button, #addCharBtn{
   margin-bottom: -1.3%;
 }
 
-#cardSection{
+#cardSection, #cardSectionMarine, #cardSectionOthers{
   display: flex;
   justify-content: start;
   align-items: center;
@@ -76,7 +80,7 @@ button, #addCharBtn{
   height: 440px;
   padding: 0 2rem 0 2%;
   overflow-x: scroll;
-  margin: 0 0 0 2%;
+  margin: 0 0 0 1%; 
 }
 
 .fruitImg{
@@ -84,7 +88,7 @@ button, #addCharBtn{
   margin-right: 0.5%;
 }
 
-.cardFruitName, .cardFruitType, .cardBounty{
+.cardFruitName, .cardFruitType, .cardBounty, .cardRank{
   display: flex;
   justify-content: start;
   align-items: center;
@@ -121,7 +125,7 @@ button, #addCharBtn{
   box-shadow: 0px 0px 20px rgba(179, 32, 247, 1);
 }
 
-.strong{
+.mighty{
   box-shadow: 0px 0px 20px rgba(243, 243, 243, 1);
 }
 
@@ -168,7 +172,7 @@ button, #addCharBtn{
 
 /*-----------Navigation Bar--------------*/
 #navigation{
-  background: rgb(234, 255, 255);
+  background: rgba(234, 255, 255, 0.3);
   position: absolute;
   top: 0;
   left: 0;

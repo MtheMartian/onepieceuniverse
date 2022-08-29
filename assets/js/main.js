@@ -60,6 +60,7 @@ async function createCharacter(){
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
   const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
+  const charRank = document.querySelector('#charRank');
   for(let i = 1; i <= Number(numAbilities.value); i++){
     characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: ""});
   }
@@ -83,6 +84,7 @@ async function createCharacter(){
         'charAge': charAge.value,
         'charFruit': fruitInfo,
         'charHaki': hakiInfo,
+        'charRank': charRank,
         'imgURL': imgURL.value,
         'bounty': bountyInfo,
         'location': charLocation.value,
@@ -293,6 +295,7 @@ async function updateCard(){
   const charHakiTypeU = document.querySelector('#charHakiTypeU');
   const charHaki = {hakiUsageLevel: charHakiU, hakiType: charHakiTypeU.value};
   const bountyU = document.querySelector('#bountyU').value;
+  const charRankU = document.querySelector('#charRankU').value;
 
   const imgURLU = document.querySelector('#imgURLU').value;
   try{
@@ -305,6 +308,7 @@ async function updateCard(){
         'charAgeU': charAgeU,
         'charFruitU': charFruit,
         'charHakiU': charHaki,
+        'charRankU': charRankU,
         'imgURLU': imgURLU,
         'bountyU': bountyU
       })
@@ -325,6 +329,7 @@ function addInfoToEdit(){
   const charHakiTypeU = document.querySelector('#charHakiTypeU');
   const imgURLU = document.querySelector('#imgURLU');
   const bountyU = document.querySelector('#bountyU');
+  const charRankU = document.querySelector('#charRankU');
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId == characterCard.charArray[i].id){
       charNameU.value = characterCard.charArray[i].charName;
@@ -333,6 +338,7 @@ function addInfoToEdit(){
       charFruitTypeU.value = characterCard.charArray[i].charFruit.fruitType;
       charHakiU.value = characterCard.charArray[i].charhaki.hakiUsageLevel;
       charHakiTypeU.value = characterCard.charArray[i].charhaki.hakiType;
+      charRankU.value = characterCard.charArray[i].charRank;
       imgURLU.value = characterCard.charArray[i].imgURL;
       bountyU.value = characterCard.charArray[i].description[0].bounty.bountyAmount;
     }
@@ -369,8 +375,8 @@ setTimeout(function whosStronger(){
         document.getElementById(`${characterCard.charArray[i].id}`).classList.add('legendary');
         break;
 
-        case "Strong": 
-        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('strong');
+        case "Mighty": 
+        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('mighty');
         break;
       } 
     }

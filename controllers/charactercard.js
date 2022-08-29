@@ -6,6 +6,7 @@ module.exports = {
       await Character.create(
         {charName: request.body.charName, charAge: request.body.charAge,
           charFruit: request.body.charFruit, charhaki: request.body.charHaki,
+          charRank: request.body.charRank,
           imgURL: request.body.imgURL,
           id: Math.ceil(Math.random()*Date.now()).toString(),
           pirate: request.body.pirate,
@@ -34,6 +35,7 @@ module.exports = {
             charAge: request.body.charAgeU,
             charFruit: request.body.charFruitU,
             charhaki: request.body.charHakiU,
+            charRank: request.body.charRankU,
             imgURL: request.body.imgURLU,
             'description.$[].bounty.bountyAmount': request.body.bountyU
           }

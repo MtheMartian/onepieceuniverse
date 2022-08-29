@@ -17,6 +17,10 @@ const CharacterSchema = new mongoose.Schema({
     type: Object,
     required: true
   },
+  charRank: {
+    type: String,
+    required: true,
+  },
   imgURL: {
     type: String,
     required: true
