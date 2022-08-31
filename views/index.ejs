@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
   <title>One Piece Universe</title>
 </head>
 <body>
   <main>
-  <h1>ONE PIECE UNIVERSE</h1>
+    <div>
+      <h1 class="cardSectionTitle pirateTitle">Pirates</h1>
+    </div>
     <section id="cardSection">
       <%for(let i = 0; i < info.length; i++){%>
         <%if(info[i].pirate == true && info[i].marine == false){%>
@@ -78,6 +83,9 @@
         <button class="closeIt">X</button>
       </div>
     </section>
+    <div>
+      <h1 class="cardSectionTitle">Marines</h1>
+    </div>
     <section id="cardSectionMarine">
       <%for(let i = 0; i < info.length; i++){%>
         <%if(info[i].marine == true && info[i].pirate == false){%>
@@ -116,6 +124,9 @@
         <%}%>
       <%}%>
     </section>
+    <div>
+      <h1 class="cardSectionTitle">Others</h1>
+    </div>
     <section id="cardSectionOthers">
       <%for(let i = 0; i < info.length; i++){%>
         <%if(info[i].marine == false && info[i].pirate == false){%>
@@ -158,9 +169,9 @@
       <div>
         <img id="bountyImg" src="" atl="Bounty"></img>
         <p id="charDesc"></p>
+        <button id="editSeeMoreButton">Edit</button>
+        <button class="closeSeeMore">X</button>
       </div>
-      <button id="editSeeMoreButton">Edit</button>
-      <button class="closeSeeMore">X</button>
     </div>
     <div class="updateSeeMore hidden">
       <div id="abilitySection">
@@ -172,12 +183,16 @@
     </div>
   </main>
   <nav id="navigation">
+    <div class="title">
+      <h1>One Piece Realm</h1>
+    </div>
     <ul>
       <li>
         <button id="createChar">Add Character</button>
       </li>
-      <li>Marine World</li>
-      <li>Sign In</li>
+      <li>
+        <button>Sign In</button>
+      </li>
     </ul>
   </nav>
   <script src="js/main.js"></script>
