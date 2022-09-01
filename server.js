@@ -3,8 +3,11 @@ const ejs = require('ejs');
 const cors = require('cors');
 const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
+const passport = require('passport');
+const mongoose = require('mongoose');
 const characterCardRoutes = require('./routes/charactercards');
 const characterInfoRoutes = require('./routes/characterinfo');
+const usersRoutes = require('./routes/User');
 const app = express();
 
 require('dotenv').config({path: './config/.env'});
@@ -19,6 +22,7 @@ app.use(express.json());
 app.use('/', homeRoutes);
 app.use('/', characterCardRoutes);
 app.use('/', characterInfoRoutes);
+app.use('/', usersRoutes);
 
 app.listen(process.env.PORT, () =>{
   console.log(`Server running on port ${process.env.PORT}`);

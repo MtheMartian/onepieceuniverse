@@ -382,3 +382,21 @@ setTimeout(function whosStronger(){
     }
   }
 }, "100");
+
+//-------------------Sign In/ Sign Up--------------------------------------
+document.querySelector('.signInBtn').addEventListener('click', showSignInForm);
+const signInCustom = {
+  isItOpen: false,
+}
+
+function showSignInForm(){
+  const signInForm = document.querySelector('#signIn');
+  if(signInCustom.isItOpen == false){
+    signInForm.classList.remove('hidden');
+    signInCustom.isItOpen = true;
+  }
+  else{
+    signInForm.classList.add('hidden');
+    signInCustom.isItOpen = false;
+  }
+}

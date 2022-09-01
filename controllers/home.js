@@ -5,7 +5,7 @@ module.exports = {
   getIndex: async (request, response) =>{
     try{
       const characters = await Character.find()
-      response.render('index.ejs', {info: characters});
+      response.render('index', {info: characters});
     }
     catch(err){
       console.log(`Didn't find anything! ${err}`);

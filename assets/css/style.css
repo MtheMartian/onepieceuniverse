@@ -253,5 +253,10 @@ button, #addCharBtn{
 .hidden{
   display: none !important;
 }
-
+/*------------------Users--------------------*/
+#signIn{
+  position: absolute;
+  top: 5%;
+  right: 25%;
+}
 

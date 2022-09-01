@@ -191,10 +191,22 @@
         <button id="createChar">Add Character</button>
       </li>
       <li>
-        <button>Sign In</button>
+        <button class="signInBtn">Sign In</button>
       </li>
     </ul>
   </nav>
+    <form id="signIn" class="hidden" action="/signin" method="post">
+      <section>
+        <label for="username">Username/E-mail:</label>
+        <input type="text" placeholder="E-Mail" id="username" name="username">
+      </section>
+      <section>
+        <label for="password">Password:</label>
+        <input type="text" placeholder="Password" id="password" name="password">
+      </section>
+      <button type="submit">Sign In</button>
+      <span>New?</span><a href="/page/signup" id="signUp">Sign Up</a>
+    </form>
   <script src="js/main.js"></script>
 </body>
 </html>
