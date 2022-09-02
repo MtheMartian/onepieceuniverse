@@ -8,20 +8,25 @@
 </head>
 <body>
   <h1>Sign Up<h1>
-<form action="/signup/newuser" method="post">
+<section>
   <section>
-    <label for="username">Username/E-mail</label>
-    <input type="text" placeholder="E-Mail" id="username" name="username">
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username">
+  </section>
+  <section>
+    <label for="email">E-mail</label>
+    <input type="text" placeholder="E-Mail" id="email">
   </section>
   <section>
     <label for="password">Password</label>
-    <input type="text" placeholder="Password" id="password" name="password">
+    <input type="text" placeholder="Password" id="password">
   </section>
   <section>
     <label for="confpassword">Confirm</label>
-    <input type="text" placeholder="Password" id="confpassword" name="confpassword">
+    <input type="text" placeholder="Password" id="confpassword">
   </section>
-  <button type="submit">Sign Up</button>
-</form>
+  <button id="signUpButton">Sign Up</button>
+</section>
+<script src="/js/signuppage.js"></script>
 </body>
 </html>
