@@ -24,31 +24,40 @@ module.exports = {
                           'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     //-------------------------------
     try{
-      const hashPassword = await bcrypt.hash(request.body.password, 10)
-      await User.create({
-        userName: request.body.userName,
-        email: request.body.email,
-        password: hashPassword,
-        userID: Math.ceil(Math.random()*Date.now()) + 
-        lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
-        Math.ceil(Math.random()*1000000) + 
-        letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
-        })
-        console.log("User Created!");
-        console.log(request.body);
-        response.redirect('/');
+      const res = await User.findOne({email: request.body.email})
+      const data = res;
+      if(data === null){
+        const hashPassword = await bcrypt.hash(request.body.password, 10)
+        await User.create({
+          userName: request.body.userName,
+          email: request.body.email,
+          password: hashPassword,
+          userID: Math.ceil(Math.random()*Date.now()) + 
+          lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
+          Math.ceil(Math.random()*1000000) + 
+          letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
+          })
+      
+          console.log("User Created!");
+          console.log(request.body); 
+          request.flash('success_msg', 'You are now registered');
+          response.redirect('/');
+      }
+      else{
+        console.log("Email is already registered.");
+      }
     }
     catch(err){
       console.log(`Unable to create account! ${err}`);
       response.redirect('/page/signup');
     }
 },
-postSignIn: async () =>{
-    await passport.authenticate('local', {
+postSignIn: (request, response, next) =>{
+  passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/pageSignup',
+    failureRedirect: '/page/signup',
     failureFlash: true
-  })
+  })(request, response, next);
 }
 }
 

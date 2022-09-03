@@ -21,15 +21,23 @@ app.set('view engine', 'ejs');
 app.use(express.static('assets'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   store: MongoStore.create({mongoUrl: process.env.DB_STRING}),
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+
+//Global variables
+app.use((request,response, next) =>{
+  response.locals.success_msg = request.flash('success_msg');
+  response.locals.error_msg = request.flash('error_msg');
+  next();
+})
 
 app.use('/', homeRoutes);
 app.use('/', characterCardRoutes);

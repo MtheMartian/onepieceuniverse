@@ -84,7 +84,7 @@ async function createCharacter(){
         'charAge': charAge.value,
         'charFruit': fruitInfo,
         'charHaki': hakiInfo,
-        'charRank': charRank,
+        'charRank': charRank.value,
         'imgURL': imgURL.value,
         'bounty': bountyInfo,
         'location': charLocation.value,
