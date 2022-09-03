@@ -15,7 +15,6 @@ async function signUp(){
         'confirmPassword': confirmPassword.value
       })
     })
-    console.log("User Created!");
   }
   catch(err){
     console.log(`Couldn't sign you up! ${err}`);

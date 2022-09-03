@@ -1,20 +1,19 @@
 const express = require('express');
 const ejs = require('ejs');
-const cors = require('cors');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
 const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const passport = require('passport');
-const mongoose = require('mongoose')
-const logger = require('morgan');
-const flash = require('express-flash');
 const characterCardRoutes = require('./routes/charactercards');
 const characterInfoRoutes = require('./routes/characterinfo');
 const usersRoutes = require('./routes/User');
+const MongoStore = require('connect-mongo');
 const app = express();
 
 require('dotenv').config({path: './config/.env'});
+
+require('./config/passport')(passport);
 
 connectDB();
 
@@ -22,22 +21,15 @@ app.set('view engine', 'ejs');
 app.use(express.static('assets'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(logger('dev'));
-
-//Session
+app.use(flash());
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({mongoUrl: process.env.DB_STRING})
-}));
-app.use(passport.authenticate('session'));
-
-//Passport Middleware
+  store: MongoStore.create({mongoUrl: process.env.DB_STRING}),
+}))
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(flash());
 
 app.use('/', homeRoutes);
 app.use('/', characterCardRoutes);

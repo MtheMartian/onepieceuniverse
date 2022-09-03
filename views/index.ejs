@@ -196,9 +196,12 @@
     </ul>
   </nav>
     <form id="signIn" class="hidden" action="/signin" method="post">
+      <%if(messages.error){%>
+        <%=messages.error%>
+      <%}%>
       <section>
         <label for="username">Username/E-mail:</label>
-        <input type="text" placeholder="E-Mail" id="username" name="userName">
+        <input type="text" placeholder="E-Mail" id="username" name="email">
       </section>
       <section>
         <label for="password">Password:</label>
