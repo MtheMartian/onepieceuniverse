@@ -19,5 +19,13 @@ module.exports = {
     catch(err){
       console.log(`Where they at? ${err}`);
     }
+  },
+  getWelcomePage: async (request, response) =>{
+    try{
+      await response.render('welcomepage.ejs');
+    }
+    catch(err){
+      console.log(err);
+    }  
   }
 }

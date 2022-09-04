@@ -54,10 +54,25 @@ module.exports = {
 },
 postSignIn: (request, response, next) =>{
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/page/signup',
+    successRedirect: '/home',
+    failureRedirect: '/page/signin',
     failureFlash: true
   })(request, response, next);
+}, 
+getSignIn: async (request, response) =>{
+  try{
+    await response.render('login.ejs', {welcomeMsg: 'Conquer the world!'})
+  }
+  catch(err){
+    console.log(err);
+  }  
+},
+signOut: (request, response, next) =>{
+  request.logout(function(err) {
+    if (err) { return next(err); }
+    console.log('Successfully logged out!');
+    response.redirect('/page/signin');
+  });
 }
 }
 

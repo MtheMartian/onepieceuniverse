@@ -23,8 +23,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: false,
+  resave: false,
+  saveUninitialized: true,
   store: MongoStore.create({mongoUrl: process.env.DB_STRING}),
 }))
 app.use(passport.initialize());
