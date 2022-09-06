@@ -40,7 +40,15 @@ const CharacterSchema = new mongoose.Schema({
   description: {
     type: Array,
     required: true
-  } 
+  },
+  superAdmin: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: String,
+    required: true
+  }
 })
 
 module.exports = mongoose.model('characters', CharacterSchema);

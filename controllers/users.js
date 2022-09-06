@@ -23,33 +23,69 @@ module.exports = {
                           'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
                           'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     //-------------------------------
-    try{
-      const res = await User.findOne({email: request.body.email})
-      const data = res;
-      if(data === null){
-        const hashPassword = await bcrypt.hash(request.body.password, 10)
-        await User.create({
-          userName: request.body.userName,
-          email: request.body.email,
-          password: hashPassword,
-          userID: Math.ceil(Math.random()*Date.now()) + 
-          lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
-          Math.ceil(Math.random()*1000000) + 
-          letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
-          })
-      
-          console.log("User Created!");
-          console.log(request.body); 
-          request.flash('success_msg', 'You are now registered');
-          response.redirect('/');
-      }
-      else{
-        console.log("Email is already registered.");
-      }
+    const {userName, email, password, confirmPassword} = request.body; //Descontructor
+    let errors = [];
+
+    //Check required fields
+    if(!userName || !email || !password || !confirmPassword){
+      errors.push({msg: 'Please fill in all fields.'});
     }
-    catch(err){
-      console.log(`Unable to create account! ${err}`);
-      response.redirect('/page/signup');
+
+    //Check passwords match
+    if(password !== confirmPassword){
+      errors.push({msg: 'Passwords do not match.'});
+    }
+
+    //Check password length
+    if(password.length < 8){
+      errors.push({msg: 'Password should be at least 8 characters.'});
+    }
+
+    if(errors.length > 0){
+      response.render('signup.ejs', {
+        errors,
+        userName,
+        email,
+        password,
+        confirmPassword,
+      });
+    }
+    else{
+      try{
+        const res = await User.findOne({email: request.body.email})
+        const data = res;
+        if(data === null){
+          const hashPassword = await bcrypt.hash(password, 10)
+          await User.create({
+            userName: userName,
+            email: email,
+            password: hashPassword,
+            userID: Math.ceil(Math.random()*Date.now()) + 
+            lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
+            Math.ceil(Math.random()*1000000) + 
+            letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
+            })
+        
+            console.log("User Created!");
+            console.log(request.body); 
+            request.flash('success_msg', 'You are now registered.');
+            response.redirect('/page/signin');
+        }
+        else{
+          errors.push({msg: "Email is already registered."});
+          response.render('signup.ejs', {
+            errors,
+            userName,
+            email,
+            password,
+            confirmPassword,
+          });
+        }
+      }
+      catch(err){
+        console.log(`Unable to create account! ${err}`);
+        response.redirect('/page/signup');
+      }
     }
 },
 postSignIn: (request, response, next) =>{
@@ -70,9 +106,18 @@ getSignIn: async (request, response) =>{
 signOut: (request, response, next) =>{
   request.logout(function(err) {
     if (err) { return next(err); }
-    console.log('Successfully logged out!');
-    response.redirect('/page/signin');
+    request.flash('success_msg', 'Successfully logged out!');
+    response.redirect('/');
   });
+},
+getUsers: async (request, response) =>{
+  try{
+    const users = await User.find();
+    response.send(users);
+  }
+  catch(err){
+    console.log(err);
+  }
 }
 }
 

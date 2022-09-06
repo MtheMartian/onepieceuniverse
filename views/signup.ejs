@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
   <title>One Piece Realm</title>
 </head>
 <body>
   <h1>Sign Up<h1>
 <section>
+  <%- include('./partials/messages.ejs') %>
   <form action="/signup/newuser" method="POST">
     <label for="username">Username</label>
-    <input type="text" placeholder="Username" id="username" name="userName">
+    <input type="text" placeholder="Username" 
+            id="username" name="userName"
+            value="<%= typeof userName != 'undefined' ? userName: '' %>">
   </section>
   <section>
     <label for="email">E-mail</label>
-    <input type="text" placeholder="E-Mail" id="email" name="email">
+    <input type="text" placeholder="E-Mail" 
+            id="email" name="email"
+            value="<%= typeof email != 'undefined' ? email: '' %>">
   </section>
   <section>
     <label for="password">Password</label>
-    <input type="text" placeholder="Password" id="password" name="password">
+    <input type="password" placeholder="Password" 
+            id="password" name="password"
+            value="<%= typeof password != 'undefined' ? password: '' %>">
   </section>
   <section>
     <label for="confpassword">Confirm</label>
-    <input type="text" placeholder="Password" id="confpassword" name="confirmPassword">
+    <input type="password" placeholder="Password" 
+            id="confpassword" name="confirmPassword"
+            value="<%= typeof confirmPassword != 'undefined' ? confirmPassword: '' %>">
   </section>
   <button type="submit" id="signUpButton">Sign Up</button>
 </section>

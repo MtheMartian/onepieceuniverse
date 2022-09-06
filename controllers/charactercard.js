@@ -18,7 +18,9 @@ module.exports = {
             location: request.body.location,
             numAbilities: request.body.numAbilities,
             altCharImg: ""
-          }]                
+          }],
+          superAdmin: request.body.superAdmin,
+          userID: request.body.userID,                
         })
         console.log('Character added!');
         response.redirect('/');
@@ -37,7 +39,9 @@ module.exports = {
             charhaki: request.body.charHakiU,
             charRank: request.body.charRankU,
             imgURL: request.body.imgURLU,
-            'description.$[].bounty.bountyAmount': request.body.bountyU
+            'description.$[].bounty.bountyAmount': request.body.bountyU,
+            superAdmin: request.body.superAdmin,
+            userID: request.body.userID,
           }
         },
         {

@@ -1,3 +1,4 @@
+
 //----------------------General-----------------------------------------
 const characterCard = {
   submitChar: document.querySelector('#addCharBtn'),
@@ -27,6 +28,7 @@ function unHideIt(element){
 }
 
 storeInfo();
+getUsers();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -57,7 +59,9 @@ async function createCharacter(){
   const numAbilities = document.querySelector('#numAbilities');
   const charFruitType = document.querySelector('#charFruitType');
   const charHakiType = document.querySelector('#charHakiTypeU');
+  const superAdmin = customUsers.superAdmin;
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
+  const userID = setUsersToCards();
   const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   const charRank = document.querySelector('#charRank');
@@ -90,7 +94,9 @@ async function createCharacter(){
         'location': charLocation.value,
         'pirate': isItPirate,
         'marine': isItMarine,
-        'numAbilities': characterCard.listOfAbilities
+        'numAbilities': characterCard.listOfAbilities,
+        'superAdmin': superAdmin,
+        'userID': userID,
       })
     })
     characterCard.listOfAbilities = [];
@@ -296,6 +302,7 @@ async function updateCard(){
   const charHaki = {hakiUsageLevel: charHakiU, hakiType: charHakiTypeU.value};
   const bountyU = document.querySelector('#bountyU').value;
   const charRankU = document.querySelector('#charRankU').value;
+  const userID = setUsersToCards();
 
   const imgURLU = document.querySelector('#imgURLU').value;
   try{
@@ -310,7 +317,9 @@ async function updateCard(){
         'charHakiU': charHaki,
         'charRankU': charRankU,
         'imgURLU': imgURLU,
-        'bountyU': bountyU
+        'bountyU': bountyU,
+        'superAdmin': customUsers.superAdmin,
+        'userID': userID
       })
     });
     location.reload();
@@ -399,4 +408,32 @@ function showSignInForm(){
     signInForm.classList.add('hidden');
     signInCustom.isItOpen = false;
   }
+}
+//-------------------------Users and cards----------------------------------------
+const customUsers = {
+  userArr: [],
+  superAdmin: "391390167862gh354062i",
+}
+
+async function getUsers(){
+  try{
+    const response = await fetch('/users');
+    const users = await response.json();
+    customUsers.userArr =  users;
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
+function setUsersToCards(){
+  const emailMatch = sessionStorage.getItem('email');
+  let userID = "";
+  for(let i = 0; i < customUsers.userArr.length; i++){
+    if(emailMatch == customUsers.userArr[i].email){
+       userID = customUsers.userArr[i].userID;
+      break;
+    }
+  }
+  return userID;
 }
