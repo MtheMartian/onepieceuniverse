@@ -15,6 +15,11 @@ const characterCard = {
   characterId: "",
 }
 
+const customUsers = {
+  userArr: [],
+  superAdmin: "391390167862gh354062i",
+}
+
 const generalButtons = {
   xOut: document.querySelectorAll('.closeIt'),
   hideIt: function(event){
@@ -29,6 +34,7 @@ function unHideIt(element){
 
 storeInfo();
 getUsers();
+setTimeout(hideAllCardEditButtons(), "100");
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -61,7 +67,7 @@ async function createCharacter(){
   const charHakiType = document.querySelector('#charHakiTypeU');
   const superAdmin = customUsers.superAdmin;
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
-  const userID = setUsersToCards();
+  const userID = getSignedInUserID();
   const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   const charRank = document.querySelector('#charRank');
@@ -410,10 +416,6 @@ function showSignInForm(){
   }
 }
 //-------------------------Users and cards----------------------------------------
-const customUsers = {
-  userArr: [],
-  superAdmin: "391390167862gh354062i",
-}
 
 async function getUsers(){
   try{
@@ -426,7 +428,7 @@ async function getUsers(){
   }
 }
 
-function setUsersToCards(){
+function getSignedInUserID(){
   const emailMatch = sessionStorage.getItem('email');
   let userID = "";
   for(let i = 0; i < customUsers.userArr.length; i++){
@@ -437,3 +439,24 @@ function setUsersToCards(){
   }
   return userID;
 }
+
+
+function hideAllCardEditButtons(){
+  const editCard = document.querySelectorAll('.editCard');
+  const editCardArr = Array.from(editCard);
+   editCardArr.forEach(element =>{
+    element.classList.add('hidden');
+  })
+}
+
+setTimeout(function showCardEditButtonsBasedOnUsers(){
+  const userID = getSignedInUserID();
+  const cardArr = characterCard.charArray;
+  console.log(userID);
+  for(let i = 0; i < cardArr.length; i++){
+    if(userID == cardArr[i].userID || userID == cardArr[i].superAdmin){
+      document.getElementById(`${cardArr[i].id}`).querySelector('.editCard').classList.remove('hidden');
+    }
+  }
+}, "500");
+
