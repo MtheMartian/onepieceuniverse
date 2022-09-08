@@ -155,6 +155,7 @@ button, #addCharBtn{
   row-gap: 1rem;
   border-radius: 10px;
   overflow: auto;
+  font-family: Secular One, Arial;
 }
 
 .closeIt, .closeSeeMore{
@@ -179,6 +180,13 @@ button, #addCharBtn{
   border-radius: 20px;
   padding: 0 0 0 1rem;
   border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+#abilityDescription, #charDescription{
+  min-height: 50%;
+  max-height: 70%;
+  padding: 1rem;
+
 }
 /*-----------Navigation Bar--------------*/
 #navigation, #navigation > ul{
@@ -216,7 +224,7 @@ button, #addCharBtn{
   margin-left: 35%;
 }
 /*----------------More info on character-----------------*/
-#characterMoreInfo, #characterMoreInfo > div{
+#characterMoreInfo{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -224,30 +232,55 @@ button, #addCharBtn{
 }
 
 #characterMoreInfo{
-  height: 50%;
-  background-color: rgba(0, 0, 0, 0.9);
+  height: 40%;
+  background-color: rgba(73, 48, 0, 1);
   color: white;
   position: absolute;
-  top: 10%;
-  right: 30%;
-  width: 40%;
+  top: 7%;
+  right: 15%;
+  width: 70%;
   overflow: auto;
+  row-gap: 5rem;
 }
 
 #bountyImg{
-  width: 75%;
-  height: 80%;
+  width: 100%;
   object-fit: fill;
 }
 
 #characterMoreInfo > div{
   position: relative;
   width: 95%;
-  margin-bottom: -20%;
+  margin-bottom: 0;
+}
+
+#characterSummary{
+  width: 50% !important;
 }
 
 #editSeeMoreButton, .closeSeeMore{
   z-index: 1;
+}
+
+#abilityTrailerContainer{
+  float: left;
+  width: 400px;
+  height: 400px;
+  margin: 0 2rem 0 0;
+
+}
+
+.abilityDiv > pre, .abilityDiv > span{
+  font-family: Secular One, Arial;
+}
+
+.abilityDiv{
+  width: 50% !important;
+}
+
+.abilityDiv > p{
+  line-height: 2rem;
+  letter-spacing: 2px;
 }
 /*-------------Stuff---------------------*/
 .hidden{

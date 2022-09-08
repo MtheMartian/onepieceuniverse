@@ -5,6 +5,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const connectDB = require('./config/database');
 const homeRoutes = require('./routes/home');
+const logger = require('morgan');
 const characterCardRoutes = require('./routes/charactercards');
 const characterInfoRoutes = require('./routes/characterinfo');
 const usersRoutes = require('./routes/User');
@@ -21,10 +22,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('assets'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(logger('dev'));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: MongoStore.create({mongoUrl: process.env.DB_STRING}),
 }))
 app.use(passport.initialize());

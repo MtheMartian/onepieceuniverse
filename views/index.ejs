@@ -166,7 +166,7 @@
       <%}%>
     </section>
     <div id="characterMoreInfo" class="hidden">
-      <div>
+      <div id="characterSummary">
         <img id="bountyImg" src="" atl="Bounty"></img>
         <p id="charDesc"></p>
         <button id="editSeeMoreButton">Edit</button>
@@ -176,7 +176,9 @@
     <div class="updateSeeMore hidden">
       <div id="abilitySection">
         <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Bounty Image URL">
-        <input type="text" id="charDescription" class="cardDisplayInfo" placeholder="Character Description">
+        <textarea id="charDescription" class="cardDisplayInfo" 
+          placeholder="Character Description" cols="33" rows="5">
+        </textarea>
       </div>
       <button id="updateSeeMoreBtn">Update</button>
       <button class="closeIt">X</button>
@@ -190,7 +192,7 @@
       <li>
         <button id="createChar">Add Character</button>
       </li>
-      <li>
+      <li id="signInSection">
         <button class="signInBtn">Sign In</button>
       </li>
       <li>

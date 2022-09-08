@@ -34,7 +34,9 @@ function unHideIt(element){
 
 storeInfo();
 getUsers();
-setTimeout(hideAllCardEditButtons(), "100");
+setTimeout(currentlySignedIn, 150);
+setTimeout(hideAllCardEditButtons, 10);
+setTimeout(whosStronger, 100);
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -135,7 +137,7 @@ function seeMore(event){
   const bountyImg = document.querySelector('#bountyImg');
   const charDesc = document.querySelector('#charDesc');
   const imagery = document.createElement('iframe');
-  const ability = document.createElement('span');
+  const ability = document.createElement('h2');
   const abilityDesc = document.createElement('p');
   const container = document.createElement('div');
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
@@ -151,15 +153,24 @@ function seeMore(event){
         charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
         
         for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+          
           const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
           abilityDiv.className = "abilityDiv";
+
+          const abilityTrailerContainer = abilityDiv.appendChild(container.cloneNode());
+          abilityTrailerContainer.id = "abilityTrailerContainer";
+          
           const abilityName = abilityDiv.appendChild(ability.cloneNode());
           abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
+          
           const abilityDescription = abilityDiv.appendChild(abilityDesc.cloneNode());
+          abilityDescription
           abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
-          const abilityTrailer = abilityDiv.appendChild(imagery.cloneNode());
+          
+          const abilityTrailer = abilityTrailerContainer.appendChild(imagery.cloneNode());
           abilityTrailer.width = 400;
           abilityTrailer.height = 400;
+          abilityTrailer.id ="abilityTrailer";
           abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
         }
         characterMoreInfoDiv.classList.remove('hidden');
@@ -179,7 +190,7 @@ async function openSeeMoreForm(){
 }
 async function addInfoToSeeMoreEdit(){
   const abilityName = document.createElement('input');
-  const abilityDesc = document.createElement('input');
+  const abilityDesc = document.createElement('textarea');
   const abilityView = document.createElement('input');
   const abilitySection = document.querySelector('#abilitySection');
   const bountyImgURL = document.querySelector('#bountyImgURL');
@@ -195,19 +206,22 @@ async function addInfoToSeeMoreEdit(){
         abilityNameInput.id = "abilityName";
         abilityNameInput.value = characterCard.charArray[i].description[0].numAbilities[j].ability;
 
-        const abilityDescInput = abilitySection.appendChild(abilityDesc.cloneNode());
-        abilityDescInput.className = "cardDisplayInfo";
-        abilityDescInput.placeholder = "Ability Description";
-        abilityDescInput.type = "text";
-        abilityDescInput.id = "abilityDescription";
-        abilityDescInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
-
         const abilityViewInput = abilitySection.appendChild(abilityView.cloneNode());
         abilityViewInput.className = "cardDisplayInfo";
         abilityViewInput.placeholder = "Video URL/Image URL";
-        abilityViewInput.id = "abilityTrailer";
+        abilityViewInput.id = "abilityTrailerURL";
         abilityViewInput.type = "text";
         abilityViewInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+
+        const abilityDescInput = abilitySection.appendChild(abilityDesc.cloneNode());
+        abilityDescInput.className = "cardDisplayInfo";
+        abilityDescInput.placeholder = "Ability Description";
+        abilityDescInput.id = "abilityDescription";
+        abilityDescInput.rows = "5"
+        abilityDescInput.cols = "33";
+        abilityDescInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+
+        
       }
       bountyImgURL.value = characterCard.charArray[i].description[0].bounty.posterBountyURL;
       charDescription.value = characterCard.charArray[i].description[0].charDesc;
@@ -219,7 +233,7 @@ async function addInfoToSeeMoreEdit(){
 async function updateSeeMore(){
     const abilityName = document.querySelectorAll('#abilityName');
     const abilityDescription = document.querySelectorAll('#abilityDescription');
-    const abilityTrailer = document.querySelectorAll('#abilityTrailer');
+    const abilityTrailer = document.querySelectorAll('#abilityTrailerURL');
     const bountyImgURL = document.querySelector('#bountyImgURL');
     const charDescription = document.querySelector('#charDescription');
     let abilitiesArray = [];
@@ -242,7 +256,7 @@ async function updateSeeMore(){
       abilitiesArray.push({
         ability: abilityNameArr[i],
         abilityDesc: abilityDescArr[i],
-        abilityURL: abilityURLArr[i] 
+        abilityURL: abilityURLArr[i],
       })
     }
 
@@ -377,7 +391,7 @@ async function deleteCard(){
 }
 
 //------------------------Style Cards------------------------------------
-setTimeout(function whosStronger(){
+function whosStronger(){
   if(characterCard.charArray.length >= 1){
     for(let i = 0; i < characterCard.charArray.length; i++){
       switch(characterCard.charArray[i].charhaki.hakiUsageLevel)
@@ -395,24 +409,6 @@ setTimeout(function whosStronger(){
         break;
       } 
     }
-  }
-}, "100");
-
-//-------------------Sign In/ Sign Up--------------------------------------
-document.querySelector('.signInBtn').addEventListener('click', showSignInForm);
-const signInCustom = {
-  isItOpen: false,
-}
-
-function showSignInForm(){
-  const signInForm = document.querySelector('#signIn');
-  if(signInCustom.isItOpen == false){
-    signInForm.classList.remove('hidden');
-    signInCustom.isItOpen = true;
-  }
-  else{
-    signInForm.classList.add('hidden');
-    signInCustom.isItOpen = false;
   }
 }
 //-------------------------Users and cards----------------------------------------
@@ -459,4 +455,38 @@ setTimeout(function showCardEditButtonsBasedOnUsers(){
     }
   }
 }, "500");
+//-------------------Sign In, Up, Out--------------------------------------
+document.querySelector('.signInBtn').addEventListener('click', showSignInForm);
+document.querySelector('.signOut').addEventListener('click', clearStorageOnSignOut);
+const signInCustom = {
+  isItOpen: false,
+  userIsSignedIn: false
+}
+
+function showSignInForm(){
+  const signInForm = document.querySelector('#signIn');
+  if(signInCustom.isItOpen == false){
+    signInForm.classList.remove('hidden');
+    signInCustom.isItOpen = true;
+  }
+  else{
+    signInForm.classList.add('hidden');
+    signInCustom.isItOpen = false;
+  }
+}
+
+function clearStorageOnSignOut(){
+  sessionStorage.clear();
+}
+
+function currentlySignedIn(){
+  const singInSection = document.getElementById('signInSection');
+  const storedEmail = sessionStorage.getItem('email');
+  const userArr = customUsers.userArr;
+  for(let i = 0; i < userArr.length; i++){
+    if(storedEmail !== null || userArr[i].email.includes(storedEmail)){
+      singInSection.classList.add('hidden');
+    }
+  }
+}
 
