@@ -1,4 +1,3 @@
-
 //----------------------General-----------------------------------------
 const characterCard = {
   submitChar: document.querySelector('#addCharBtn'),
@@ -64,6 +63,7 @@ async function createCharacter(){
   const isMarineChecked = document.querySelector('#isMarine');
   const bounty = document.querySelector('#bounty');
   const charLocation = document.querySelector('#location');
+  const specificCharLocation = document.querySelector('#specificLocation');
   const numAbilities = document.querySelector('#numAbilities');
   const charFruitType = document.querySelector('#charFruitType');
   const charHakiType = document.querySelector('#charHakiTypeU');
@@ -100,6 +100,7 @@ async function createCharacter(){
         'imgURL': imgURL.value,
         'bounty': bountyInfo,
         'location': charLocation.value,
+        'specificLocation': specificCharLocation.value,
         'pirate': isItPirate,
         'marine': isItMarine,
         'numAbilities': characterCard.listOfAbilities,
@@ -184,11 +185,11 @@ function seeMore(event){
 document.querySelector('#editSeeMoreButton').addEventListener('click', addInfoToSeeMoreEdit);
 document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeMore);
 
-async function openSeeMoreForm(){
+function openSeeMoreForm(){
   const updateSeeMoreForm = document.querySelector('.updateSeeMore');
   updateSeeMoreForm.classList.remove('hidden');
 }
-async function addInfoToSeeMoreEdit(){
+function addInfoToSeeMoreEdit(){
   const abilityName = document.createElement('input');
   const abilityDesc = document.createElement('textarea');
   const abilityView = document.createElement('input');
@@ -322,7 +323,8 @@ async function updateCard(){
   const charHaki = {hakiUsageLevel: charHakiU, hakiType: charHakiTypeU.value};
   const bountyU = document.querySelector('#bountyU').value;
   const charRankU = document.querySelector('#charRankU').value;
-  const userID = setUsersToCards();
+  const generalLocationU = document.querySelector('#locationU').value;
+  const specificLocationU = document.querySelector('#specificLocationU').value;
 
   const imgURLU = document.querySelector('#imgURLU').value;
   try{
@@ -338,8 +340,8 @@ async function updateCard(){
         'charRankU': charRankU,
         'imgURLU': imgURLU,
         'bountyU': bountyU,
-        'superAdmin': customUsers.superAdmin,
-        'userID': userID
+        'generalLocationU': generalLocationU,
+        'specificLocationU': specificLocationU,
       })
     });
     location.reload();
@@ -359,6 +361,8 @@ function addInfoToEdit(){
   const imgURLU = document.querySelector('#imgURLU');
   const bountyU = document.querySelector('#bountyU');
   const charRankU = document.querySelector('#charRankU');
+  const generalLocationU = document.querySelector('#locationU');
+  const specificLocationU = document.querySelector('#specificLocationU');
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId == characterCard.charArray[i].id){
       charNameU.value = characterCard.charArray[i].charName;
@@ -370,6 +374,8 @@ function addInfoToEdit(){
       charRankU.value = characterCard.charArray[i].charRank;
       imgURLU.value = characterCard.charArray[i].imgURL;
       bountyU.value = characterCard.charArray[i].description[0].bounty.bountyAmount;
+      generalLocationU.value = characterCard.charArray[i].description[0].location;
+      specificLocationU.value = characterCard.charArray[i].description[0].specificLocation;
     }
   }
 }
@@ -489,4 +495,3 @@ function currentlySignedIn(){
     }
   }
 }
-

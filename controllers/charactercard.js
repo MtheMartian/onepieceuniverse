@@ -16,6 +16,7 @@ module.exports = {
             bounty: request.body.bounty,
             imgBountyURL: request.body.bountyImgURL,
             location: request.body.location,
+            specificLocation: request.body.specificLocation,
             numAbilities: request.body.numAbilities,
             altCharImg: ""
           }],
@@ -40,8 +41,8 @@ module.exports = {
             charRank: request.body.charRankU,
             imgURL: request.body.imgURLU,
             'description.$[].bounty.bountyAmount': request.body.bountyU,
-            superAdmin: request.body.superAdmin,
-            userID: request.body.userID,
+            'description.$[].location': request.body.generalLocationU,
+            'description.$[].specificLocation': request.body.specificLocationU,
           }
         },
         {
