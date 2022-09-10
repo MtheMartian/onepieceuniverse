@@ -3,6 +3,7 @@ const Character = require('../models/Character');
 module.exports = {
   moreInfoUpdate: async (request, response) =>{
     try{
+      console.log(request);
       await Character.findOneAndUpdate({id: request.body.cardId}, {
         "$set": {
           "description.$[].charDesc" : request.body.charDesc,

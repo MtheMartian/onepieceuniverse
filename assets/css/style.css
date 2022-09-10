@@ -1,6 +1,7 @@
 /*--------------------General-----------------------*/
 body{
   background: orange;
+  overflow: hidden;
 }
 
 html{
@@ -16,11 +17,26 @@ button, #addCharBtn{
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 67px);
+  overflow-y: scroll;
+  padding-top: 3%;
 }  
+
+button{
+  border: none;
+  font-family: Secular One, Arial;
+  color: azure;
+  transition: color 0.15s;
+  background: rgba(0, 0, 0, 0);
+  font-size: 2rem;
+}
+
+button:hover{
+  color: blue;
+}
 
 /*--------------Character Cards------------------*/
 .cardInfo, .characterCard{
@@ -142,13 +158,13 @@ button, #addCharBtn{
 
 /*----------Forms-------------*/
 .updateCard, .addCharacter, .updateSeeMore{
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(37, 37, 37, 1);
   display: flex;
   position: absolute;
-  top: 8%;
+  top: 6%;
   left: 35%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 35%;
   height: 45%;
@@ -156,6 +172,18 @@ button, #addCharBtn{
   border-radius: 10px;
   overflow: auto;
   font-family: Secular One, Arial;
+  color: white;
+  padding: 1% 1% 1% 1%;
+  z-index: 1;
+}
+
+.updateCard{
+  height: 35% !important;
+}
+
+
+.updateSeeMore{
+  padding: 1% 1% 1% 5% !important;
 }
 
 .closeIt, .closeSeeMore{
@@ -163,11 +191,26 @@ button, #addCharBtn{
   font-family: Montserrat ExtraBold, Arial;
   color: white;
   font-size: 2rem;
-  background-color: rgba(0, 0, 0, 0);
   position: absolute;
-  right: 2%;
-  bottom: 2%;
+  right: 3%;
+  top: 2%;
   transition: color 0.15s;
+}
+
+#updateSeeMoreBtn, .updateSeeMoreExitBtn{
+  position: fixed;
+  right: 2%;
+  margin-right: 24%
+}
+
+#updateSeeMoreBtn{
+  top: 55%;
+}
+
+.updateSeeMoreExitBtn{
+  top: 15%;
+  right: 4%;
+  margin-right: 24%
 }
 
 .closeIt:hover,.closeSeeMore:hover{
@@ -186,7 +229,6 @@ button, #addCharBtn{
   min-height: 50%;
   max-height: 70%;
   padding: 1rem;
-
 }
 /*-----------Navigation Bar--------------*/
 #navigation, #navigation > ul{
@@ -220,7 +262,6 @@ button, #addCharBtn{
 .title{
   color: white;
   font-size: 3rem;
-  width: 40%;
   margin-left: 35%;
 }
 /*----------------More info on character-----------------*/
@@ -229,9 +270,6 @@ button, #addCharBtn{
   align-items: center;
   flex-direction: column;
   justify-content: start;
-}
-
-#characterMoreInfo{
   height: 40%;
   background-color: rgba(73, 48, 0, 1);
   color: white;
@@ -242,6 +280,7 @@ button, #addCharBtn{
   overflow-y: scroll;
   scrollbar-color: blue;
   row-gap: 5rem;
+  z-index: 1;
 }
 
 #bountyImg{
@@ -258,8 +297,24 @@ button, #addCharBtn{
   width: 50% !important;
 }
 
+#charDesc{
+  font-size: 1.5rem;
+}
+
 #editSeeMoreButton, .closeSeeMore{
-  z-index: 1;
+  position: absolute;
+  top: 0; 
+}
+
+#editSeeMoreButton{
+  left: -47%;
+  margin-top: 2%;
+}
+
+.closeSeeMore{
+  right: -47%;
+  bottom: 100% !important;
+  margin-top: 2%;
 }
 
 #abilityTrailerContainer{
@@ -285,10 +340,20 @@ button, #addCharBtn{
 .abilityDiv > p{
   line-height: 2rem;
   letter-spacing: 2px;
+  font-size: 1rem;
 }
 /*-------------Stuff---------------------*/
 .hidden{
   display: none !important;
+}
+
+#overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
 }
 /*------------------Users--------------------*/
 #signIn{

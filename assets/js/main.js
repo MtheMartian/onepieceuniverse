@@ -23,12 +23,23 @@ const generalButtons = {
   xOut: document.querySelectorAll('.closeIt'),
   hideIt: function(event){
     console.log(event);
+    if(customSeeMore.isItOpen){
+
+    }
+    else{
+      generalStuff.overlay.classList.add('hidden');
+    }
     event.path[1].classList.add('hidden');
   },
 }
 
+const generalStuff = {
+  overlay: document.querySelector('#overlay'),
+}
+
 function unHideIt(element){
   element.classList.remove('hidden');
+  generalStuff.overlay.classList.remove('hidden');
 }
 
 storeInfo();
@@ -45,12 +56,13 @@ Array.from(generalButtons.xOut).forEach((element) =>{
 const addCharForm = document.querySelector('.addCharacter');
 const createCharacterButton = document.querySelector('#createChar');
 const formAddCharButton = document.querySelector('#addCharBtn');
-function appear(){
+function showCreateCharForm(){
+  generalStuff.overlay.classList.remove('hidden');
   addCharForm.classList.remove('hidden');
 }
 addCharForm.classList.add('hidden');
 
-createCharacterButton.addEventListener('click', appear);
+createCharacterButton.addEventListener('click', showCreateCharForm);
 formAddCharButton.addEventListener('click', createCharacter);
 
 async function createCharacter(){
@@ -128,10 +140,7 @@ Array.from(characterCard.charInfo).forEach((element) =>{
   element.addEventListener('click', seeMore);
 });
 
-function closeSeeMore(event){
-  console.log(event);
-  event.path[1].classList.add('hidden');
-  customSeeMore.isItOpen = false;
+function closeSeeMore(){
   location.reload();
 }
 function seeMore(event){
@@ -169,12 +178,14 @@ function seeMore(event){
           abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
           
           const abilityTrailer = abilityTrailerContainer.appendChild(imagery.cloneNode());
-          abilityTrailer.width = 400;
-          abilityTrailer.height = 400;
           abilityTrailer.id ="abilityTrailer";
           abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
         }
+        generalStuff.overlay.classList.remove('hidden');
         characterMoreInfoDiv.classList.remove('hidden');
+        if(bountyImg.src != ""){
+          bountyImg.classList.remove('hidden');
+        }
         customSeeMore.isItOpen = true;
       }
     } 
@@ -188,6 +199,7 @@ document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeM
 function openSeeMoreForm(){
   const updateSeeMoreForm = document.querySelector('.updateSeeMore');
   updateSeeMoreForm.classList.remove('hidden');
+  generalStuff.overlay.classList.remove('hidden');
 }
 function addInfoToSeeMoreEdit(){
   const abilityName = document.createElement('input');

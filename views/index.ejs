@@ -170,7 +170,7 @@
     </section>
     <div id="characterMoreInfo" class="hidden">
       <div id="characterSummary">
-        <img id="bountyImg" src="" atl="Bounty"></img>
+        <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
         <p id="charDesc"></p>
         <button id="editSeeMoreButton">Edit</button>
         <button class="closeSeeMore">X</button>
@@ -182,9 +182,9 @@
         <textarea id="charDescription" class="cardDisplayInfo" 
           placeholder="Character Description" cols="33" rows="5">
         </textarea>
+        <button id="updateSeeMoreBtn">Update</button>
       </div>
-      <button id="updateSeeMoreBtn">Update</button>
-      <button class="closeIt">X</button>
+      <button class="closeIt updateSeeMoreExitBtn">X</button>
     </div>
   </main>
   <nav id="navigation">
@@ -215,6 +215,7 @@
       <button type="submit">Sign In</button>
       <span>New?</span><a href="/page/signup" id="signUp">Sign Up</a>
     </form>
+    <div id="overlay" class="hidden"></div>
   <script src="js/main.js"></script>
 </body>
 </html>
