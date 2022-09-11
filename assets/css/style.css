@@ -1,7 +1,6 @@
 /*--------------------General-----------------------*/
 body{
   background: orange;
-  overflow: hidden;
 }
 
 html{
@@ -13,6 +12,7 @@ button, #addCharBtn{
   cursor: pointer;
 }
 
+
  main{
   position: relative;
   display: flex;
@@ -20,9 +20,9 @@ button, #addCharBtn{
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: calc(100% - 67px);
-  overflow-y: scroll;
+  height: 90%;
   padding-top: 3%;
+  overflow-y: auto;
 }  
 
 button{
@@ -39,6 +39,17 @@ button:hover{
 }
 
 /*--------------Character Cards------------------*/
+
+#pirates, #marines, #others{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 95%;
+  height: 750px;
+}
+
+
 .cardInfo, .characterCard{
   display: flex;
   color: black;
@@ -94,10 +105,9 @@ button:hover{
   align-items: center;
   column-gap: 3%;
   width: 95%;
-  height: 440px;
-  padding: 0 2rem 0 2%;
+  height: 100%;
   overflow-x: scroll;
-  padding: 0 0 0 1%; 
+  padding-left: 2%; 
 }
 
 .fruitImg{
@@ -135,15 +145,15 @@ button:hover{
 }
 
 .supreme{
-  box-shadow: 0px 0px 20px rgba(255, 0, 0, 1);
+  box-shadow: 0px 0px 35px rgba(255, 0, 0, 1);
 }
 
 .legendary{
-  box-shadow: 0px 0px 20px rgba(179, 32, 247, 1);
+  box-shadow: 0px 0px 35px rgba(179, 32, 247, 1);
 }
 
 .mighty{
-  box-shadow: 0px 0px 20px rgba(243, 243, 243, 1);
+  box-shadow: 0px 0px 35px rgba(243, 243, 243, 1);
 }
 
 .cardSectionTitle{
@@ -161,13 +171,13 @@ button:hover{
   background: rgba(37, 37, 37, 1);
   display: flex;
   position: absolute;
-  top: 6%;
-  left: 35%;
+  top: 4%;
+  left: 30%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 35%;
-  height: 45%;
+  height: 90%;
   row-gap: 1rem;
   border-radius: 10px;
   overflow: auto;
@@ -178,15 +188,48 @@ button:hover{
 }
 
 .updateCard{
-  height: 35% !important;
+  top: 10% !important;
+  padding: 2% 1% 0 1% !important;
+  height: 80% !important;
 }
 
+.optionGrouping{
+  position: fixed;
+  background: grey;
+  height: 5%;
+  width: 40%;
+  margin-left: -4%;
+  margin-top: -3%;
+  border-radius: 3px;
+}
+
+#abilitySection, .abilityContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.abilityContainers{
+  row-gap: 1rem;
+}
+
+.updateSeeMoreFormInputs{
+  height: 10% !important;
+}
+
+#updateSeeMoreBtn{
+  padding-left: 5%;
+}
 
 .updateSeeMore{
-  padding: 1% 1% 1% 5% !important;
+  padding: 3% 1% 2% 5% !important;
+  height: 85% !important;
 }
 
-.closeIt, .closeSeeMore{
+.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
   border: none;
   font-family: Montserrat ExtraBold, Arial;
   color: white;
@@ -197,23 +240,7 @@ button:hover{
   transition: color 0.15s;
 }
 
-#updateSeeMoreBtn, .updateSeeMoreExitBtn{
-  position: fixed;
-  right: 2%;
-  margin-right: 24%
-}
-
-#updateSeeMoreBtn{
-  top: 55%;
-}
-
-.updateSeeMoreExitBtn{
-  top: 15%;
-  right: 4%;
-  margin-right: 24%
-}
-
-.closeIt:hover,.closeSeeMore:hover{
+.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
   color: red;
 }
 
@@ -270,7 +297,7 @@ button:hover{
   align-items: center;
   flex-direction: column;
   justify-content: start;
-  height: 40%;
+  height: 90%;
   background-color: rgba(73, 48, 0, 1);
   color: white;
   position: absolute;
@@ -317,16 +344,20 @@ button:hover{
   margin-top: 2%;
 }
 
-#abilityTrailerContainer{
+.abilityTrailerContainer{
   float: left;
   width: 27rem;
   height: 27rem;
   margin: 0 2rem 0 0;
 }
 
-#abilityTrailer{
+.abilityTrailer, .abilityImage{
   width: 100%;
   height: 100%;
+}
+
+.abilityImage{
+  object-fit: fill;
 }
 
 .abilityDiv > pre, .abilityDiv > span{

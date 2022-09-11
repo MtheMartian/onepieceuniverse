@@ -23,18 +23,17 @@ const generalButtons = {
   xOut: document.querySelectorAll('.closeIt'),
   hideIt: function(event){
     console.log(event);
-    if(customSeeMore.isItOpen){
-
-    }
-    else{
-      generalStuff.overlay.classList.add('hidden');
-    }
     event.path[1].classList.add('hidden');
+    generalStuff.overlay.classList.add('hidden');
   },
 }
 
 const generalStuff = {
   overlay: document.querySelector('#overlay'),
+}
+
+const allConditions = {
+  toggleMyView: false,
 }
 
 function unHideIt(element){
@@ -86,7 +85,7 @@ async function createCharacter(){
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   const charRank = document.querySelector('#charRank');
   for(let i = 1; i <= Number(numAbilities.value); i++){
-    characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: ""});
+    characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: "", viewType: "Video"});
   }
 
   let isItPirate = false;
@@ -147,6 +146,7 @@ function seeMore(event){
   const bountyImg = document.querySelector('#bountyImg');
   const charDesc = document.querySelector('#charDesc');
   const imagery = document.createElement('iframe');
+  const imagery2 = document.createElement('img');
   const ability = document.createElement('h2');
   const abilityDesc = document.createElement('p');
   const container = document.createElement('div');
@@ -168,7 +168,7 @@ function seeMore(event){
           abilityDiv.className = "abilityDiv";
 
           const abilityTrailerContainer = abilityDiv.appendChild(container.cloneNode());
-          abilityTrailerContainer.id = "abilityTrailerContainer";
+          abilityTrailerContainer.className = "abilityTrailerContainer";
           
           const abilityName = abilityDiv.appendChild(ability.cloneNode());
           abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
@@ -178,11 +178,18 @@ function seeMore(event){
           abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
           
           const abilityTrailer = abilityTrailerContainer.appendChild(imagery.cloneNode());
-          abilityTrailer.id ="abilityTrailer";
+          abilityTrailer.className ="abilityTrailer";
+          abilityTrailer.id = `trailer${j}`;
           abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+
+          const abilityImage = abilityTrailerContainer.appendChild(imagery2.cloneNode());
+          abilityImage.className ="abilityImage hidden";
+          abilityImage.id = `image${j}`;
+          abilityImage.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
         }
         generalStuff.overlay.classList.remove('hidden');
         characterMoreInfoDiv.classList.remove('hidden');
+
         if(bountyImg.src != ""){
           bountyImg.classList.remove('hidden');
         }
@@ -190,11 +197,29 @@ function seeMore(event){
       }
     } 
   }
+  //Check Imagery Type
+  for(let i = 0; i < characterCard.charArray.length; i++){
+    if(characterCard.characterId === characterCard.charArray[i].id){
+      for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+        let arrayGalore = characterCard.charArray[i].description[0].numAbilities[j].viewType;
+          if(arrayGalore === "Video"){
+            document.getElementById(`image${j}`).classList.add('hidden');
+            //document.getElementById(`trailer${j}`).classList.remove('hidden');
+          }
+          else if(arrayGalore === "Image"){
+            document.getElementById(`trailer${j}`).classList.add('hidden');
+            document.getElementById(`image${j}`).classList.remove('hidden');
+          }
+      }
+    }
+  }
+  //********************************************************************/
 }
 
 //-----------------------Update More Info-----------------------------
 document.querySelector('#editSeeMoreButton').addEventListener('click', addInfoToSeeMoreEdit);
 document.querySelector('#updateSeeMoreBtn').addEventListener('click', updateSeeMore);
+document.querySelector('#updateSeeMoreExitBtn').addEventListener('click', closeUpdateSeeMoreForm);
 
 function openSeeMoreForm(){
   const updateSeeMoreForm = document.querySelector('.updateSeeMore');
@@ -205,28 +230,41 @@ function addInfoToSeeMoreEdit(){
   const abilityName = document.createElement('input');
   const abilityDesc = document.createElement('textarea');
   const abilityView = document.createElement('input');
+  const changeImageryType = document.createElement('button');
+  const abilityContainers = document.createElement('div');
   const abilitySection = document.querySelector('#abilitySection');
   const bountyImgURL = document.querySelector('#bountyImgURL');
   const charDescription = document.querySelector('#charDescription');
+  const updateSeeMore = document.querySelector('.updateSeeMore');
   
   for(let i = 0; i < characterCard.charArray.length; i++){
     if(characterCard.characterId == characterCard.charArray[i].id){
       for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
-        const abilityNameInput = abilitySection.appendChild(abilityName.cloneNode());
-        abilityNameInput.className = "cardDisplayInfo";
+
+        let whatsTheType = characterCard.charArray[i].description[0].numAbilities[j].viewType;
+        const abilityBoxes = updateSeeMore.appendChild(abilityContainers.cloneNode());
+        abilityBoxes.className = "abilityContainers";
+
+        const abilityNameInput = abilityBoxes.appendChild(abilityName.cloneNode());
+        abilityNameInput.className = "cardDisplayInfo updateSeeMoreFormInputs";
         abilityNameInput.placeholder = "Ability Name";
         abilityNameInput.type = "text";
         abilityNameInput.id = "abilityName";
         abilityNameInput.value = characterCard.charArray[i].description[0].numAbilities[j].ability;
 
-        const abilityViewInput = abilitySection.appendChild(abilityView.cloneNode());
-        abilityViewInput.className = "cardDisplayInfo";
-        abilityViewInput.placeholder = "Video URL/Image URL";
-        abilityViewInput.id = "abilityTrailerURL";
+        const abilityViewInput = abilityBoxes.appendChild(abilityView.cloneNode());
+        abilityViewInput.className = "cardDisplayInfo abilityImagery updateSeeMoreFormInputs";
+        abilityViewInput.placeholder = "Video URL";
+        abilityViewInput.id = `abilityTrailerURL${j}`;
         abilityViewInput.type = "text";
         abilityViewInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
 
-        const abilityDescInput = abilitySection.appendChild(abilityDesc.cloneNode());
+        const changeView = abilityBoxes.appendChild(changeImageryType.cloneNode());
+        changeView.className = "changeViewType";
+        changeView.textContent = "Click Me!";
+        changeView.id = `abilityTrailerURL${j}`;
+
+        const abilityDescInput = abilityBoxes.appendChild(abilityDesc.cloneNode());
         abilityDescInput.className = "cardDisplayInfo";
         abilityDescInput.placeholder = "Ability Description";
         abilityDescInput.id = "abilityDescription";
@@ -234,19 +272,77 @@ function addInfoToSeeMoreEdit(){
         abilityDescInput.cols = "33";
         abilityDescInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
 
-        
+        //Imagery Type
+        const dontMindHim = document.querySelector('.dontmindme');
+        const typeOfImagery = dontMindHim.appendChild(document.createElement('span'));
+          typeOfImagery.textContent = whatsTheType;
+          typeOfImagery.className = "typeOfImagery hidden";
+          typeOfImagery.id = `imageryType${j}`;
       }
       bountyImgURL.value = characterCard.charArray[i].description[0].bounty.posterBountyURL;
       charDescription.value = characterCard.charArray[i].description[0].charDesc;
     }
   }
+  Array.from(document.querySelectorAll('.changeViewType')).forEach(element =>{
+    element.addEventListener('click', changeViewType);
+  });
   openSeeMoreForm();
+}
+
+function changeViewType(event){
+  const abilityImageArr = Array.from(document.querySelectorAll('.abilityImage'));
+  const abilityVideoArr = Array.from(document.querySelectorAll('.abilityTrailer'));
+  const abilityImagery = Array.from(document.querySelectorAll('.abilityImagery'));
+  const inputArr = Array.from(abilityImagery);
+
+  for(let i = 0; i <inputArr.length; i ++){
+    if(inputArr[i].id == event.target.id){
+      if(inputArr[i].placeholder == "Image URL"){
+        document.getElementById(`image${i}`).classList.add('hidden');
+        document.getElementById(`trailer${i}`).classList.remove('hidden');
+        document.getElementById(`imageryType${i}`).textContent = "Video";
+        inputArr[i].placeholder = "Video URL";
+        if(document.getElementById(`imageryType${i}`).textContent = "Video"){
+          event.srcElement.innerText = "Change to Image";
+        }
+        else{
+          event.srcElement.innerText = "Change to Video";
+        } 
+      }
+      else{
+        document.getElementById(`image${i}`).classList.remove('hidden');
+        document.getElementById(`trailer${i}`).classList.add('hidden');
+        document.getElementById(`imageryType${i}`).textContent = "Image";
+        inputArr[i].placeholder = "Image URL";
+        event.srcElement.innerText = "Change to Video"
+        if(document.getElementById(`imageryType${i}`).textContent = "Image"){
+          event.srcElement.innerText = "Change to Video";
+        }
+        else{
+          event.srcElement.innerText = "Change to Image";
+        } 
+      }
+    }
+  }
+}
+
+function closeUpdateSeeMoreForm(){
+  const updateSeeMoreForm = document.querySelector('.updateSeeMore');
+  updateSeeMoreForm.classList.add('hidden');
+  if(customSeeMore.isItOpen){
+
+  }
+  else{
+    generalStuff.overlay.classList.add('hidden');
+  }
+  
 }
 
 async function updateSeeMore(){
     const abilityName = document.querySelectorAll('#abilityName');
     const abilityDescription = document.querySelectorAll('#abilityDescription');
-    const abilityTrailer = document.querySelectorAll('#abilityTrailerURL');
+    const abilityTrailer = document.querySelectorAll('.abilityImagery');
+    const typeOfImagery = document.querySelectorAll('.typeOfImagery');
     const bountyImgURL = document.querySelector('#bountyImgURL');
     const charDescription = document.querySelector('#charDescription');
     let abilitiesArray = [];
@@ -255,7 +351,7 @@ async function updateSeeMore(){
     let abilityNameArr = [];
     Array.from(abilityName).forEach((element) =>{
       abilityNameArr.push(element.value);
-    })
+    });
     let abilityDescArr = [];
     Array.from(abilityDescription).forEach((element) =>{
       abilityDescArr.push(element.value);
@@ -263,13 +359,18 @@ async function updateSeeMore(){
     let abilityURLArr = [];
     Array.from(abilityTrailer).forEach((element) =>{
       abilityURLArr.push(element.value);
-    })
+    });
+    let viewTypeArr = [];
+    Array.from(typeOfImagery).forEach(element =>{
+      viewTypeArr.push(element.textContent);
+    });
 
     for(let i = 0; i < abilitiesArrLength; i++){
       abilitiesArray.push({
         ability: abilityNameArr[i],
         abilityDesc: abilityDescArr[i],
         abilityURL: abilityURLArr[i],
+        viewType: viewTypeArr[i],
       })
     }
 
