@@ -1,4 +1,5 @@
 const express = require('express');
+const jquery = require('jquery');
 const ejs = require('ejs');
 const passport = require('passport');
 const flash = require('express-flash');

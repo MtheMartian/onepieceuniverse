@@ -1,6 +1,7 @@
 /*--------------------General-----------------------*/
 body{
   background: orange;
+  overflow: hidden;
 }
 
 html{
@@ -12,8 +13,16 @@ button, #addCharBtn{
   cursor: pointer;
 }
 
+main{
+  position: fixed;
+  top: 10%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+}
 
- main{
+ #homePage{
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,8 +30,7 @@ button, #addCharBtn{
   align-items: center;
   width: 100%;
   height: 90%;
-  padding-top: 3%;
-  overflow-y: auto;
+  margin-top: -1%;
 }  
 
 button{
@@ -35,7 +43,7 @@ button{
 }
 
 button:hover{
-  color: blue;
+  color: rgb(136, 136, 255);
 }
 
 /*--------------Character Cards------------------*/
@@ -107,7 +115,8 @@ button:hover{
   width: 95%;
   height: 100%;
   overflow-x: scroll;
-  padding-left: 2%; 
+  padding: 2% 0 2% 2%;
+  margin-bottom: 3%;
 }
 
 .fruitImg{
@@ -179,54 +188,12 @@ button:hover{
   width: 35%;
   height: 90%;
   row-gap: 1rem;
-  border-radius: 10px;
-  overflow: auto;
+  border-radius: 8px;
+  overflow-y: scroll;
   font-family: Secular One, Arial;
   color: white;
   padding: 1% 1% 1% 1%;
   z-index: 1;
-}
-
-.updateCard{
-  top: 10% !important;
-  padding: 2% 1% 0 1% !important;
-  height: 80% !important;
-}
-
-.optionGrouping{
-  position: fixed;
-  background: grey;
-  height: 5%;
-  width: 40%;
-  margin-left: -4%;
-  margin-top: -3%;
-  border-radius: 3px;
-}
-
-#abilitySection, .abilityContainers {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.abilityContainers{
-  row-gap: 1rem;
-}
-
-.updateSeeMoreFormInputs{
-  height: 10% !important;
-}
-
-#updateSeeMoreBtn{
-  padding-left: 5%;
-}
-
-.updateSeeMore{
-  padding: 3% 1% 2% 5% !important;
-  height: 85% !important;
 }
 
 .closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
@@ -250,12 +217,84 @@ button:hover{
   border-radius: 20px;
   padding: 0 0 0 1rem;
   border: 1px solid rgba(0, 0, 0, 0.8);
+  transition: box-shadow 0.15s;
+}
+
+.cardDisplayInfo:hover, .createChar:hover{
+  box-shadow: inset 0px 0px 7px rgba(250, 121, 1, 0.9);
+}
+/* Create Character Card Form */
+#isPirate, #isMarine{
+  width: 5%;
+  cursor: pointer;
+}
+
+/* Card Update Form */
+.updateCard{
+  top: 10% !important;
+  padding: 2% 1% 0 1% !important;
+  height: 80% !important;
+}
+/* Update See More Form */
+.updateSeeMore{
+  padding: 3% 1% 2% 1% !important;
+  height: 75% !important;
+  row-gap: 3rem;
+  top: 10%;
+  border: 2px solid black;
+}
+
+.optionGrouping{
+  position: fixed;
+  background: grey;
+  height: 5%;
+  width: 37%;
+  margin-left: 0.88%;
+  margin-top: -5.5%;
+  border-radius: 1px;
+  border: 2px solid black;
+  border-bottom: none;
+}
+
+#abilitySection, .abilityContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.abilityContainers, #abilitySection{
+  row-gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1%;
+}
+
+.updateSeeMoreFormInputs, #bountyImgURL{
+  height: 5rem !important;
+  width: 97%;
+  transition: box-shadow 0.15s;
+}
+
+.updateSeeMoreFormInputs:hover, #bountyImgURL:hover, 
+#abilityDescription:hover, #charDescription:hover {
+  box-shadow: inset 0px 0px 7px rgba(0, 64, 107, 0.7);
+}
+
+#updateSeeMoreBtn{
+  padding-left: 5%;
 }
 
 #abilityDescription, #charDescription{
-  min-height: 50%;
-  max-height: 70%;
+  height: 90%;
   padding: 1rem;
+  font-family: Arial;
+}
+
+.changeViewType{
+  font-size: 1.5rem;
 }
 /*-----------Navigation Bar--------------*/
 #navigation, #navigation > ul{

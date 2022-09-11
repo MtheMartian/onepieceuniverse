@@ -11,6 +11,7 @@
 </head>
 <body>
   <main>
+  <section id="homePage">
     <section id="pirates">
       <div>
         <h1 class="cardSectionTitle pirateTitle">Pirates</h1>
@@ -140,6 +141,7 @@
         <%}%>
       </section>
     </section>
+  </section>
   </main>
   <div class="hidden addCharacter">
     <input type="text" placeholder="Character Name" id="charName" class="createChar">
@@ -179,11 +181,11 @@
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
-      <button id="editSeeMoreButton">Edit</button>
+      <button id="editSeeMoreButton" class="hidden">Edit</button>
       <button class="closeSeeMore">X</button>
     </div>
   </div>
-  <div class="updateSeeMore hidden">
+  <div class="updateSeeMore hidden" id="editSeeMoreForm">
     <div id="abilitySection">
       <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Character Image URL">
       <textarea id="charDescription" class="cardDisplayInfo" 
