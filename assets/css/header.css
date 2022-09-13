@@ -16,6 +16,7 @@ header{
 #leftSection{
   padding-left: 30%;
 }
+
 #leftSection > h1{
   color: white;
   font-size: 4rem;
@@ -28,7 +29,7 @@ header{
   column-gap: 15%;
 }
 
-#createChar{
+#createChar, .signInBtn, .signOut{
   color: white;
   font-size: 2rem;
   border: 1px solid azure;
@@ -38,39 +39,132 @@ header{
   position: relative;
 }
 
-#createChar:hover{
+#createChar:hover, .signInBtn:hover, .signOut:hover{
   opacity: 0.8;
 }
 
-#createChar:hover .tooltip{
+#createChar:active, .signInBtn:active, .signOut:active{
   opacity: 1;
 }
 
-#createChar:active{
-  opacity: 1;
+.signInBtn{
+  font-size: 2rem;
+  width: 150%;
+}
+
+.signInBtn:hover, .signOut:hover{
+  color: white;
+}
+
+.signOut{
+  font-size: 1rem;
+}
+
+#profilePicture, #profilePictureInMenu{
+  border: 1px solid grey;
+  border-radius: 50%;
 }
 
 #profilePicture{
-  border: 1px solid grey;
-  border-radius: 50%;
   height: 55px;
   width: 55px;
+  cursor: pointer;
 }
 
-#profileMenuList{
+#profilePictureContainer{
+  padding: 4% 4% 4% 4%;
+  transition: background 0.05s;
+}
+
+#profilePictureContainer:target #profileMenu{
+  height: 25%;
+  width: 15%;
+}
+
+.colorMyBackground{
+  background: rgb(25, 25, 32);
+}
+
+#profilePictureInMenu{
+  height: 45px;
+  width: 45px;
+}
+
+#profileMenu{
   position: fixed;
-  top: 10%;
-  right: 3%;
+  top: 8%;
+  right: 3.3%;
   display: flex;
   flex-direction: column;
+  border: 2px solid black;
+  border-top: none;
+  height: 0;
+  width: 0;
+  background: rgb(25, 25, 32);
+  color: rgb(231, 231, 231);
+  border-bottom-left-radius: 10px;
+  opacity: 0;
+  transition: height 0.5s, width 0.5s, opacity 1s;
+}
+
+.expand{
+  opacity: 1 !important;
+  height: 25% !important;
+  width: 15% !important;
+}
+
+#profileMenu div{
+  display: flex;
+}
+
+#currentUser{
+  width: 98% !important;
+  height: 25%;
   justify-content: start;
   align-items: center;
-  border: 2px solid black;
-  height: 30%;
-  background: white;
+  column-gap: 5%;
+  padding: 2% 0 2% 2%;
+  border-bottom: 2px solid rgb(68, 68, 68);
 }
+
+#actualMenu{
+  flex-direction: column;
+  height: 75%;
+  width: 100%;
+}
+
+#actualMenu div{
+  height: 40%;
+  width: 98%;
+  border-bottom: 2px solid rgb(122, 122, 122);
+}
+
+#myProfile, #helpContainer{
+  align-items: center;
+  padding-left: 2%;
+  color: rgba(255, 255, 255, 0.7);
+  transition: opacity 0.15s, color 0.3s;
+  cursor: pointer;
+}
+
+#myProfile:hover, #helpContainer:hover{
+  background: rgba(124, 124, 124, 0.3);
+  color: rgb(231, 231, 231);
+}
+
+#myProfile:active, #helpContainer:active{
+  background: rgba(124, 124, 124, 0.7);
+}
+
+#signOutSection{
+  height: 25%;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Tooltips */
-#createChar .tooltip{
+#createChar .tooltip, 
+#profilePictureContainer .tooltip{
   position: absolute;
   bottom: -40px;
   background-color: rgb(0, 0, 0);
@@ -82,6 +176,15 @@ header{
   pointer-events: none;
   transition: opacity 0.15s;
   white-space: nowrap;
+  }
+
+  #profilePictureContainer .tooltip{
+    bottom: -25px;
+  }
+
+  #createChar:hover .tooltip,
+  #profilePictureContainer:hover .tooltip{
+    opacity: 1;
   }
 
   

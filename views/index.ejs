@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
   <title>One Piece Universe</title>
 </head>
 <body>
@@ -208,10 +212,26 @@
         <div class="tooltip">Create a card</div>
       </button>
       <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
-      <img id="profilePicture" src="/images/luffy.jpg" alt="Profile">
-      <div id="profileMenu" class="hidden">
-        <a id="myProfile">My Profile</a>
-        <a href="/signout" class="signOut hidden"><button>Sign Out</button></a>
+      <div id="profilePictureContainer">
+        <img id="profilePicture" src="/images/luffy.jpg" alt="Profile" class="hidden">
+        <div class="tooltip">Profile</div>
+        <div id="profileMenu" class="">
+          <div id="currentUser">
+            <img id="profilePictureInMenu" src="/images/luffy.jpg" alt="Profile">
+            <span>bigboi</span>
+          </div>
+          <div id="actualMenu">
+            <div id="myProfile">
+              <a>My Profile</a>
+            </div>
+            <div id="helpContainer">
+              <a id="help">Help</a>
+            </div>
+          </div>
+          <div id="signOutSection">
+            <a href="/signout"><button class="signOut hidden">Sign Out</button></a>
+          </div>
+        </div>
       </div>
     </section>
   </header>

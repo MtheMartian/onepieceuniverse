@@ -34,6 +34,7 @@ const generalStuff = {
 
 const allConditions = {
   toggleMyView: false,
+  isProfileOpen: false,
 }
 
 function unHideIt(element){
@@ -43,9 +44,7 @@ function unHideIt(element){
 
 storeInfo();
 getUsers();
-setTimeout(currentlySignedIn, 150);
-setTimeout(hideAllCardEditButtons, 10);
-setTimeout(whosStronger, 100);
+hideAllCardEditButtons();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -56,8 +55,13 @@ const addCharForm = document.querySelector('.addCharacter');
 const createCharacterButton = document.querySelector('#createChar');
 const formAddCharButton = document.querySelector('#addCharBtn');
 function showCreateCharForm(){
-  generalStuff.overlay.classList.remove('hidden');
-  addCharForm.classList.remove('hidden');
+  if(allConditions.isProfileOpen == false){
+    generalStuff.overlay.classList.remove('hidden');
+    addCharForm.classList.remove('hidden');
+  }
+  else{
+    alert('Close the profile menu first.');
+  }
 }
 addCharForm.classList.add('hidden');
 
@@ -424,7 +428,8 @@ async function storeInfo(){
       method: 'get'
     })
     const data = await response.json();
-      characterCard.charArray = data; 
+      characterCard.charArray = data;
+      whosStronger(); 
   }
   catch(err){
     console.log(`Couldn't do it! ${err}`);
@@ -556,6 +561,7 @@ async function getUsers(){
     const response = await fetch('/users');
     const users = await response.json();
     customUsers.userArr =  users;
+    currentlySignedIn();
   }
   catch(err){
     console.log(err);
@@ -586,7 +592,6 @@ function hideAllCardEditButtons(){
 setTimeout(function showCardEditButtonsBasedOnUsers(){
   const userID = getSignedInUserID();
   const cardArr = characterCard.charArray;
-  console.log(userID);
   for(let i = 0; i < cardArr.length; i++){
     if(userID == cardArr[i].userID || userID == cardArr[i].superAdmin){
       document.getElementById(`${cardArr[i].id}`).querySelector('.editCard').classList.remove('hidden');
@@ -609,11 +614,49 @@ function currentlySignedIn(){
   const singInButton = document.querySelector('.signInBtn');
   const storedEmail = sessionStorage.getItem('email');
   const signOutButton = document.querySelector('.signOut');
+  const profilePicture = document.getElementById('profilePicture');
   const userArr = customUsers.userArr;
   for(let i = 0; i < userArr.length; i++){
     if(userArr[i].email.includes(storedEmail)){
       singInButton.classList.add('hidden');
       signOutButton.classList.remove('hidden');
+      profilePicture.classList.remove('hidden');
     }
   }
+}
+//-------------------Profile---------------------------------------------
+document.getElementById('profilePicture').addEventListener('click', openProfileMenu);
+
+function openProfileMenu(){
+  const profilPicContainer = document.getElementById('profilePictureContainer');
+  const profileMenu = document.getElementById('profileMenu');
+  const profileTooltip = document.querySelector('#profilePictureContainer .tooltip');
+  const header = document.querySelector('header');
+  if(allConditions.isProfileOpen == false){
+    profileTooltip.classList.add('hidden');
+    profileMenu.classList.remove('hidden');
+    setTimeout(lol, '1');
+    profilPicContainer.classList.add('colorMyBackground');
+    generalStuff.overlay.classList.remove('hidden');
+    header.style.zIndex = 1;
+    allConditions.isProfileOpen = true;
+  }
+  else{
+    profileTooltip.classList.remove('hidden');
+    profileMenu.classList.add('hidden');
+    setTimeout(yoho, '1');
+    profilPicContainer.classList.remove('colorMyBackground');
+    generalStuff.overlay.classList.add('hidden');
+    header.style.zIndex = 0;
+    allConditions.isProfileOpen = false;
+  }
+}
+
+function yoho(){
+  const profileMenu = document.getElementById('profileMenu');
+  profileMenu.classList.remove('expand');
+}
+const profileMenu = document.getElementById('profileMenu');
+function lol(){
+  profileMenu.classList.add('expand');
 }

@@ -84,7 +84,7 @@ button:hover{
 
 .cardInfo, .cardName, .cardImg, .cardHaki{
   border: 2px solid goldenrod;
-  background-image: url("/images/marble2.webp");
+  background-image: url("/images/marble.webp");
 }
 
 .cardInfo{
