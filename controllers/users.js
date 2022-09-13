@@ -64,6 +64,7 @@ module.exports = {
             lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
             Math.ceil(Math.random()*1000000) + 
             letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
+            profilePicture: "",
             })
         
             console.log("User Created!");

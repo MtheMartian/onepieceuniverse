@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -197,34 +198,23 @@
       <button id="updateSeeMoreExitBtn">X</button>
     </div>
   </div>
-  <nav id="navigation">
-    <div class="title">
+  <header id="header">
+    <section id="leftSection">
       <h1>One Piece Realm</h1>
-    </div>
-    <ul>
-      <li>
-        <button id="createChar">Add Character</button>
-      </li>
-      <li id="signInSection">
-        <button class="signInBtn">Sign In</button>
-      </li>
-      <li>
-          <a href="/signout" class="signOut">Sign Out</a>
-      </li>
-    </ul>
-  </nav>
-    <form id="signIn" class="hidden" action="/signin" method="post">
-      <section>
-        <label for="username">Username/E-mail:</label>
-        <input type="text" placeholder="E-Mail" id="username" name="email">
-      </section>
-      <section>
-        <label for="password">Password:</label>
-        <input type="text" placeholder="Password" id="password" name="password">
-      </section>
-      <button type="submit">Sign In</button>
-      <span>New?</span><a href="/page/signup" id="signUp">Sign Up</a>
-    </form>
+    </section>
+    <section id="rightSection">
+      <button id="createChar">
+        Create
+        <div class="tooltip">Create a card</div>
+      </button>
+      <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
+      <img id="profilePicture" src="/images/luffy.jpg" alt="Profile">
+      <div id="profileMenu" class="hidden">
+        <a id="myProfile">My Profile</a>
+        <a href="/signout" class="signOut hidden"><button>Sign Out</button></a>
+      </div>
+    </section>
+  </header>
     <div id="overlay" class="hidden"></div>
     <div class="dontmindme hidden"></div>
   <script src="js/main.js"></script>

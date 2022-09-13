@@ -1,0 +1,87 @@
+header{
+  background: rgba(255, 0, 0, 0.9);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 77px;
+  position: fixed;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  column-gap: 15%;
+}
+
+/* Left Section */
+#leftSection{
+  padding-left: 30%;
+}
+#leftSection > h1{
+  color: white;
+  font-size: 4rem;
+}
+
+/* Right Section */
+#rightSection{
+  display: flex;
+  align-items: center;
+  column-gap: 15%;
+}
+
+#createChar{
+  color: white;
+  font-size: 2rem;
+  border: 1px solid azure;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  transition: opacity 0.15s;
+  position: relative;
+}
+
+#createChar:hover{
+  opacity: 0.8;
+}
+
+#createChar:hover .tooltip{
+  opacity: 1;
+}
+
+#createChar:active{
+  opacity: 1;
+}
+
+#profilePicture{
+  border: 1px solid grey;
+  border-radius: 50%;
+  height: 55px;
+  width: 55px;
+}
+
+#profileMenuList{
+  position: fixed;
+  top: 10%;
+  right: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  border: 2px solid black;
+  height: 30%;
+  background: white;
+}
+/* Tooltips */
+#createChar .tooltip{
+  position: absolute;
+  bottom: -40px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 8px 10px 8px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  }
+
+  

@@ -1,6 +1,7 @@
 /*--------------------General-----------------------*/
 body{
-  background: orange;
+  background-image: url('/images/maptexture.webp');
+  /* background: rgb(73, 73, 73); */
   overflow: hidden;
 }
 
@@ -20,6 +21,7 @@ main{
   left: 0;
   right: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
  #homePage{
@@ -115,8 +117,11 @@ button:hover{
   width: 95%;
   height: 100%;
   overflow-x: scroll;
-  padding: 2% 0 2% 2%;
+  padding: 2% 7% 2% 7%;
   margin-bottom: 3%;
+  background: rgba(49, 49, 49, 0.5);
+  border: 2px solid orange;
+  border-radius: 7px;
 }
 
 .fruitImg{
@@ -169,6 +174,7 @@ button:hover{
   font-family: Acme, Arial;
   font-size: 5rem;
   margin: 0 0 0 0;
+  color: black;
 }
 
 .pirateTitle{
@@ -296,40 +302,8 @@ button:hover{
 .changeViewType{
   font-size: 1.5rem;
 }
-/*-----------Navigation Bar--------------*/
-#navigation, #navigation > ul{
-  display: flex;
-  align-items: center;
-}
+/*-----------Header--------------*/
 
-#navigation{
-  background: rgb(255, 0, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10%;
-  position: fixed;
-  justify-content: space-between;
-}
-
-#navigation > ul{
-  justify-content: end;
-  flex-direction: row;
-  column-gap: 2%;
-  height: 100%;
-  margin: 0 2.5rem 0 0;
-}
-
-#navigation > ul li{
-  list-style-type: none;
-}
-
-.title{
-  color: white;
-  font-size: 3rem;
-  margin-left: 35%;
-}
 /*----------------More info on character-----------------*/
 #characterMoreInfo{
   display: flex;
@@ -337,7 +311,7 @@ button:hover{
   flex-direction: column;
   justify-content: start;
   height: 90%;
-  background-color: rgba(73, 48, 0, 1);
+  background-color: rgb(109, 50, 2);
   color: white;
   position: absolute;
   top: 7%;
@@ -425,10 +399,15 @@ button:hover{
   right: 0;
   background: rgba(0, 0, 0, 0.8);
 }
+
+
 /*------------------Users--------------------*/
 #signIn{
   position: absolute;
-  top: 5%;
-  right: 25%;
+  top: 11%;
+  right: 2%;
+  background: grey;
+  padding: 1%;
+  border-radius: 10px;
 }
 

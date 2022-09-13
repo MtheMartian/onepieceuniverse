@@ -595,23 +595,10 @@ setTimeout(function showCardEditButtonsBasedOnUsers(){
   }
 }, "500");
 //-------------------Sign In, Up, Out--------------------------------------
-document.querySelector('.signInBtn').addEventListener('click', showSignInForm);
 document.querySelector('.signOut').addEventListener('click', clearStorageOnSignOut);
 const signInCustom = {
   isItOpen: false,
   userIsSignedIn: false
-}
-
-function showSignInForm(){
-  const signInForm = document.querySelector('#signIn');
-  if(signInCustom.isItOpen == false){
-    signInForm.classList.remove('hidden');
-    signInCustom.isItOpen = true;
-  }
-  else{
-    signInForm.classList.add('hidden');
-    signInCustom.isItOpen = false;
-  }
 }
 
 function clearStorageOnSignOut(){
@@ -619,12 +606,14 @@ function clearStorageOnSignOut(){
 }
 
 function currentlySignedIn(){
-  const singInSection = document.getElementById('signInSection');
+  const singInButton = document.querySelector('.signInBtn');
   const storedEmail = sessionStorage.getItem('email');
+  const signOutButton = document.querySelector('.signOut');
   const userArr = customUsers.userArr;
   for(let i = 0; i < userArr.length; i++){
-    if(storedEmail !== null || userArr[i].email.includes(storedEmail)){
-      singInSection.classList.add('hidden');
+    if(userArr[i].email.includes(storedEmail)){
+      singInButton.classList.add('hidden');
+      signOutButton.classList.remove('hidden');
     }
   }
 }
