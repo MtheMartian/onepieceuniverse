@@ -17,9 +17,10 @@ header{
   padding-left: 30%;
 }
 
-#leftSection > h1{
+#leftSection > a{
   color: white;
   font-size: 4rem;
+  text-decoration: none;
 }
 
 /* Right Section */
@@ -83,6 +84,7 @@ header{
 
 .colorMyBackground{
   background: rgb(25, 25, 32);
+  /* border-right: 2px solid black; */
 }
 
 #profilePictureInMenu{
@@ -93,10 +95,10 @@ header{
 #profileMenu{
   position: fixed;
   top: 8%;
-  right: 3.3%;
+  right: 4.61%;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-top: none;
   height: 0;
   width: 0;
@@ -104,6 +106,7 @@ header{
   color: rgb(231, 231, 231);
   border-bottom-left-radius: 10px;
   opacity: 0;
+  font-family: Secular One, Arial;
   transition: height 0.5s, width 0.5s, opacity 1s;
 }
 

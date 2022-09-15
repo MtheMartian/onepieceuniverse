@@ -23,7 +23,8 @@
       </div>
       <section id="cardSection">
         <%for(let i = 0; i < info.length; i++){%>
-          <%if(info[i].pirate == true && info[i].marine == false){%>
+          <%if(info[i].pirate == true && info[i].marine == false ||
+                info[i].pirate == true && info[i].marine == true){%>
             <div class="characterCard" id=<%=info[i].id%>>
               <div class="cardName">
                 <span><%=info[i].charName%></span>
@@ -53,7 +54,11 @@
                 <div class="seeMore">
                   <span class="characterInfo">See more</span>
                 </div>
-              <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                <%if(typeof user !== 'undefined'){%>
+                    <%if(info[i].userID == user.userID || user.userID == info[i].superAdmin){%>
+                      <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                    <%}%>
+                <%}%>
             </div>
           </div>
           <%}%>
@@ -96,7 +101,11 @@
                 <div class="seeMore">
                   <span class="characterInfo">See more</span>
                 </div>
-              <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                <%if(typeof user !== 'undefined'){%>
+                    <%if(info[i].userID == user.userID || user.userID == info[i].superAdmin){%>
+                      <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                    <%}%>
+                <%}%>
             </div>
           </div>
           <%}%>
@@ -139,7 +148,11 @@
                 <div class="seeMore">
                   <span class="characterInfo">See more</span>
                 </div>
-              <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                <%if(typeof user !== 'undefined'){%>
+                    <%if(info[i].userID == user.userID || user.userID == info[i].superAdmin){%>
+                      <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                    <%}%>
+                <%}%>
             </div>
           </div>
           <%}%>
@@ -148,24 +161,27 @@
     </section>
   </section>
   </main>
-  <div class="hidden addCharacter">
-    <input type="text" placeholder="Character Name" id="charName" class="createChar">
-    <input type="text" placeholder="Character Age" id="charAge" class="createChar">
-    <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
-    <input type="text" placeholder="Fruit Type" id="charFruitType" class="createChar">
-    <input type="text" placeholder="Haki Strength" id="charHaki" class="createChar">
-    <input type="text" placeholder="Haki Type" id="charHakiType" class="createChar">
-    <input type="text" placeholder="Current Rank" id="charRank" class="createChar">
-    <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
-    <input type="text" placeholder="Bounty" id="bounty" class="createChar">
-    <input type="text" placeholder="General location (e.g. Grand Line)" id="location" class="createChar">
-    <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocation" class="createChar">
-    <input type="text" placeholder="Number of abilities" id="numAbilities" class="createChar">
-    <label for="isPirate">Pirate</label><input type="checkbox" id="isPirate" class="createChar">
-    <label for="isMarine">Marine</label><input type="checkbox" id="isMarine" class="createChar">
-    <button id="addCharBtn">Submit</button>
-    <button class="closeIt">X</button>
-  </div>
+  <%if(typeof user !== 'undefined'){%>
+    <div class="hidden addCharacter">
+      <input type="text" placeholder="Character Name" id="charName" class="createChar">
+      <input type="text" placeholder="Character Age" id="charAge" class="createChar">
+      <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
+      <input type="text" placeholder="Fruit Type" id="charFruitType" class="createChar">
+      <input type="text" placeholder="Haki Strength" id="charHaki" class="createChar">
+      <input type="text" placeholder="Haki Type" id="charHakiType" class="createChar">
+      <input type="text" placeholder="Current Rank" id="charRank" class="createChar">
+      <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
+      <input type="text" placeholder="Bounty" id="bounty" class="createChar">
+      <input type="text" placeholder="General location (e.g. Grand Line)" id="location" class="createChar">
+      <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocation" class="createChar">
+      <input type="text" placeholder="Number of abilities" id="numAbilities" class="createChar">
+      <label for="isPirate">Pirate</label><input type="checkbox" id="isPirate" class="createChar">
+      <label for="isMarine">Marine</label><input type="checkbox" id="isMarine" class="createChar">
+      <button id="addCharBtn">Submit</button>
+      <button class="closeIt">X</button>
+    </div>
+    <span id="userID" class="hidden"><%=user.userID%></span>
+  <%}%>
   <div class="updateCard hidden">
     <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
     <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
@@ -179,7 +195,7 @@
     <input type="text" placeholder="Bounty" id="bountyU" class="cardDisplayInfo">
     <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
     <button id="updateCardBtn">Update</button>
-    <button id="deleteCard">Remove</button>
+    <button id="deleteCard" type="submit">Remove</button>
     <button class="closeIt">X</button>
   </div>
   <div id="characterMoreInfo" class="hidden">
@@ -204,35 +220,39 @@
   </div>
   <header id="header">
     <section id="leftSection">
-      <h1>One Piece Realm</h1>
+      <a href="/">One Piece Realm</a>
     </section>
     <section id="rightSection">
       <button id="createChar">
         Create
         <div class="tooltip">Create a card</div>
       </button>
-      <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
-      <div id="profilePictureContainer">
-        <img id="profilePicture" src="/images/luffy.jpg" alt="Profile" class="hidden">
-        <div class="tooltip">Profile</div>
-        <div id="profileMenu" class="">
-          <div id="currentUser">
-            <img id="profilePictureInMenu" src="/images/luffy.jpg" alt="Profile">
-            <span>bigboi</span>
-          </div>
-          <div id="actualMenu">
-            <div id="myProfile">
-              <a>My Profile</a>
+      <%if(typeof user === 'undefined'){%>
+        <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
+      <%}%>
+      <%if(typeof user !== 'undefined'){%>
+        <div id="profilePictureContainer">
+          <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
+          <div class="tooltip">Profile</div>
+          <div id="profileMenu" class="">
+            <div id="currentUser">
+              <img id="profilePictureInMenu" src="<%=user.profilePicture%>" alt="Profile">
+              <span><%=user.userName%></span>
             </div>
-            <div id="helpContainer">
-              <a id="help">Help</a>
+            <div id="actualMenu">
+              <div id="myProfile">
+                <a>My Profile</a>
+              </div>
+              <div id="helpContainer">
+                <a id="help">Help</a>
+              </div>
             </div>
-          </div>
-          <div id="signOutSection">
-            <a href="/signout"><button class="signOut hidden">Sign Out</button></a>
+            <div id="signOutSection">
+              <a href="/signout"><button class="signOut">Sign Out</button></a>
+            </div>
           </div>
         </div>
-      </div>
+      <%}%>
     </section>
   </header>
     <div id="overlay" class="hidden"></div>

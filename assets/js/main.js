@@ -9,14 +9,8 @@ const characterCard = {
   addCharacterFormBtn: document.querySelector('#addCharacter'),
   characterCard: document.querySelectorAll('.characterCard'),
   listOfAbilities: [],
-  charArray: [],
   charInfo: document.querySelectorAll('.characterInfo'),
   characterId: "",
-}
-
-const customUsers = {
-  userArr: [],
-  superAdmin: "391390167862gh354062i",
 }
 
 const generalButtons = {
@@ -42,9 +36,7 @@ function unHideIt(element){
   generalStuff.overlay.classList.remove('hidden');
 }
 
-storeInfo();
-getUsers();
-hideAllCardEditButtons();
+whosStronger();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -63,10 +55,14 @@ function showCreateCharForm(){
     alert('Close the profile menu first.');
   }
 }
-addCharForm.classList.add('hidden');
 
-createCharacterButton.addEventListener('click', showCreateCharForm);
-formAddCharButton.addEventListener('click', createCharacter);
+if(createCharacterButton === null || formAddCharButton === null){
+
+}
+else{
+  createCharacterButton.addEventListener('click', showCreateCharForm);
+  formAddCharButton.addEventListener('click', createCharacter);
+}
 
 async function createCharacter(){
   const charName = document.querySelector('#charName');
@@ -82,9 +78,9 @@ async function createCharacter(){
   const numAbilities = document.querySelector('#numAbilities');
   const charFruitType = document.querySelector('#charFruitType');
   const charHakiType = document.querySelector('#charHakiTypeU');
-  const superAdmin = customUsers.superAdmin;
+  const superAdmin = "391390167862gh354062i";
   const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
-  const userID = getSignedInUserID();
+  const userID = document.getElementById('userID').textContent;
   const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
   const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
   const charRank = document.querySelector('#charRank');
@@ -146,7 +142,8 @@ Array.from(characterCard.charInfo).forEach((element) =>{
 function closeSeeMore(){
   location.reload();
 }
-function seeMore(event){
+async function seeMore(event){
+  const characters = await fetchCharacters();
   const bountyImg = document.querySelector('#bountyImg');
   const charDesc = document.querySelector('#charDesc');
   const imagery = document.createElement('iframe');
@@ -156,17 +153,18 @@ function seeMore(event){
   const container = document.createElement('div');
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
   characterCard.characterId = event.path[3].id;
+  showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
 
   }
   else{
-    for(let i = 0; i < characterCard.charArray.length; i++){
-      if(characterCard.characterId === characterCard.charArray[i].id){
-        bountyImg.src = characterCard.charArray[i].description[0].bounty.posterBountyURL;
-        charDesc.textContent = characterCard.charArray[i].description[0].charDesc;
+    for(let i = 0; i < characters.length; i++){
+      if(characterCard.characterId === characters[i].id){
+        bountyImg.src = characters[i].description[0].bounty.posterBountyURL;
+        charDesc.textContent = characters[i].description[0].charDesc;
         
-        for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+        for(let j = 0; j < characters[i].description[0].numAbilities.length; j++){
           
           const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
           abilityDiv.className = "abilityDiv";
@@ -175,21 +173,21 @@ function seeMore(event){
           abilityTrailerContainer.className = "abilityTrailerContainer";
           
           const abilityName = abilityDiv.appendChild(ability.cloneNode());
-          abilityName.textContent = characterCard.charArray[i].description[0].numAbilities[j].ability;
+          abilityName.textContent = characters[i].description[0].numAbilities[j].ability;
           
           const abilityDescription = abilityDiv.appendChild(abilityDesc.cloneNode());
           abilityDescription
-          abilityDescription.textContent = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+          abilityDescription.textContent = characters[i].description[0].numAbilities[j].abilityDesc;
           
           const abilityTrailer = abilityTrailerContainer.appendChild(imagery.cloneNode());
           abilityTrailer.className ="abilityTrailer";
           abilityTrailer.id = `trailer${j}`;
-          abilityTrailer.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+          abilityTrailer.src = characters[i].description[0].numAbilities[j].abilityURL;
 
           const abilityImage = abilityTrailerContainer.appendChild(imagery2.cloneNode());
           abilityImage.className ="abilityImage hidden";
           abilityImage.id = `image${j}`;
-          abilityImage.src = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+          abilityImage.src = characters[i].description[0].numAbilities[j].abilityURL;
         }
         generalStuff.overlay.classList.remove('hidden');
         characterMoreInfoDiv.classList.remove('hidden');
@@ -202,10 +200,10 @@ function seeMore(event){
     } 
   }
   //Check Imagery Type
-  for(let i = 0; i < characterCard.charArray.length; i++){
-    if(characterCard.characterId === characterCard.charArray[i].id){
-      for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
-        let arrayGalore = characterCard.charArray[i].description[0].numAbilities[j].viewType;
+  for(let i = 0; i < characters.length; i++){
+    if(characterCard.characterId === characters[i].id){
+      for(let j = 0; j < characters[i].description[0].numAbilities.length; j++){
+        let arrayGalore = characters[i].description[0].numAbilities[j].viewType;
           if(arrayGalore === "Video"){
             document.getElementById(`image${j}`).classList.add('hidden');
             //document.getElementById(`trailer${j}`).classList.remove('hidden');
@@ -230,7 +228,8 @@ function openSeeMoreForm(){
   updateSeeMoreForm.classList.remove('hidden');
   generalStuff.overlay.classList.remove('hidden');
 }
-function addInfoToSeeMoreEdit(){
+async function addInfoToSeeMoreEdit(){
+  const characters = await fetchCharacters();
   const abilityName = document.createElement('input');
   const abilityDesc = document.createElement('textarea');
   const abilityView = document.createElement('input');
@@ -245,11 +244,11 @@ function addInfoToSeeMoreEdit(){
 
   }
   else{
-    for(let i = 0; i < characterCard.charArray.length; i++){
-      if(characterCard.characterId == characterCard.charArray[i].id){
-        for(let j = 0; j < characterCard.charArray[i].description[0].numAbilities.length; j++){
+    for(let i = 0; i < characters.length; i++){
+      if(characterCard.characterId == characters[i].id){
+        for(let j = 0; j < characters[i].description[0].numAbilities.length; j++){
   
-          let whatsTheType = characterCard.charArray[i].description[0].numAbilities[j].viewType;
+          let whatsTheType = characters[i].description[0].numAbilities[j].viewType;
           const abilityBoxes = updateSeeMore.appendChild(abilityContainers.cloneNode());
           abilityBoxes.className = "abilityContainers";
   
@@ -258,14 +257,14 @@ function addInfoToSeeMoreEdit(){
           abilityNameInput.placeholder = "Ability Name";
           abilityNameInput.type = "text";
           abilityNameInput.id = "abilityName";
-          abilityNameInput.value = characterCard.charArray[i].description[0].numAbilities[j].ability;
+          abilityNameInput.value = characters[i].description[0].numAbilities[j].ability;
   
           const abilityViewInput = abilityBoxes.appendChild(abilityView.cloneNode());
           abilityViewInput.className = "cardDisplayInfo abilityImagery updateSeeMoreFormInputs";
           abilityViewInput.placeholder = "Video URL";
           abilityViewInput.id = `abilityTrailerURL${j}`;
           abilityViewInput.type = "text";
-          abilityViewInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityURL;
+          abilityViewInput.value = characters[i].description[0].numAbilities[j].abilityURL;
   
           const containChangeView = abilityBoxes.appendChild(abilityContainers.cloneNode());
           containChangeView.className = "changeViewContainer";
@@ -282,7 +281,7 @@ function addInfoToSeeMoreEdit(){
           abilityDescInput.id = "abilityDescription";
           abilityDescInput.rows = "5"
           abilityDescInput.cols = "33";
-          abilityDescInput.value = characterCard.charArray[i].description[0].numAbilities[j].abilityDesc;
+          abilityDescInput.value = characters[i].description[0].numAbilities[j].abilityDesc;
   
           //Imagery Type
           const dontMindHim = document.querySelector('.dontmindme');
@@ -291,8 +290,8 @@ function addInfoToSeeMoreEdit(){
             typeOfImagery.className = "typeOfImagery hidden";
             typeOfImagery.id = `imageryType${j}`;
         }
-        bountyImgURL.value = characterCard.charArray[i].description[0].bounty.posterBountyURL;
-        charDescription.value = characterCard.charArray[i].description[0].charDesc;
+        bountyImgURL.value = characters[i].description[0].bounty.posterBountyURL;
+        charDescription.value = characters[i].description[0].charDesc;
       }
     }
   }
@@ -417,19 +416,18 @@ async function updateSeeMore(){
       console.log(`Didn't work! ${err}`);
     }
 }
-//------------------Store character info-------------------------------
+//------------------Get Characters-------------------------------
 Array.from(characterCard.updateCharCard).forEach((x, i) =>{
   characterCard.updateCharCard[i].onclick = getCardId;
 })
 
-async function storeInfo(){
+async function fetchCharacters(){
   try{
     const response = await fetch('/getinfo', {
       method: 'get'
     })
-    const data = await response.json();
-      characterCard.charArray = data;
-      whosStronger(); 
+    const data = await response.json(); 
+      return data;
   }
   catch(err){
     console.log(`Couldn't do it! ${err}`);
@@ -488,7 +486,8 @@ async function updateCard(){
   }
 }
 
-function addInfoToEdit(){
+async function addInfoToEdit(){
+  const characters = await fetchCharacters();
   const charNameU = document.querySelector('#charNameU');
   const charAgeU = document.querySelector('#charAgeU');
   const charFruitU = document.querySelector('#charFruitU');
@@ -500,19 +499,19 @@ function addInfoToEdit(){
   const charRankU = document.querySelector('#charRankU');
   const generalLocationU = document.querySelector('#locationU');
   const specificLocationU = document.querySelector('#specificLocationU');
-  for(let i = 0; i < characterCard.charArray.length; i++){
-    if(characterCard.characterId == characterCard.charArray[i].id){
-      charNameU.value = characterCard.charArray[i].charName;
-      charAgeU.value = characterCard.charArray[i].charAge;
-      charFruitU.value = characterCard.charArray[i].charFruit.fruitName;
-      charFruitTypeU.value = characterCard.charArray[i].charFruit.fruitType;
-      charHakiU.value = characterCard.charArray[i].charhaki.hakiUsageLevel;
-      charHakiTypeU.value = characterCard.charArray[i].charhaki.hakiType;
-      charRankU.value = characterCard.charArray[i].charRank;
-      imgURLU.value = characterCard.charArray[i].imgURL;
-      bountyU.value = characterCard.charArray[i].description[0].bounty.bountyAmount;
-      generalLocationU.value = characterCard.charArray[i].description[0].location;
-      specificLocationU.value = characterCard.charArray[i].description[0].specificLocation;
+  for(let i = 0; i < characters.length; i++){
+    if(characterCard.characterId == characters[i].id){
+      charNameU.value = characters[i].charName;
+      charAgeU.value = characters[i].charAge;
+      charFruitU.value = characters[i].charFruit.fruitName;
+      charFruitTypeU.value = characters[i].charFruit.fruitType;
+      charHakiU.value = characters[i].charhaki.hakiUsageLevel;
+      charHakiTypeU.value = characters[i].charhaki.hakiType;
+      charRankU.value = characters[i].charRank;
+      imgURLU.value = characters[i].imgURL;
+      bountyU.value = characters[i].description[0].bounty.bountyAmount;
+      generalLocationU.value = characters[i].description[0].location;
+      specificLocationU.value = characters[i].description[0].specificLocation;
     }
   }
 }
@@ -534,73 +533,51 @@ async function deleteCard(){
 }
 
 //------------------------Style Cards------------------------------------
-function whosStronger(){
-  if(characterCard.charArray.length >= 1){
-    for(let i = 0; i < characterCard.charArray.length; i++){
-      switch(characterCard.charArray[i].charhaki.hakiUsageLevel)
+async function whosStronger(){
+  const characters = await fetchCharacters();
+  if(characters.length >= 1){
+    for(let i = 0; i < characters.length; i++){
+      switch(characters[i].charhaki.hakiUsageLevel)
       {
         case "Supreme": 
-        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('supreme');
+        document.getElementById(`${characters[i].id}`).classList.add('supreme');
         break;
 
         case "Legendary": 
-        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('legendary');
+        document.getElementById(`${characters[i].id}`).classList.add('legendary');
         break;
 
         case "Mighty": 
-        document.getElementById(`${characterCard.charArray[i].id}`).classList.add('mighty');
+        document.getElementById(`${characters[i].id}`).classList.add('mighty');
         break;
       } 
     }
   }
 }
 //-------------------------Users and cards----------------------------------------
-
-async function getUsers(){
-  try{
-    const response = await fetch('/users');
-    const users = await response.json();
-    customUsers.userArr =  users;
-    currentlySignedIn();
-  }
-  catch(err){
-    console.log(err);
-  }
-}
-
-function getSignedInUserID(){
-  const emailMatch = sessionStorage.getItem('email');
-  let userID = "";
-  for(let i = 0; i < customUsers.userArr.length; i++){
-    if(emailMatch == customUsers.userArr[i].email){
-       userID = customUsers.userArr[i].userID;
-      break;
+async function showCardEditButtonsBasedOnUsers(){
+  const characters = await fetchCharacters();
+  if(document.getElementById('userID') !== null){
+    const userID = document.getElementById('userID').textContent;
+    let cardUserID = "";
+    const superAdmin ="391390167862gh354062i";
+    for(let i = 0; i < characters.length; i++){
+      if(characters[i].id == characterCard.characterId){
+        cardUserID = characters[i].userID;
+        break;
+      }
     }
-  }
-  return userID;
-}
-
-
-function hideAllCardEditButtons(){
-  const editCard = document.querySelectorAll('.editCard');
-  const editCardArr = Array.from(editCard);
-   editCardArr.forEach(element =>{
-    element.classList.add('hidden');
-  })
-}
-
-setTimeout(function showCardEditButtonsBasedOnUsers(){
-  const userID = getSignedInUserID();
-  const cardArr = characterCard.charArray;
-  for(let i = 0; i < cardArr.length; i++){
-    if(userID == cardArr[i].userID || userID == cardArr[i].superAdmin){
-      document.getElementById(`${cardArr[i].id}`).querySelector('.editCard').classList.remove('hidden');
+    if(userID == cardUserID || userID == superAdmin){
       document.querySelector('#editSeeMoreButton').classList.remove('hidden');
     }
   }
-}, "500");
+  }
 //-------------------Sign In, Up, Out--------------------------------------
-document.querySelector('.signOut').addEventListener('click', clearStorageOnSignOut);
+
+if(document.querySelector('.signOut') !== null){
+  document.querySelector('.signOut').addEventListener('click', clearStorageOnSignOut);
+}
+
 const signInCustom = {
   isItOpen: false,
   userIsSignedIn: false
@@ -610,22 +587,10 @@ function clearStorageOnSignOut(){
   sessionStorage.clear();
 }
 
-function currentlySignedIn(){
-  const singInButton = document.querySelector('.signInBtn');
-  const storedEmail = sessionStorage.getItem('email');
-  const signOutButton = document.querySelector('.signOut');
-  const profilePicture = document.getElementById('profilePicture');
-  const userArr = customUsers.userArr;
-  for(let i = 0; i < userArr.length; i++){
-    if(userArr[i].email.includes(storedEmail)){
-      singInButton.classList.add('hidden');
-      signOutButton.classList.remove('hidden');
-      profilePicture.classList.remove('hidden');
-    }
-  }
-}
 //-------------------Profile---------------------------------------------
-document.getElementById('profilePicture').addEventListener('click', openProfileMenu);
+if(document.getElementById('profilePicture') !== null){
+  document.getElementById('profilePicture').addEventListener('click', openProfileMenu);
+}
 
 function openProfileMenu(){
   const profilPicContainer = document.getElementById('profilePictureContainer');
@@ -656,7 +621,8 @@ function yoho(){
   const profileMenu = document.getElementById('profileMenu');
   profileMenu.classList.remove('expand');
 }
-const profileMenu = document.getElementById('profileMenu');
+
 function lol(){
+  const profileMenu = document.getElementById('profileMenu');
   profileMenu.classList.add('expand');
 }

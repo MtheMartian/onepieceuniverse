@@ -1,6 +1,6 @@
 const express = require('express');
-const jquery = require('jquery');
 const ejs = require('ejs');
+const methodOverride = require('method-override');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
@@ -43,6 +43,7 @@ app.use((request,response, next) =>{
   next();
 })
 
+app.use(methodOverride('_method'));
 app.use('/', homeRoutes);
 app.use('/', characterCardRoutes);
 app.use('/', characterInfoRoutes);

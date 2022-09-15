@@ -1,11 +1,13 @@
 const Character = require('../models/Character');
-const charactercard = require('./charactercard');
+const User = require('../models/User');
 
 module.exports = {
   getIndex: async (request, response) =>{
+    console.log(request);
+    const users = request.user;
     try{
-      const characters = await Character.find()
-      response.render('index', {info: characters});
+      const characters = await Character.find().lean();
+      response.render('index', {info: characters, user: users});
     }
     catch(err){
       console.log(`Didn't find anything! ${err}`);
@@ -13,7 +15,7 @@ module.exports = {
   },
   getInfo: async (request, response) =>{
     try{
-      const characters = await Character.find()
+      const characters = await Character.find().lean();
       response.send(characters);
     }
     catch(err){

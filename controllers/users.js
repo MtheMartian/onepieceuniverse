@@ -1,5 +1,6 @@
 const passport = require('passport');
 const User = require('../models/User');
+const Character = require('../models/Character');
 const bcrypt = require('bcrypt');
 const flash = require('express-flash');
 
@@ -64,7 +65,7 @@ module.exports = {
             lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
             Math.ceil(Math.random()*1000000) + 
             letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
-            profilePicture: "",
+            profilePicture: "/images/luffy.jpg",
             })
         
             console.log("User Created!");
@@ -89,7 +90,8 @@ module.exports = {
       }
     }
 },
-postSignIn: (request, response, next) =>{
+postSignIn: async (request, response, next) =>{
+  // console.log(request);
   passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/page/signin',

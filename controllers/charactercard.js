@@ -2,15 +2,29 @@ const Character = require('../models/Character');
 
 module.exports = {
   createCard: async (request, response) =>{
+    //Generate random letters for ID
+    const lettersArr = ['ab', 'bc', 'cd', 'de', 'ef', 'fg', 'gh',
+    'hi', 'ij', 'jk', 'kl', 'lm', 'mn', 'no',
+    'op', 'pq', 'qr', 'rs', 'tu', 'uv', 'vw',
+    'wx', 'xy', 'yz'];
+
+    const letterAr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                        'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
+                        'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  //-------------------------------
     try{
       await Character.create(
         {charName: request.body.charName, charAge: request.body.charAge,
           charFruit: request.body.charFruit, charhaki: request.body.charHaki,
           charRank: request.body.charRank,
           imgURL: request.body.imgURL,
-          id: Math.ceil(Math.random()*Date.now()).toString(),
-          pirate: request.body.pirate,
-          marine: request.body.marine,
+          id: Math.ceil(Math.random()*100000) + 
+            Math.ceil(Math.random()*Date.now()) + 
+            lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
+            Math.ceil(Math.random()*1000000) + 
+            letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
+            pirate: request.body.pirate,
+            marine: request.body.marine,
           description: [{
             charDesc: "",
             bounty: request.body.bounty,
