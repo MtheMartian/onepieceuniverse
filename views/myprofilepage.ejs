@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/profilepage.css">
+  <link rel="stylesheet" href="css/generalheader.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <title>One Piece Realm</title>
+</head>
+<body>
+  <main>
+    <section id="profilePage">
+      <div id="profilePictureContainer">
+        <img id="profilePicture" src="<%=user.profilePicture%>" alt="Picture">
+      </div>
+      <section id="userSettings">
+        <div id="userName">
+          <form action="/myprofile/username?_method=PUT" method="POST" id="userNameForm">
+            <label for="userName">Username</label>
+            <input type="text" name="userName" id="userNameInput" value="<%=user.userName%>">
+            <button type="submit">Change</button>
+          </form>
+          <form action="/myprofile/email?_method=PUT" method="POST" id="emailForm">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="emailInput" value="<%=user.email%>">
+            <button type="submit">Change</button>
+          </form>
+          <form action="/myprofile/password?_method=PUT" method="POST" id="passwordForm">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="passwordInput">
+            <button type="submit">Change</button>
+          </form>
+        </div>
+      </section>
+      <section id="myCardsSection">
+        <h2>My Cards</h2>
+        <div id="myCards">
+          <%for(let i = 0; i < character.length; i++){%>
+            <%if(character[i].userID == user.userID){%>
+              <div id="<%=character[i].id%>" class="characterCard">
+                <div class="cardName">
+                  <span><%=character[i].charName%></span>
+                </div>
+                <div class="cardCharImg">
+                  <img class="cardImg" src=<%=character[i].imgURL%>>
+                </div>
+                <div class="cardHaki">
+                  <span><%=character[i].charhaki.hakiUsageLevel%></span>
+                </div>
+                <div class="cardInfo">
+                  <div class="cardRank">
+                    <span>Rank:</span><span><%=character[i].charRank%></span>
+                  </div>
+                  <div class="cardAge">
+                    <span><%=character[i].charAge%> years old</span>
+                  </div>
+                  <div class="cardFruitName">
+                    <img class="fruitImg" src="images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
+                  </div>
+                  <div class="cardFruitType">
+                    <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
+                  </div>
+                  <div class="cardBounty">
+                    <img class="bounty" src="images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
+                  </div>
+                  <div class="seeMore">
+                    <span class="characterInfo">See more</span>
+                  </div>
+                  <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+              </div>
+            </div>
+            <%}%>
+          <%}%>
+        </div> 
+      </section>
+      <nav id="menuContainer">
+        <div><a href="/home">Home</a></div>
+        <div><a href="/">Welcome Page</a></div>
+      </nav>
+    </section>
+  </main>
+  <div class="updateCard hidden">
+    <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
+    <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
+    <input type="text" id="charFruitU" class="cardDisplayInfo" placeholder="Fruit Name">
+    <input type="text" id="charFruitTypeU" class="cardDisplayInfo" placeholder="Fruit Type">
+    <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength">
+    <input type="text" id="charHakiTypeU" class="cardDisplayInfo" placeholder="Haki Type">
+    <input type="text" placeholder="Current Rank" id="charRankU" class="cardDisplayInfo">
+    <input type="text" placeholder="General location (e.g. Grand Line)" id="locationU" class="cardDisplayInfo">
+    <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocationU" class="cardDisplayInfo">
+    <input type="text" placeholder="Bounty" id="bountyU" class="cardDisplayInfo">
+    <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
+    <button id="updateCardBtn">Update</button>
+    <button id="deleteCard" type="submit">Remove</button>
+    <button class="closeIt">X</button>
+  </div>
+  <div id="characterMoreInfo" class="hidden">
+    <div id="characterSummary">
+      <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
+      <p id="charDesc"></p>
+      <button id="editSeeMoreButton">Edit</button>
+      <button class="closeSeeMore">X</button>
+    </div>
+  </div>
+  <div class="updateSeeMore hidden" id="editSeeMoreForm">
+    <div id="abilitySection">
+      <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Character Image URL">
+      <textarea id="charDescription" class="cardDisplayInfo" 
+        placeholder="Character Description" cols="33" rows="5">
+      </textarea>
+    </div>
+    <div class="optionGrouping">
+      <button id="updateSeeMoreBtn">Update</button>
+      <button id="updateSeeMoreExitBtn">X</button>
+    </div>
+  </div>
+  <header id="header">
+    <section id="leftSection">
+      <a href="/">One Piece Realm</a>
+    </section>
+  </header>
+  <div id="overlay" class="hidden"></div>
+  <div class="dontmindme hidden"></div>
+  <script src="js/myprofilepage.js"></script>
+</body>
+</html>

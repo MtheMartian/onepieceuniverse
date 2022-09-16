@@ -42,91 +42,6 @@ Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
 })
 
-//-------------------------Create Character-----------------------------
-const addCharForm = document.querySelector('.addCharacter');
-const createCharacterButton = document.querySelector('#createChar');
-const formAddCharButton = document.querySelector('#addCharBtn');
-function showCreateCharForm(){
-  if(allConditions.isProfileOpen == false){
-    generalStuff.overlay.classList.remove('hidden');
-    addCharForm.classList.remove('hidden');
-  }
-  else{
-    alert('Close the profile menu first.');
-  }
-}
-
-if(createCharacterButton === null || formAddCharButton === null){
-
-}
-else{
-  createCharacterButton.addEventListener('click', showCreateCharForm);
-  formAddCharButton.addEventListener('click', createCharacter);
-}
-
-async function createCharacter(){
-  const charName = document.querySelector('#charName');
-  const charAge = document.querySelector('#charAge');
-  const charFruit = document.querySelector('#charFruit');
-  const charHaki = document.querySelector('#charHaki');
-  const imgURL = document.querySelector('#imgURL');
-  const isItChecked = document.querySelector('#isPirate');
-  const isMarineChecked = document.querySelector('#isMarine');
-  const bounty = document.querySelector('#bounty');
-  const charLocation = document.querySelector('#location');
-  const specificCharLocation = document.querySelector('#specificLocation');
-  const numAbilities = document.querySelector('#numAbilities');
-  const charFruitType = document.querySelector('#charFruitType');
-  const charHakiType = document.querySelector('#charHakiTypeU');
-  const superAdmin = "391390167862gh354062i";
-  const bountyInfo = {bountyAmount: bounty.value, posterBountyURL: ""};
-  const userID = document.getElementById('userID').textContent;
-  const hakiInfo = {hakiUsageLevel: charHaki.value, hakiType: charHakiType.value};
-  const fruitInfo = {fruitType: charFruitType.value, fruitName: charFruit.value};
-  const charRank = document.querySelector('#charRank');
-  for(let i = 1; i <= Number(numAbilities.value); i++){
-    characterCard.listOfAbilities.push({ability: `Ability ${i}`, abilityDesc: "", abilityURL: "", viewType: "Video"});
-  }
-
-  let isItPirate = false;
-  let isItMarine = false;
-  if(isItChecked.checked){
-    isItPirate = true;
-  }
-  else if(isMarineChecked.checked){
-    isItMarine = true;
-  }
-
-  try{
-    const response = await fetch('/addCharacter', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        'charName': charName.value,
-        'charAge': charAge.value,
-        'charFruit': fruitInfo,
-        'charHaki': hakiInfo,
-        'charRank': charRank.value,
-        'imgURL': imgURL.value,
-        'bounty': bountyInfo,
-        'location': charLocation.value,
-        'specificLocation': specificCharLocation.value,
-        'pirate': isItPirate,
-        'marine': isItMarine,
-        'numAbilities': characterCard.listOfAbilities,
-        'superAdmin': superAdmin,
-        'userID': userID,
-      })
-    })
-    characterCard.listOfAbilities = [];
-    location.reload();
-  }
-  catch(err){
-    console.log(`Was unable to add to Database! ${err}`);
-  }
-}
-
 //--------------More info on the character----------------------------
 const customSeeMore = {
   closeButton: document.querySelector('.closeSeeMore'),
@@ -153,7 +68,6 @@ async function seeMore(event){
   const container = document.createElement('div');
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
   characterCard.characterId = event.path[3].id;
-  showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
     
@@ -553,76 +467,4 @@ async function whosStronger(){
       } 
     }
   }
-}
-//-------------------------Users and cards----------------------------------------
-async function showCardEditButtonsBasedOnUsers(){
-  const characters = await fetchCharacters();
-  if(document.getElementById('userID') !== null){
-    const userID = document.getElementById('userID').textContent;
-    let cardUserID = "";
-    const superAdmin ="391390167862gh354062i";
-    for(let i = 0; i < characters.length; i++){
-      if(characters[i].id == characterCard.characterId){
-        cardUserID = characters[i].userID;
-        break;
-      }
-    }
-    if(userID == cardUserID || userID == superAdmin){
-      document.querySelector('#editSeeMoreButton').classList.remove('hidden');
-    }
-  }
-  }
-//-------------------Sign In, Up, Out--------------------------------------
-
-if(document.querySelector('.signOut') !== null){
-  document.querySelector('.signOut').addEventListener('click', clearStorageOnSignOut);
-}
-
-const signInCustom = {
-  isItOpen: false,
-  userIsSignedIn: false
-}
-
-function clearStorageOnSignOut(){
-  sessionStorage.clear();
-}
-
-//-------------------Profile---------------------------------------------
-if(document.getElementById('profilePicture') !== null){
-  document.getElementById('profilePicture').addEventListener('click', openProfileMenu);
-}
-
-function openProfileMenu(){
-  const profilPicContainer = document.getElementById('profilePictureContainer');
-  const profileMenu = document.getElementById('profileMenu');
-  const profileTooltip = document.querySelector('#profilePictureContainer .tooltip');
-  const header = document.querySelector('header');
-  if(allConditions.isProfileOpen == false){
-    profileTooltip.classList.add('hidden');
-    profileMenu.classList.remove('hidden');
-    setTimeout(lol, '1');
-    profilPicContainer.classList.add('colorMyBackground');
-    generalStuff.overlay.classList.remove('hidden');
-    header.style.zIndex = 1;
-    allConditions.isProfileOpen = true;
-  }
-  else{
-    profileTooltip.classList.remove('hidden');
-    profileMenu.classList.add('hidden');
-    setTimeout(yoho, '1');
-    profilPicContainer.classList.remove('colorMyBackground');
-    generalStuff.overlay.classList.add('hidden');
-    header.style.zIndex = 0;
-    allConditions.isProfileOpen = false;
-  }
-}
-
-function yoho(){
-  const profileMenu = document.getElementById('profileMenu');
-  profileMenu.classList.remove('expand');
-}
-
-function lol(){
-  const profileMenu = document.getElementById('profileMenu');
-  profileMenu.classList.add('expand');
 }

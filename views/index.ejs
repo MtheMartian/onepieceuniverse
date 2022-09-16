@@ -25,7 +25,7 @@
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].pirate == true && info[i].marine == false ||
                 info[i].pirate == true && info[i].marine == true){%>
-            <div class="characterCard" id=<%=info[i].id%>>
+            <div class="characterCard" id="<%=info[i].id%>">
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>
@@ -72,7 +72,7 @@
       <section id="cardSectionMarine">
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == true && info[i].pirate == false){%>
-            <div class="characterCard" id=<%=info[i].id%>>
+            <div class="characterCard" id="<%=info[i].id%>">
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>
@@ -119,7 +119,7 @@
       <section id="cardSectionOthers">
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == false && info[i].pirate == false){%>
-            <div class="characterCard" id=<%=info[i].id%>>
+            <div class="characterCard" id="<%=info[i].id%>">
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>
@@ -182,6 +182,9 @@
     </div>
     <span id="userID" class="hidden"><%=user.userID%></span>
   <%}%>
+  <%if(typeof user === 'undefined'){%>
+    <a href="/page/signin" id="signInFirst"></a>
+  <%}%>
   <div class="updateCard hidden">
     <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
     <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
@@ -241,7 +244,7 @@
             </div>
             <div id="actualMenu">
               <div id="myProfile">
-                <a>My Profile</a>
+                <a href="/myprofile">My Profile</a>
               </div>
               <div id="helpContainer">
                 <a id="help">Help</a>

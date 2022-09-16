@@ -30,6 +30,15 @@ header{
   column-gap: 15%;
 }
 
+#signInFirst{
+  position: absolute;
+  top: 1%;
+  right: 11.5%;
+  width: 6%;
+  height: 5.5%;
+  z-index: 1;
+}
+
 #createChar, .signInBtn, .signOut{
   color: white;
   font-size: 2rem;
