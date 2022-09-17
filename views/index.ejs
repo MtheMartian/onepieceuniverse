@@ -18,10 +18,10 @@
   <main>
   <section id="homePage">
     <section id="pirates">
-      <div>
-        <h1 class="cardSectionTitle pirateTitle">Pirates</h1>
+      <div id="pirateTitle">
+        <h1>Pirates</h1>
       </div>
-      <section id="cardSection">
+      <section class="cardSection">
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].pirate == true && info[i].marine == false ||
                 info[i].pirate == true && info[i].marine == true){%>
@@ -66,10 +66,10 @@
       </section>
     </section>
     <section id="marines">
-      <div>
-        <h1 class="cardSectionTitle">Marines</h1>
+      <div id="marinesTitle">
+        <h1>Marines</h1>
       </div>
-      <section id="cardSectionMarine">
+      <section class="cardSection">
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == true && info[i].pirate == false){%>
             <div class="characterCard" id="<%=info[i].id%>">
@@ -113,10 +113,10 @@
       </section>
     </section>
     <section id="others">
-      <div>
-        <h1 class="cardSectionTitle">Others</h1>
+      <div id="othersTitle">
+        <h1>Others</h1>
       </div>
-      <section id="cardSectionOthers">
+      <section class="cardSection">
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == false && info[i].pirate == false){%>
             <div class="characterCard" id="<%=info[i].id%>">

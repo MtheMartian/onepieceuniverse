@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/profilepage.css">
   <link rel="stylesheet" href="css/generalheader.css">
+  <link rel="stylesheet" href="css/profilepagemenu.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -34,51 +35,55 @@
             <button type="submit">Change</button>
           </form>
         </div>
-      </section>
-      <section id="myCardsSection">
-        <h2>My Cards</h2>
-        <div id="myCards">
-          <%for(let i = 0; i < character.length; i++){%>
-            <%if(character[i].userID == user.userID){%>
-              <div id="<%=character[i].id%>" class="characterCard">
-                <div class="cardName">
-                  <span><%=character[i].charName%></span>
+        <section id="myCardsSection">
+          <div id="myCards">
+            <%for(let i = 0; i < character.length; i++){%>
+              <%if(character[i].userID == user.userID){%>
+                <div id="<%=character[i].id%>" class="characterCard">
+                  <div class="cardName">
+                    <span><%=character[i].charName%></span>
+                  </div>
+                  <div class="cardCharImg">
+                    <img class="cardImg" src=<%=character[i].imgURL%>>
+                  </div>
+                  <div class="cardHaki">
+                    <span><%=character[i].charhaki.hakiUsageLevel%></span>
+                  </div>
+                  <div class="cardInfo">
+                    <div class="cardRank">
+                      <span>Rank:</span><span><%=character[i].charRank%></span>
+                    </div>
+                    <div class="cardAge">
+                      <span><%=character[i].charAge%> years old</span>
+                    </div>
+                    <div class="cardFruitName">
+                      <img class="fruitImg" src="images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
+                    </div>
+                    <div class="cardFruitType">
+                      <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
+                    </div>
+                    <div class="cardBounty">
+                      <img class="bounty" src="images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
+                    </div>
+                    <div class="seeMore">
+                      <span class="characterInfo">See more</span>
+                    </div>
+                    <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
                 </div>
-                <div class="cardCharImg">
-                  <img class="cardImg" src=<%=character[i].imgURL%>>
-                </div>
-                <div class="cardHaki">
-                  <span><%=character[i].charhaki.hakiUsageLevel%></span>
-                </div>
-                <div class="cardInfo">
-                  <div class="cardRank">
-                    <span>Rank:</span><span><%=character[i].charRank%></span>
-                  </div>
-                  <div class="cardAge">
-                    <span><%=character[i].charAge%> years old</span>
-                  </div>
-                  <div class="cardFruitName">
-                    <img class="fruitImg" src="images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
-                  </div>
-                  <div class="cardFruitType">
-                    <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
-                  </div>
-                  <div class="cardBounty">
-                    <img class="bounty" src="images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
-                  </div>
-                  <div class="seeMore">
-                    <span class="characterInfo">See more</span>
-                  </div>
-                  <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
               </div>
-            </div>
+              <%}%>
             <%}%>
-          <%}%>
-        </div> 
+          </div> 
+        </section>
       </section>
       <nav id="menuContainer">
-        <div><a href="/home">Home</a></div>
-        <div><a href="/">Welcome Page</a></div>
+        <div>General</div>
+        <div><a href="/home">My Profile</a></div>
+        <div><a href="/home">Change Username</a></div>
+        <div><a href="/home">Change Email</a></div>
+        <div><a href="/home">Change Password</a></div>
+        <div><a href="/home">Home Page</a></div>
+        <div><a href="/home">Welcome Page</a></div>
       </nav>
     </section>
   </main>

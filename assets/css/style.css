@@ -21,18 +21,19 @@ main{
   left: 0;
   right: 0;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
  #homePage{
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: start;
   align-items: center;
   width: 100%;
   height: 90%;
   margin-top: -1%;
+  column-gap: 20%;
 }  
 
 button{
@@ -55,10 +56,12 @@ button:hover{
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 95%;
-  height: 750px;
+  width: 100%;
+  height: 100%;
+  padding-left: 25%;
+  padding-top: 5%;
+  position: relative;
 }
-
 
 .cardInfo, .characterCard{
   display: flex;
@@ -80,6 +83,7 @@ button:hover{
   background-image: url("/images/rocks.webp");
   justify-content: center;
   align-items: center;
+  margin-bottom: 20%;
 }
 
 .cardInfo, .cardName, .cardImg, .cardHaki{
@@ -109,17 +113,16 @@ button:hover{
   margin-bottom: -2.5%;
 }
 
-#cardSection, #cardSectionMarine, #cardSectionOthers{
-  display: flex;
-  justify-content: start;
+.cardSection{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  column-gap: 3%;
-  width: 95%;
+  width: 120%;
   height: 100%;
-  overflow-x: scroll;
-  padding: 2% 7% 2% 7%;
-  margin-bottom: 3%;
-  background: rgba(49, 49, 49, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 5% 2% 5% 5%;
+  background: rgba(49, 49, 49, 0.7);
   border: 2px solid orange;
   border-radius: 7px;
 }
@@ -170,15 +173,11 @@ button:hover{
   box-shadow: 0px 0px 35px rgba(243, 243, 243, 1);
 }
 
-.cardSectionTitle{
+#pirateTitle > h1, #marinesTitle > h1, #othersTitle > h1{
   font-family: Acme, Arial;
-  font-size: 5rem;
+  font-size: 4rem;
   margin: 0 0 0 0;
   color: black;
-}
-
-.pirateTitle{
-  padding-top: 50%;
 }
 
 /*----------Forms-------------*/
