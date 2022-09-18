@@ -23,7 +23,7 @@ const CharacterSchema = new mongoose.Schema({
   },
   imgURL: {
     type: String,
-    required: true
+    default: ""
   },
   id: {
     type: String,
@@ -48,6 +48,10 @@ const CharacterSchema = new mongoose.Schema({
   userID: {
     type: String,
     required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 

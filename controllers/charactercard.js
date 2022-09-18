@@ -1,4 +1,5 @@
 const Character = require('../models/Character');
+const cloudinary = require('../middleware/cloudinary');
 
 module.exports = {
   createCard: async (request, response) =>{
@@ -13,6 +14,7 @@ module.exports = {
                         'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   //-------------------------------
     try{
+      // const imageFile = await cloudinary.uploader.upload(request.body.imgURL);
       await Character.create(
         {charName: request.body.charName, charAge: request.body.charAge,
           charFruit: request.body.charFruit, charhaki: request.body.charHaki,
@@ -28,7 +30,7 @@ module.exports = {
           description: [{
             charDesc: "",
             bounty: request.body.bounty,
-            imgBountyURL: request.body.bountyImgURL,
+            imgBountyURL: "",
             location: request.body.location,
             specificLocation: request.body.specificLocation,
             numAbilities: request.body.numAbilities,
@@ -46,6 +48,7 @@ module.exports = {
   },
   editCard: async (request, response) =>{
     try{
+      // const imageFile = await cloudinary.uploader.upload(request.file.path);
       await Character.findOneAndUpdate({id: request.body.itemFromJS},{
         $set: {
             charName: request.body.charNameU,
@@ -71,6 +74,7 @@ module.exports = {
   },
   removeCard: async (request, response) =>{
     try{
+      // await cloudinary.uploader.destroy(cardImage.cloudinaryId);
       await Character.findOneAndRemove({id: request.body.itemFromJS})
       console.log('Deleted!');
       response.redirect('/');
