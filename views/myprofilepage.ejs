@@ -40,6 +40,14 @@
             <%for(let i = 0; i < character.length; i++){%>
               <%if(character[i].userID == user.userID){%>
                 <div id="<%=character[i].id%>" class="characterCard">
+                  <div class="changeImageBox">
+                    Change
+                  </div>
+                  <form action="/myprofile/charactercard/<%=character[i].id%>/upload/image?_method=PUT" 
+                    method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
+                  <input type="file" name="file" accept="image/*">
+                  <button type="submit">Submit</button>
+                  </form>
                   <div class="cardName">
                     <span><%=character[i].charName%></span>
                   </div>

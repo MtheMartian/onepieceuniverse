@@ -26,6 +26,16 @@
           <%if(info[i].pirate == true && info[i].marine == false ||
                 info[i].pirate == true && info[i].marine == true){%>
             <div class="characterCard" id="<%=info[i].id%>">
+              <%if(typeof user !== 'undefined' && user.userID == info[i].userID){%>
+                <div class="changeImageBox">
+                  Change
+                </div>
+                <form action="/charactercard/<%=info[i].id%>/upload/image?_method=PUT" 
+                  method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
+                <input type="file" name="file" accept="image/*">
+                <button type="submit">Submit</button>
+                </form>
+              <%}%>
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>
@@ -73,6 +83,16 @@
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == true && info[i].pirate == false){%>
             <div class="characterCard" id="<%=info[i].id%>">
+              <%if(typeof user !== 'undefined' && user.userID == info[i].userID){%>
+                <div class="changeImageBox">
+                  Change
+                </div>
+                <form action="/charactercard/<%=info[i].id%>/upload/image?_method=PUT" 
+                  method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
+                <input type="file" name="file" accept="image/*">
+                <button type="submit">Submit</button>
+                </form>
+              <%}%>
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>
@@ -120,6 +140,16 @@
         <%for(let i = 0; i < info.length; i++){%>
           <%if(info[i].marine == false && info[i].pirate == false){%>
             <div class="characterCard" id="<%=info[i].id%>">
+              <%if(typeof user !== 'undefined' && user.userID == info[i].userID){%>
+                <div class="changeImageBox">
+                  Change
+                </div>
+                <form action="/charactercard/<%=info[i].id%>/upload/image?_method=PUT" 
+                  method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
+                <input type="file" name="file" accept="image/*">
+                <button type="submit">Submit</button>
+                </form>
+              <%}%>
               <div class="cardName">
                 <span><%=info[i].charName%></span>
               </div>

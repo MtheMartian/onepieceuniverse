@@ -74,13 +74,49 @@ module.exports = {
   },
   removeCard: async (request, response) =>{
     try{
-      // await cloudinary.uploader.destroy(cardImage.cloudinaryId);
-      await Character.findOneAndRemove({id: request.body.itemFromJS})
+      const checkCloudinaryId = await Character.findOne({id: request.body.itemFromJS});
+      if(checkCloudinaryId.cloudinaryId !== "" || checkCloudinaryId.cloudinaryId == 'undefined'){
+        await cloudinary.uploader.destroy(checkCloudinaryId.cloudinaryId)
+        await Character.findOneAndRemove({id: request.body.itemFromJS})
+      }
+      else{
+        await Character.findOneAndRemove({id: request.body.itemFromJS})
+      }
       console.log('Deleted!');
       response.redirect('/');
     }
     catch(err){
       console.log(`Shoot, it didn't work! ${err}`);
+    }
+  },
+  uploadCardImg: async (request, response) =>{
+    try{
+      console.log(request);
+      const result = await cloudinary.uploader.upload(request.file.path);
+      const checkCloudinaryId = await Character.findOne({id: request.params.id});
+      
+      if(checkCloudinaryId.cloudinaryId !== "" || checkCloudinaryId.cloudinaryId == 'undefined'){
+        await cloudinary.uploader.destroy(checkCloudinaryId.cloudinaryId)
+        await Character.findOneAndUpdate({id: request.params.id},{
+          '$set': {
+            imgURL: result.secure_url,
+            cloudinaryId: result.public_id
+          }
+        });
+      }
+      else{
+        await Character.findOneAndUpdate({id: request.params.id},{
+          '$set': {
+            imgURL: result.secure_url,
+            cloudinaryId: result.public_id
+          }
+        });
+      }
+      console.log('File successfully uploaded!');
+      response.redirect('/home');
+    }
+    catch(err){
+      console.log(`File upload failed! ${err}`);
     }
   }
 }

@@ -116,7 +116,7 @@ header{
   border-bottom-left-radius: 10px;
   opacity: 0;
   font-family: Secular One, Arial;
-  transition: height 0.5s, width 0.5s, opacity 1s;
+  transition: height 0.3s, width 0.3s, opacity 0.3s;
 }
 
 .expand{

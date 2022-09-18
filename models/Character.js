@@ -25,6 +25,10 @@ const CharacterSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+  cloudinaryId: {
+    type: String,
+    default: ""
+  },
   id: {
     type: String,
     required: true

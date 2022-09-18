@@ -3,7 +3,6 @@ const User = require('../models/User');
 
 module.exports = {
   getIndex: async (request, response) =>{
-    console.log(request);
     const users = request.user;
     try{
       const characters = await Character.find().lean();
