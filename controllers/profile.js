@@ -15,6 +15,9 @@ module.exports = {
       console.loge(`Couldn't get the page! ${err}`);
     }
   },
+  getChangeUsername: (request, response) =>{
+    response.render('changeusername.ejs', {user: request.user});
+  },
   changeUserName: async (request, response) =>{
     const {userName, email, password, userID} = request.user;
     try{
@@ -30,6 +33,9 @@ module.exports = {
       console.log(`Failed to change username. ${err}`);
     }
   },
+  getChangeEmail: (request, response) =>{
+    response.render('changeemail.ejs', {user: request.user});
+  },
   changeEmail: async (request, response) =>{
     try{
       await Users.findOneAndUpdate({userID: request.user.userID}, {
@@ -42,6 +48,9 @@ module.exports = {
     catch(err){
       console.log(`Failed to change email. ${err}`);
     }
+  },
+  getChangePassword: (request, response) =>{
+    response.render('changepassword.ejs', {user: request.user});
   },
   changePassword: async (request, response) =>{
     const {userName, email, password} = request.body;
@@ -77,6 +86,35 @@ module.exports = {
         await Characters.findOneAndUpdate({id: request.params.id},{
           '$set': {
             imgURL: result.secure_url,
+            cloudinaryId: result.public_id
+          }
+        });
+      }
+      console.log('File successfully uploaded!');
+      response.redirect('/myprofile');
+    }
+    catch(err){
+      console.log(`File upload failed! ${err}`);
+    }
+  },uploadProfileImage: async (request, response) =>{
+    try{
+      console.log(request);
+      const result = await cloudinary.uploader.upload(request.file.path);
+      const checkCloudinaryId = await Users.findOne({userID: request.params.userid}).lean();
+      
+      if(checkCloudinaryId.cloudinaryId !== "" || checkCloudinaryId.cloudinaryId == 'undefined'){
+        await cloudinary.uploader.destroy(checkCloudinaryId.cloudinaryId)
+        await Users.findOneAndUpdate({userID: request.params.userid},{
+          '$set': {
+            profilePicture: result.secure_url,
+            cloudinaryId: result.public_id
+          }
+        }).lean();
+      }
+      else{
+        await Users.findOneAndUpdate({userID: request.params.userid},{
+          '$set': {
+            profilePicture: result.secure_url,
             cloudinaryId: result.public_id
           }
         });

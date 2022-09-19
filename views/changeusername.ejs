@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/profileusersettings.css">
+  <link rel="stylesheet" href="/css/generalheader.css">
+  <link rel="stylesheet" href="/css/profilepagemenu.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <title>One Piece Realm</title>
+</head>
+<body>
+  <main>
+    <section id="profilePage">
+      <section id="userSettings">
+        <div id="userName">
+          <form action="/myprofile/username?_method=PUT" method="POST" id="userNameForm">
+            <label for="userName">Username</label>
+            <input type="text" name="userName" id="userNameInput" value="<%=user.userName%>">
+            <button type="submit">Change</button>
+          </form>
+        </div>
+      </section>
+      <nav id="menuContainer">
+        <div>General</div>
+        <div><a href="/myprofile">My Profile</a></div>
+        <div><a href="/myprofile/changeusername">Change Username</a></div>
+        <div><a href="/myprofile/changeemail">Change Email</a></div>
+        <div><a href="/myprofile/changepassword">Change Password</a></div>
+        <div><a href="/home">Home Page</a></div>
+        <div><a href="/">Welcome Page</a></div>
+      </nav>
+    </section>
+  </main>
+  <header id="header">
+    <section id="leftSection">
+      <a href="/">One Piece Realm</a>
+    </section>
+  </header>
+</body>
+</html>

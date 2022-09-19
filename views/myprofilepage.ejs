@@ -16,25 +16,16 @@
     <section id="profilePage">
       <div id="profilePictureContainer">
         <img id="profilePicture" src="<%=user.profilePicture%>" alt="Picture">
+        <div id="changeProfilePictureBox">
+          Edit
+        </div>
+        <form action="/myprofile/changeprofilepicture/<%=user.userID%>/upload/image?_method=PUT" 
+          method="POST" enctype="multipart/form-data" id="profilePictureUploadForm" class="hidden">
+        <input type="file" name="file" accept="image/*">
+        <button type="submit">Submit</button>
+        </form>
       </div>
       <section id="userSettings">
-        <div id="userName">
-          <form action="/myprofile/username?_method=PUT" method="POST" id="userNameForm">
-            <label for="userName">Username</label>
-            <input type="text" name="userName" id="userNameInput" value="<%=user.userName%>">
-            <button type="submit">Change</button>
-          </form>
-          <form action="/myprofile/email?_method=PUT" method="POST" id="emailForm">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="emailInput" value="<%=user.email%>">
-            <button type="submit">Change</button>
-          </form>
-          <form action="/myprofile/password?_method=PUT" method="POST" id="passwordForm">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="passwordInput">
-            <button type="submit">Change</button>
-          </form>
-        </div>
         <section id="myCardsSection">
           <div id="myCards">
             <%for(let i = 0; i < character.length; i++){%>
@@ -86,12 +77,12 @@
       </section>
       <nav id="menuContainer">
         <div>General</div>
-        <div><a href="/home">My Profile</a></div>
-        <div><a href="/home">Change Username</a></div>
-        <div><a href="/home">Change Email</a></div>
-        <div><a href="/home">Change Password</a></div>
+        <div><a href="/myprofile">My Profile</a></div>
+        <div><a href="/myprofile/changeusername">Change Username</a></div>
+        <div><a href="/myprofile/changeemail">Change Email</a></div>
+        <div><a href="/myprofile/changepassword">Change Password</a></div>
         <div><a href="/home">Home Page</a></div>
-        <div><a href="/home">Welcome Page</a></div>
+        <div><a href="/">Welcome Page</a></div>
       </nav>
     </section>
   </main>

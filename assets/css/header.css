@@ -79,6 +79,8 @@ header{
   height: 55px;
   width: 55px;
   cursor: pointer;
+  object-fit: cover;
+  object-position: top;
 }
 
 #profilePictureContainer{
@@ -99,6 +101,8 @@ header{
 #profilePictureInMenu{
   height: 45px;
   width: 45px;
+  object-fit: cover;
+  object-position: top;
 }
 
 #profileMenu{

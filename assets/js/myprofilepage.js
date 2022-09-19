@@ -29,6 +29,7 @@ const generalStuff = {
 const allConditions = {
   toggleMyView: false,
   isProfileOpen: false,
+  isUploadFormOpen: false,
 }
 
 function unHideIt(element){
@@ -468,7 +469,7 @@ async function whosStronger(){
     }
   }
 }
-//--------------- Upload an image -------------------------------
+//--------------- Upload an image for character card -------------------------------
 Array.from(document.querySelectorAll('.changeImageBox')).forEach(element =>{
   element.addEventListener('click', openUploadImageForm);
 })
@@ -489,6 +490,23 @@ function openUploadImageForm(event){
       changeImageContainers[i].classList.remove('hidden');
       allConditions.isUploadFormOpen = false;
     }
+  }
+}
+//--------------- Change Profile Picture --------------------------------
+document.getElementById('changeProfilePictureBox').addEventListener('click', openChangeProfilePictureForm);
+
+function openChangeProfilePictureForm(){
+  const changeProfilePictureBox = document.getElementById('changeProfilePictureBox');
+  const profilePictureUploadForm = document.getElementById('profilePictureUploadForm');
+  if(allConditions.isUploadFormOpen == false){
+    profilePictureUploadForm.classList.remove('hidden');
+    changeProfilePictureBox.classList.add('hidden');
+    allConditions.isUploadFormOpen = true;
+  }
+  else{
+    profilePictureUploadForm.classList.add('hidden');
+    changeProfilePictureBox.classList.remove('hidden');
+    allConditions.isUploadFormOpen = false;
   }
 }
 
