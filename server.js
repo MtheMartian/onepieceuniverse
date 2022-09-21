@@ -11,7 +11,9 @@ const characterCardRoutes = require('./routes/charactercards');
 const characterInfoRoutes = require('./routes/characterinfo');
 const profileRoutes = require('./routes/profile');
 const usersRoutes = require('./routes/User');
+const commentsRoutes = require('./routes/comments');
 const MongoStore = require('connect-mongo');
+const comments = require('./controllers/comments');
 const app = express();
 
 require('dotenv').config({path: './config/.env'});
@@ -50,6 +52,7 @@ app.use('/', characterCardRoutes);
 app.use('/', characterInfoRoutes);
 app.use('/', usersRoutes);
 app.use('/', profileRoutes);
+app.use('/', commentsRoutes);
 
 app.listen(process.env.PORT, () =>{
   console.log(`Server running on port ${process.env.PORT}`);

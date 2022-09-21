@@ -152,8 +152,12 @@ async function seeMore(event){
   const ability = document.createElement('h2');
   const abilityDesc = document.createElement('p');
   const container = document.createElement('div');
+  const cardIdForComment = document.getElementById('cardID');
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
+  const characterAbilitiesDesc = document.getElementById('characterAbilitiesDesc');
   characterCard.characterId = event.path[3].id;
+  cardIdForComment.value = characterCard.characterId;
+  await addComments(characterCard.characterId);
   showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
@@ -167,7 +171,7 @@ async function seeMore(event){
         
         for(let j = 0; j < characters[i].description[0].numAbilities.length; j++){
           
-          const abilityDiv = characterMoreInfoDiv.appendChild(container.cloneNode());
+          const abilityDiv = characterAbilitiesDesc.appendChild(container.cloneNode());
           abilityDiv.className = "abilityDiv";
 
           const abilityTrailerContainer = abilityDiv.appendChild(container.cloneNode());
@@ -668,6 +672,28 @@ function openUploadImageForm(event){
       uploadImageForm[i].classList.add('hidden');
       changeImageContainers[i].classList.remove('hidden');
       allConditions.isUploadFormOpen = false;
+    }
+  }
+}
+//--------------------- Get comments ------------------------------
+async function getComments(){
+  try{
+    const response = await fetch('/comments',{
+      method: 'get'
+    });
+    const comments = response.json();
+    return comments;
+  }
+  catch(err){
+    console.log(`Oops! ${err}`);
+  }
+}
+//----------------------- Add comments to see more ----------------------------
+async function addComments(cardID){
+  const comments = await getComments();
+  for(let i = 0; i < comments.length; i++){
+    if(comments[i].cardID == cardID){
+      document.getElementById(`comment${i}`).classList.remove('hidden');
     }
   }
 }

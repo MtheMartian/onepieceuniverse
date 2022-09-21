@@ -1,4 +1,5 @@
 const Character = require('../models/Character');
+const Comments = require('../models/Comments');
 const User = require('../models/User');
 
 module.exports = {
@@ -6,7 +7,8 @@ module.exports = {
     const users = request.user;
     try{
       const characters = await Character.find().lean();
-      response.render('index', {info: characters, user: users});
+      const userComments = await Comments.find().lean();
+      response.render('index', {info: characters, user: users, comments: userComments});
     }
     catch(err){
       console.log(`Didn't find anything! ${err}`);

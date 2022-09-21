@@ -363,12 +363,20 @@ button:hover{
   z-index: 1;
 }
 
+#characterAbilitiesDesc{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: start;
+  row-gap: 5rem;
+}
+
 #bountyImg{
   width: 100%;
   object-fit: fill;
 }
 
-#characterMoreInfo > div{
+#characterMoreInfo > div, #characterAbilitiesDesc > div{
   position: relative;
   width: 95%;
 }

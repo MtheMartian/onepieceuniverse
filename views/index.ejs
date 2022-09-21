@@ -239,6 +239,27 @@
       <button id="editSeeMoreButton" class="hidden">Edit</button>
       <button class="closeSeeMore">X</button>
     </div>
+    <div id="characterAbilitiesDesc">
+    </div>
+    <section id="commentSection">
+      <form action="/home/postcomment" method="POST">
+        <input type="text" name="comment" id="comment" placeholder="Comment...">
+        <input type="text" name="cardID" id="cardID" class="hidden" value="">
+        <button type="submit">Post</button>
+      </form>
+      <div id="comments">
+        <%if(typeof comments !== 'undefined'){%>
+          <%for(let i = 0; i < comments.length; i++){%>
+                <div class="commentContainer hidden" id="comment<%=i%>">
+                  <img class="userPic" src=""
+                        alt="userPic">
+                  <p class="cardComment"><%=comments[i].comment%></p>
+                  <div>Number</div>
+                </div>
+          <%}%>
+        <%}%>
+      </div>
+    </section>
   </div>
   <div class="updateSeeMore hidden" id="editSeeMoreForm">
     <div id="abilitySection">
