@@ -697,3 +697,15 @@ async function addComments(cardID){
     }
   }
 }
+
+document.getElementById('postComment').addEventListener('click', reloadCommentSection);
+
+async function reloadCommentSection(){
+  $('#comments').load(location.href + " #comments");
+  await getComments();
+  $('#comments').load(location.href + " #comments");
+  await getComments();
+  await addComments(characterCard.characterId);
+  document.getElementById('comment').value = "";
+}
+

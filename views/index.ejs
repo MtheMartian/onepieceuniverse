@@ -245,16 +245,19 @@
       <form action="/home/postcomment" method="POST">
         <input type="text" name="comment" id="comment" placeholder="Comment...">
         <input type="text" name="cardID" id="cardID" class="hidden" value="">
-        <button type="submit">Post</button>
+        <button type="submit" id="postComment">Post</button>
       </form>
       <div id="comments">
         <%if(typeof comments !== 'undefined'){%>
           <%for(let i = 0; i < comments.length; i++){%>
-                <div class="commentContainer hidden" id="comment<%=i%>">
+                <div class="commentContainer hidden" id="comment<%=comments.length-1-i%>">
                   <img class="userPic" src=""
                         alt="userPic">
-                  <p class="cardComment"><%=comments[i].comment%></p>
-                  <div>Number</div>
+                  <p class="cardComment"><%=comments[comments.length-1-i].comment%></p>
+                  <form action="/home/likecomment/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST">
+
+                    <button type="submit">Like</button><span><%=comments[comments.length-1-i].likes.numberOfLikes%></span>
+                  </form>
                 </div>
           <%}%>
         <%}%>

@@ -19,9 +19,10 @@ const UserSchema = new mongoose.Schema({
   },
   profilePicture:{
     type: String,
+    default: "",
   },
   cloudinaryId:{
-    trype: String,
+    type: String,
     default: "",
   }
 })

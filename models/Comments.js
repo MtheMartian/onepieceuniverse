@@ -6,14 +6,12 @@ const CommentSchema = new mongoose.Schema({
     require: true,
   },
   likes: {
-    type: Number,
-    default: 0,
+    type: Object,
+    default: {numberOfLikes: 0, whoLiked:[]},
   },
   replies: {
     type: Array,
-    default: [{comment: "", userID: "", 
-                userProfilePicture: "", cardID: "", 
-                likes: 0, dateCreated: new Date().toString}],
+    default: [],
   },
   userID: {
     type: String,
