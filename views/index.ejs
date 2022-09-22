@@ -242,7 +242,10 @@
     <div id="characterAbilitiesDesc">
     </div>
     <section id="commentSection">
-      <form action="/home/postcomment" method="POST">
+      <div id="commentsTitle">
+        <span>Comments</span>
+      </div>
+      <form action="/home/postcomment" method="POST" id="postCommentForm">
         <input type="text" name="comment" id="comment" placeholder="Comment...">
         <input type="text" name="cardID" id="cardID" class="hidden" value="">
         <button type="submit" id="postComment">Post</button>
@@ -251,12 +254,15 @@
         <%if(typeof comments !== 'undefined'){%>
           <%for(let i = 0; i < comments.length; i++){%>
                 <div class="commentContainer hidden" id="comment<%=comments.length-1-i%>">
-                  <img class="userPic" src=""
-                        alt="userPic">
+                  <div class="whoPosted">
+                    <img class="userPic" src="<%=user.profilePicture%>"
+                          alt="userPic">
+                    <span><%=user.userName%></span>
+                  </div>
                   <p class="cardComment"><%=comments[comments.length-1-i].comment%></p>
-                  <form action="/home/likecomment/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST">
-
-                    <button type="submit">Like</button><span><%=comments[comments.length-1-i].likes.numberOfLikes%></span>
+                  <form action="/home/likecomment/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST" class="upvoteContainer">
+                    <button type="submit" class="upvoteButton"><img src="/images/dflag.webp" alt="flag" class="upvotePic"></button>
+                    <span><%=comments[comments.length-1-i].likes.numberOfLikes%></span>
                   </form>
                 </div>
           <%}%>

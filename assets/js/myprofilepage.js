@@ -37,7 +37,7 @@ function unHideIt(element){
   generalStuff.overlay.classList.remove('hidden');
 }
 
-// whosStronger();
+whosStronger();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
