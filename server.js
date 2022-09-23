@@ -12,6 +12,7 @@ const characterInfoRoutes = require('./routes/characterinfo');
 const profileRoutes = require('./routes/profile');
 const usersRoutes = require('./routes/User');
 const commentsRoutes = require('./routes/comments');
+const replyRoutes = require('./routes/reply');
 const MongoStore = require('connect-mongo');
 const comments = require('./controllers/comments');
 const app = express();
@@ -53,6 +54,7 @@ app.use('/', characterInfoRoutes);
 app.use('/', usersRoutes);
 app.use('/', profileRoutes);
 app.use('/', commentsRoutes);
+app.use('/', replyRoutes);
 
 app.listen(process.env.PORT, () =>{
   console.log(`Server running on port ${process.env.PORT}`);

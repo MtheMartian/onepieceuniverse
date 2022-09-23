@@ -1,4 +1,5 @@
 const express = require('express');
+const { reply } = require('../controllers/comments');
 const router = express.Router();
 const commentsController = require('../controllers/comments');
 

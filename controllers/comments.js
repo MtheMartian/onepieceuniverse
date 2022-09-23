@@ -6,6 +6,7 @@ module.exports = {
       await Comments.create({
         comment: request.body.comment,
         userID: request.user.userID,
+        userName: request.user.userName,
         userProfilePicture: request.user.profilePicture,
         cardID: request.body.cardID,
       })
