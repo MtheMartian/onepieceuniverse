@@ -444,6 +444,7 @@ button:hover{
   align-items: center;
   row-gap: 5%;
   font-family: Arial;
+  margin-bottom: 10%;
 }
 
 #commentsTitle{
@@ -484,22 +485,30 @@ button:hover{
 }
 
 .userPic{
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
 }
 
-.cardComment, .upvoteContainer{
+.cardComment{
   padding-left: 5%;
+}
+
+.upvoteContainer{
+  padding-left: 4%;
+}
+
+.cardComment{
+  margin-top: 0;
 }
 
 .upvotePic{
   width: 25px;
 }
 
-#comment{
+#comment, #reply{
   width: 80%;
   border: none;
   outline-color: rgba(0, 0, 0, 0.7);
@@ -508,10 +517,50 @@ button:hover{
   padding: 1% 0 1% 2%;
   font-size: 1rem;
   color: white;
+  transition: border 0.15s;
 }
 
-#comment::placeholder{
+#comment::placeholder, #reply::placeholder{
   color: white;
+}
+
+#comment:hover, #reply:hover{
+  border-bottom: 2px solid white;
+}
+
+.likeReplyContainer, .postReplyForm{
+  display: flex;
+  align-items: center;
+}
+
+.likeReplyContainer{
+  width: 100%;
+  height: 50%;
+  column-gap: 5%;
+}
+
+.postReplyForm{
+  width: 70%;
+}
+
+.postReply{
+  font-size: 1rem;
+}
+
+#reply{
+  width: 80%;
+}
+
+.replyButton{
+  cursor: pointer;
+  transition: color 0.15s;
+  margin-bottom: 3%;
+  padding-left: 4%;
+  margin-top: 1%;
+}
+
+.replyButton:hover{
+  color: rgb(40, 126, 255);
 }
 
 /*-------------Stuff---------------------*/

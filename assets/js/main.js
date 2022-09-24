@@ -30,6 +30,7 @@ const allConditions = {
   toggleMyView: false,
   isProfileOpen: false,
   isUploadFormOpen: false,
+  isReplyOpen: false,
 }
 
 function unHideIt(element){
@@ -158,6 +159,7 @@ async function seeMore(event){
   characterCard.characterId = event.path[3].id;
   cardIdForComment.value = characterCard.characterId;
   await addComments(characterCard.characterId);
+  numberOfReplies();
   showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
@@ -675,7 +677,7 @@ function openUploadImageForm(event){
     }
   }
 }
-//--------------------- Get comments ------------------------------
+//--------------------- Get comments and replies ------------------------------
 async function getComments(){
   try{
     const response = await fetch('/comments',{
@@ -688,7 +690,20 @@ async function getComments(){
     console.log(`Oops! ${err}`);
   }
 }
-//----------------------- Add comments to see more ----------------------------
+
+async function getReplies(){
+  try{
+    const response = await fetch('/replies',{
+      method: 'get'
+    });
+    const replies = response.json();
+    return replies;
+  }
+  catch(err){
+    console.log(`Oops! ${err}`);
+  }
+}
+//----------------------- Add comments/replies to see more ----------------------------
 async function addComments(cardID){
   const comments = await getComments();
   for(let i = 0; i < comments.length; i++){
@@ -700,12 +715,60 @@ async function addComments(cardID){
 
 document.getElementById('postComment').addEventListener('click', reloadCommentSection);
 
-async function reloadCommentSection(){
+
+async function reloadCommentSection(event){
   $('#comments').load(location.href + " #comments");
   await getComments();
+  await getReplies();
+  numberOfReplies();
   $('#comments').load(location.href + " #comments");
   await getComments();
+  await getReplies();
+  numberOfReplies();
   await addComments(characterCard.characterId);
   document.getElementById('comment').value = "";
+  event.preventDefault();
 }
 
+Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
+  element.addEventListener('click', openReplies);
+});
+
+Array.from(document.querySelectorAll('.postReply')).forEach(element =>{
+  element.addEventListener('click', reloadCommentSection);
+});
+
+Array.from(document.querySelectorAll('.upvoteButton')).forEach(element =>{
+  element.addEventListener('click', reloadCommentSection);
+});
+
+function openReplies(event){
+  const openRepliesOf = event.target.id;
+  const repliesContainer = Array.from(document.querySelectorAll('.repliesContainer'));
+  for(let i = 0; i < repliesContainer.length; i++){
+    if(repliesContainer[i].id.includes(openRepliesOf) && allConditions.isReplyOpen == false){
+      repliesContainer[i].classList.remove('hidden');
+      allConditions.isReplyOpen = true;
+    }
+    else if(repliesContainer[i].id.includes(openRepliesOf) && allConditions.isReplyOpen){
+      repliesContainer[i].classList.add('hidden');
+      allConditions.isReplyOpen = false;
+    }
+  }
+}
+
+
+function numberOfReplies(){
+  const replyButtons = Array.from(document.querySelectorAll('.replyButton'));
+  const repliesContainers = Array.from(document.querySelectorAll('.repliesContainer'));
+  for(let i = 0; i < replyButtons.length; i++){
+    if(repliesContainers[i].id.includes(replyButtons[i].id)){
+      if(repliesContainers[i].childElementCount == 0){
+        replyButtons[i].classList.add('hidden');
+      }
+      else{
+        replyButtons[i].textContent = `Replies ${repliesContainers[i].childElementCount}`;
+      }
+    }
+  }
+}

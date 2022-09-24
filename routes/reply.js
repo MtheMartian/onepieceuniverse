@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.put('/home/reply/:id', replyController.postReply);
 router.put('/home/likereply/:id', replyController.likeReply);
+router.get('/replies', replyController.getReplies);
 
 module.exports = router;
