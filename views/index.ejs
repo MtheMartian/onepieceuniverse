@@ -251,47 +251,6 @@
         <button type="submit" id="postComment">Post</button>
       </form>
       <div id="comments">
-        <%if(typeof comments !== 'undefined'){%>
-          <%for(let i = 0; i < comments.length; i++){%>
-                <div class="commentContainer hidden" id="comment<%=comments.length-1-i%>">
-                  <div class="whoPosted">
-                    <img class="userPic" src="<%=comments[comments.length-1-i].userProfilePicture%>"
-                          alt="userPic">
-                    <span><%=comments[comments.length-1-i].userName%></span>
-                  </div>
-                  <p class="cardComment"><%=comments[comments.length-1-i].comment%></p>
-                  <div class="likeReplyContainer">
-                    <form action="/home/likecomment/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST" class="upvoteContainer">
-                      <button type="submit" class="upvoteButton"><img src="/images/dflag.webp" alt="flag" class="upvotePic"></button>
-                      <span><%=comments[comments.length-1-i].likes.numberOfLikes%></span>
-                    </form>
-                    <form action="/home/reply/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST" class="postReplyForm">
-                      <input type="text" name="reply" id="reply" placeholder="Reply...">
-                      <button type="submit" class="postReply">Reply</button>
-                    </form>
-                  </div>
-                  <div class="replyButton" id="<%=comments.length-1-i%>"></div>
-                  <div class="repliesContainer hidden" id="reply<%=comments.length-1-i%>">
-                    <%for(let j = 0; j < reply.length; j++){%>
-                      <%if(reply[reply.length-1-j].commentID == comments[comments.length-1-i]._id){%>
-                        <div class="commentContainer" id="reply<%=reply.length-1-j%>">
-                          <div class="whoPosted">
-                            <img class="userPic" src="<%=reply[reply.length-1-j].userProfilePic%>"
-                                  alt="userPic">
-                            <span><%=reply[reply.length-1-j].userName%></span>
-                          </div>
-                          <p class="cardComment"><%=reply[reply.length-1-j].comment%></p>
-                          <form action="/home/likereply/<%=reply[reply.length-1-j]._id%>?_method=PUT" method="POST" class="upvoteContainer">
-                            <button type="submit" class="upvoteButton"><img src="/images/dflag.webp" alt="flag" class="upvotePic"></button>
-                            <span><%=reply[reply.length-1-j].likes.numberOfLikes%></span>
-                          </form>
-                        </div>
-                      <%}%>
-                    <%}%>
-                  </div>
-                </div>
-          <%}%>
-        <%}%>
       </div>
     </section>
   </div>

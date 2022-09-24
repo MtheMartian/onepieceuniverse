@@ -158,8 +158,8 @@ async function seeMore(event){
   const characterAbilitiesDesc = document.getElementById('characterAbilitiesDesc');
   characterCard.characterId = event.path[3].id;
   cardIdForComment.value = characterCard.characterId;
-  await addComments(characterCard.characterId);
-  numberOfReplies();
+  await addCommentsToSection();
+  // await addComments(characterCard.characterId);
   showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
@@ -704,54 +704,149 @@ async function getReplies(){
   }
 }
 //----------------------- Add comments/replies to see more ----------------------------
-async function addComments(cardID){
-  const comments = await getComments();
-  for(let i = 0; i < comments.length; i++){
-    if(comments[i].cardID == cardID){
-      document.getElementById(`comment${i}`).classList.remove('hidden');
-    }
-  }
-}
+// async function addComments(cardID){
+//   const comments = await getComments();
+//   for(let i = 0; i < comments.length; i++){
+//     if(comments[i].cardID == cardID){
+//       document.getElementById(`comment${i}`).classList.remove('hidden');
+//     }
+//   }
+// }
 
 document.getElementById('postComment').addEventListener('click', reloadCommentSection);
 
+async function addCommentsToSection(){
+  const commentsDiv = document.getElementById('comments');
+  const div = document.createElement('div');
+  const img = document.createElement('img');
+  const span = document.createElement('span');
+  const p = document.createElement('p');
+  const form = document.createElement('form');
+  const button = document.createElement('button');
+  const input = document.createElement('input');
+  const commentsArr = await getComments();
+  const repliesArr = await getReplies();
 
-async function reloadCommentSection(event){
-  $('#comments').load(location.href + " #comments");
-  await getComments();
-  await getReplies();
-  numberOfReplies();
-  $('#comments').load(location.href + " #comments");
-  await getComments();
-  await getReplies();
-  numberOfReplies();
-  await addComments(characterCard.characterId);
-  document.getElementById('comment').value = "";
-  event.preventDefault();
+  for(let i = 0; i < commentsArr.length; i++){
+    if(commentsArr[commentsArr.length-1-i].cardID == characterCard.characterId){
+      const commentContainer = commentsDiv.appendChild(div.cloneNode());
+    commentContainer.className = 'commentContainer';
+    commentContainer.id = `comment${commentsArr.length-1-i}`;
+
+    //Card Comment
+    const whoPosted = commentContainer.appendChild(div.cloneNode());
+    whoPosted.className = 'whoPosted';
+    const userPic = whoPosted.appendChild(img.cloneNode());
+    userPic.className = 'userPic';
+    userPic.src = commentsArr[commentsArr.length-1-i].userProfilePicture;
+    userPic.alt = "userPic";
+    const userName = whoPosted.appendChild(span.cloneNode());
+    userName.textContent = commentsArr[commentsArr.length-1-i].userName;
+
+    const cardComment = commentContainer.appendChild(p.cloneNode());
+    cardComment.className = "cardComment";
+    cardComment.textContent = commentsArr[commentsArr.length-1-i].comment;
+
+    //Likes and reply form
+    const likeReplyContainer = commentContainer.appendChild(div.cloneNode());
+    likeReplyContainer.className = "likeReplyContainer";
+    const upvoteContainer = likeReplyContainer.appendChild(form.cloneNode());
+    upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
+    upvoteContainer.method = "POST";
+    upvoteContainer.class = "upvoteContainer";
+    const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
+    upvoteButton.type = "submit";
+    upvoteButton.className = "upvoteButton";
+    const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
+    upvoteButtonImage.src = "/images/dflag.webp";
+    upvoteButtonImage.alt = "flag";
+    upvoteButtonImage.className = "upvotePic";
+    const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
+    numberOfLikes.textContent = `${commentsArr[commentsArr.length-1-i].likes.numberOfLikes}`;
+
+    const postReplyForm = likeReplyContainer.appendChild(form.cloneNode());
+    postReplyForm.className = "postReplyForm";
+    postReplyForm.action = `/home/reply/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
+    postReplyForm.method = "POST";
+    const reply = postReplyForm.appendChild(input.cloneNode());
+    reply.type = "text";
+    reply.name = "reply";
+    reply.id = "reply";
+    reply.placeholder = "Reply...";
+    const postReply = postReplyForm.appendChild(button.cloneNode());
+    postReply.type = "submit";
+    postReply.className = "postReply";
+    postReply.textContent = "Reply";
+
+    //Replies
+    const replyButton = commentContainer.appendChild(div.cloneNode());
+    replyButton.className = "replyButton";
+    replyButton.id = `${commentsArr.length-1-i}`;
+
+    const repliesContainer = commentContainer.appendChild(div.cloneNode());
+    repliesContainer.className = "repliesContainer hidden";
+    repliesContainer.id = `reply${commentsArr.length-1-i}`;
+    for(let j = 0; j < repliesArr.length; j++){
+      if(repliesArr[repliesArr.length-1-j].commentID == commentsArr[commentsArr.length-1-i]._id){
+        const actualReplyContainer = repliesContainer.appendChild(div.cloneNode());
+        actualReplyContainer.className = "actualReplyContainer";
+        actualReplyContainer.id = `reply${repliesArr.length-1-j}`;
+        const whoPosted = actualReplyContainer.appendChild(div.cloneNode());
+        whoPosted.className = 'whoPosted';
+        const userPic = whoPosted.appendChild(img.cloneNode());
+        userPic.className = 'userPic';
+        userPic.src = repliesArr[repliesArr.length-1-j].userProfilePic;
+        userPic.alt = "userPic";
+        const userName = whoPosted.appendChild(span.cloneNode());
+        userName.textContent = repliesArr[repliesArr.length-1-j].userName;
+        const commentReply = actualReplyContainer.appendChild(p.cloneNode());
+        commentReply.className = "commentReply";
+        commentReply.textContent = repliesArr[repliesArr.length-1-j].comment;
+        const upvoteContainer = actualReplyContainer.appendChild(form.cloneNode());
+        upvoteContainer.action = `/home/likereply/${repliesArr[repliesArr.length-1-j]._id}?_method=PUT`;
+        upvoteContainer.method = "POST";
+        upvoteContainer.class = "upvoteContainer";
+        const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
+        upvoteButton.type = "submit";
+        upvoteButton.className = "upvoteButton";
+        const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
+        upvoteButtonImage.src = "/images/dflag.webp";
+        upvoteButtonImage.alt = "flag";
+        upvoteButtonImage.className = "upvotePic";
+        const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
+        numberOfLikes.textContent = `${repliesArr[repliesArr.length-1-j].likes.numberOfLikes}`;
+      }
+    }
+  }
+  }
+  setTimeout(numberOfReplies, 100);
+  // await addComments(characterCard.characterId);
+  Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
+    element.addEventListener('click', openReplies);
+  });
+  
+  Array.from(document.querySelectorAll('.postReply')).forEach(element =>{
+    element.addEventListener('click', reloadCommentSection);
+  });
+  
+  Array.from(document.querySelectorAll('.upvoteButton')).forEach(element =>{
+    element.addEventListener('click', reloadCommentSection);
+  });
 }
 
-Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
-  element.addEventListener('click', openReplies);
-});
-
-Array.from(document.querySelectorAll('.postReply')).forEach(element =>{
-  element.addEventListener('click', reloadCommentSection);
-});
-
-Array.from(document.querySelectorAll('.upvoteButton')).forEach(element =>{
-  element.addEventListener('click', reloadCommentSection);
-});
-
 function openReplies(event){
+  console.log(event);
   const openRepliesOf = event.target.id;
   const repliesContainer = Array.from(document.querySelectorAll('.repliesContainer'));
   for(let i = 0; i < repliesContainer.length; i++){
     if(repliesContainer[i].id.includes(openRepliesOf) && allConditions.isReplyOpen == false){
       repliesContainer[i].classList.remove('hidden');
+      document.getElementById(openRepliesOf).style.color = 'rgb(40, 126, 255)';
       allConditions.isReplyOpen = true;
     }
     else if(repliesContainer[i].id.includes(openRepliesOf) && allConditions.isReplyOpen){
       repliesContainer[i].classList.add('hidden');
+      document.getElementById(openRepliesOf).style.color = 'rgb(255, 255, 255)';
       allConditions.isReplyOpen = false;
     }
   }
@@ -766,9 +861,20 @@ function numberOfReplies(){
       if(repliesContainers[i].childElementCount == 0){
         replyButtons[i].classList.add('hidden');
       }
-      else{
-        replyButtons[i].textContent = `Replies ${repliesContainers[i].childElementCount}`;
+      else if(repliesContainers[i].childElementCount == 1){
+        replyButtons[i].textContent = `See Reply`;
+      }
+      else if(repliesContainers[i].childElementCount > 1){
+        replyButtons[i].textContent = `See ${repliesContainers[i].childElementCount} Replies`;
       }
     }
   }
+}
+
+async function reloadCommentSection(){
+  setTimeout(async () =>{
+    document.getElementById('comment').value = "";
+    $('#comments').load(' #comments>*');
+    await addCommentsToSection();
+  }, 500);
 }

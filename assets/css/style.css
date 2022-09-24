@@ -455,6 +455,7 @@ button:hover{
 
 #postCommentForm{
   width: 80%;
+  margin-bottom: 1%;
 }
 
 #postComment{
@@ -502,6 +503,7 @@ button:hover{
 
 .cardComment{
   margin-top: 0;
+  font-size: 0.95rem;
 }
 
 .upvotePic{
@@ -511,6 +513,7 @@ button:hover{
 #comment, #reply{
   width: 80%;
   border: none;
+  outline: none;
   outline-color: rgba(0, 0, 0, 0.7);
   height: 50%;
   background: rgba(0, 0, 0, 0);
@@ -525,6 +528,10 @@ button:hover{
 }
 
 #comment:hover, #reply:hover{
+  border-bottom: 1px solid white;
+}
+
+#comment:focus, #reply:focus{
   border-bottom: 2px solid white;
 }
 
@@ -559,8 +566,25 @@ button:hover{
   margin-top: 1%;
 }
 
-.replyButton:hover{
-  color: rgb(40, 126, 255);
+.repliesContainer{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.actualReplyContainer{
+  padding-left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.commentReply{
+  padding-left: 8%;
+  margin-top: 0;
+  font-size: 0.95rem;
 }
 
 /*-------------Stuff---------------------*/
