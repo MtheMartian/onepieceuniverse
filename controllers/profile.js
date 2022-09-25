@@ -1,5 +1,7 @@
 const Characters = require('../models/Character');
 const Users = require('../models/User');
+const Comments = require('../models/Comments');
+const Reply = require('../models/Reply');
 const { models, set } = require('mongoose');
 const bcrypt = require('bcrypt');
 const cloudinary = require('../middleware/cloudinary');
@@ -25,6 +27,18 @@ module.exports = {
         $set:{
           userName: request.body.userName
         }});
+        await Characters.updateMany({userID: userID}, {
+          $set:{
+            userName: request.body.userName
+          }});
+      await Comments.updateMany({userID: userID}, {
+          $set:{
+            userName: request.body.userName
+          }});
+      await Reply.updateMany({userID: userID}, {
+          $set:{
+            userName: request.body.userName
+          }});
       console.log("Successfully changed the username!");
       console.log(request.user);
       response.redirect('/myprofile');
@@ -124,6 +138,17 @@ module.exports = {
     }
     catch(err){
       console.log(`File upload failed! ${err}`);
+    }
+  },
+  getOthersProfile: async (request, response) =>{
+    try{
+      const user = await Users.findOne({userID: request.params.id}).lean();
+      const cards = await Characters.find().lean();
+      
+      response.render('profiles.ejs', {user: user, character: cards});
+    }
+    catch(err){
+      console.log(`Me no get. ${err}`);
     }
   }
 }

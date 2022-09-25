@@ -39,6 +39,7 @@ function unHideIt(element){
 }
 
 whosStronger();
+createdBy();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -157,7 +158,9 @@ async function seeMore(event){
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
   const characterAbilitiesDesc = document.getElementById('characterAbilitiesDesc');
   characterCard.characterId = event.path[3].id;
-  cardIdForComment.value = characterCard.characterId;
+  if(cardIdForComment !== null){
+    cardIdForComment.value = characterCard.characterId;
+  }
   await addCommentsToSection();
   // await addComments(characterCard.characterId);
   showCardEditButtonsBasedOnUsers();
@@ -578,6 +581,18 @@ async function showCardEditButtonsBasedOnUsers(){
     }
   }
   }
+
+  async function createdBy(){
+    const cardCreators = Array.from(document.querySelectorAll('.cardCreator'));
+    const users = await fetchCharacters();
+    for(let i = 0; i < users.length; i++){
+      for(let j = 0; j < cardCreators.length; j++){
+        if(cardCreators[j].href.includes(users[i].userID)){
+          cardCreators[j].textContent = users[i].userName;
+        }
+      }
+    }
+  }
 //-------------------Sign In, Up, Out--------------------------------------
 
 if(document.querySelector('.signOut') !== null){
@@ -713,7 +728,10 @@ async function getReplies(){
 //   }
 // }
 
-document.getElementById('postComment').addEventListener('click', reloadCommentSection);
+if(document.getElementById('postComment') !== null){
+  document.getElementById('postComment').addEventListener('click', reloadCommentSection);
+}
+
 
 async function addCommentsToSection(){
   const commentsDiv = document.getElementById('comments');
@@ -724,8 +742,10 @@ async function addCommentsToSection(){
   const form = document.createElement('form');
   const button = document.createElement('button');
   const input = document.createElement('input');
+  const a = document.createElement('a');
   const commentsArr = await getComments();
   const repliesArr = await getReplies();
+  const characters = await fetchCharacters();
 
   for(let i = 0; i < commentsArr.length; i++){
     if(commentsArr[commentsArr.length-1-i].cardID == characterCard.characterId){
@@ -740,8 +760,9 @@ async function addCommentsToSection(){
     userPic.className = 'userPic';
     userPic.src = commentsArr[commentsArr.length-1-i].userProfilePicture;
     userPic.alt = "userPic";
-    const userName = whoPosted.appendChild(span.cloneNode());
+    const userName = whoPosted.appendChild(a.cloneNode());
     userName.textContent = commentsArr[commentsArr.length-1-i].userName;
+    userName.href = `/home/userprofile/${commentsArr[commentsArr.length-1-i].userID}`;
 
     const cardComment = commentContainer.appendChild(p.cloneNode());
     cardComment.className = "cardComment";
@@ -750,34 +771,39 @@ async function addCommentsToSection(){
     //Likes and reply form
     const likeReplyContainer = commentContainer.appendChild(div.cloneNode());
     likeReplyContainer.className = "likeReplyContainer";
-    const upvoteContainer = likeReplyContainer.appendChild(form.cloneNode());
-    upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
-    upvoteContainer.method = "POST";
-    upvoteContainer.class = "upvoteContainer";
-    const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
-    upvoteButton.type = "submit";
-    upvoteButton.className = "upvoteButton";
-    const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
-    upvoteButtonImage.src = "/images/dflag.webp";
-    upvoteButtonImage.alt = "flag";
-    upvoteButtonImage.className = "upvotePic";
-    const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
-    numberOfLikes.textContent = `${commentsArr[commentsArr.length-1-i].likes.numberOfLikes}`;
+    if(document.getElementById('userID') !== null){
+      const upvoteContainer = likeReplyContainer.appendChild(form.cloneNode());
+      upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
+      upvoteContainer.method = "POST";
+      upvoteContainer.class = "upvoteContainer";
+      const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
+      upvoteButton.type = "submit";
+      upvoteButton.className = "upvoteButton";
+      const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
+      upvoteButtonImage.src = "/images/dflag.webp";
+      upvoteButtonImage.alt = "flag";
+      upvoteButtonImage.className = "upvotePic";
+      const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
+      numberOfLikes.textContent = `${commentsArr[commentsArr.length-1-i].likes.numberOfLikes}`;
+    }
 
-    const postReplyForm = likeReplyContainer.appendChild(form.cloneNode());
-    postReplyForm.className = "postReplyForm";
-    postReplyForm.action = `/home/reply/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
-    postReplyForm.method = "POST";
-    const reply = postReplyForm.appendChild(input.cloneNode());
-    reply.type = "text";
-    reply.name = "reply";
-    reply.id = "reply";
-    reply.placeholder = "Reply...";
-    const postReply = postReplyForm.appendChild(button.cloneNode());
-    postReply.type = "submit";
-    postReply.className = "postReply";
-    postReply.textContent = "Reply";
-
+    if(document.getElementById('userID') !== null){
+        const postReplyForm = likeReplyContainer.appendChild(form.cloneNode());
+        postReplyForm.className = "postReplyForm";
+        postReplyForm.action = `/home/reply/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
+        postReplyForm.method = "POST";
+        const reply = postReplyForm.appendChild(input.cloneNode());
+        reply.type = "text";
+        reply.name = "reply";
+        reply.id = "reply";
+        reply.placeholder = "Reply...";
+        const postReply = postReplyForm.appendChild(button.cloneNode());
+        postReply.type = "submit";
+        postReply.className = "postReply";
+        postReply.textContent = "Reply";  
+      }
+    
+    
     //Replies
     const replyButton = commentContainer.appendChild(div.cloneNode());
     replyButton.className = "replyButton";
@@ -797,24 +823,27 @@ async function addCommentsToSection(){
         userPic.className = 'userPic';
         userPic.src = repliesArr[repliesArr.length-1-j].userProfilePic;
         userPic.alt = "userPic";
-        const userName = whoPosted.appendChild(span.cloneNode());
+        const userName = whoPosted.appendChild(a.cloneNode());
         userName.textContent = repliesArr[repliesArr.length-1-j].userName;
+        userName.href = `/home/userprofile/${repliesArr[repliesArr.length-1-j].userID}`;
         const commentReply = actualReplyContainer.appendChild(p.cloneNode());
         commentReply.className = "commentReply";
         commentReply.textContent = repliesArr[repliesArr.length-1-j].comment;
-        const upvoteContainer = actualReplyContainer.appendChild(form.cloneNode());
-        upvoteContainer.action = `/home/likereply/${repliesArr[repliesArr.length-1-j]._id}?_method=PUT`;
-        upvoteContainer.method = "POST";
-        upvoteContainer.class = "upvoteContainer";
-        const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
-        upvoteButton.type = "submit";
-        upvoteButton.className = "upvoteButton";
-        const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
-        upvoteButtonImage.src = "/images/dflag.webp";
-        upvoteButtonImage.alt = "flag";
-        upvoteButtonImage.className = "upvotePic";
-        const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
-        numberOfLikes.textContent = `${repliesArr[repliesArr.length-1-j].likes.numberOfLikes}`;
+        if(document.getElementById('userID') !== null){
+          const upvoteContainer = actualReplyContainer.appendChild(form.cloneNode());
+          upvoteContainer.action = `/home/likereply/${repliesArr[repliesArr.length-1-j]._id}?_method=PUT`;
+          upvoteContainer.method = "POST";
+          upvoteContainer.class = "upvoteContainer";
+          const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
+          upvoteButton.type = "submit";
+          upvoteButton.className = "upvoteButton";
+          const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
+          upvoteButtonImage.src = "/images/dflag.webp";
+          upvoteButtonImage.alt = "flag";
+          upvoteButtonImage.className = "upvotePic";
+          const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
+          numberOfLikes.textContent = `${repliesArr[repliesArr.length-1-j].likes.numberOfLikes}`;
+        }
       }
     }
   }
@@ -851,7 +880,6 @@ function openReplies(event){
     }
   }
 }
-
 
 function numberOfReplies(){
   const replyButtons = Array.from(document.querySelectorAll('.replyButton'));

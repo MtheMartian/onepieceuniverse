@@ -10,8 +10,9 @@ module.exports = {
       const characters = await Character.find().lean();
       const userComments = await Comments.find().lean();
       const replies = await Reply.find().lean();
+      const allUsers = await User.find().lean();
       response.render('index', {info: characters, user: users, comments: userComments, 
-        reply: replies
+        reply: replies, users: allUsers
       });
     }
     catch(err){

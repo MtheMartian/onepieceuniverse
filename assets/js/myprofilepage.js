@@ -449,21 +449,21 @@ async function deleteCard(){
 
 //------------------------Style Cards------------------------------------
 async function whosStronger(){
-  const characters = await fetchCharacters();
+  const characters = Array.from(document.querySelectorAll('.characterCard'));
   if(characters.length >= 1){
     for(let i = 0; i < characters.length; i++){
-      switch(characters[i].charhaki.hakiUsageLevel)
+      switch(characters[i].querySelector('.cardHaki > span').textContent)
       {
         case "Supreme": 
-        document.getElementById(`${characters[i].id}`).classList.add('supreme');
+        characters[i].classList.add('supreme');
         break;
 
         case "Legendary": 
-        document.getElementById(`${characters[i].id}`).classList.add('legendary');
+        characters[i].classList.add('legendary');
         break;
 
         case "Mighty": 
-        document.getElementById(`${characters[i].id}`).classList.add('mighty');
+        characters[i].classList.add('mighty');
         break;
       } 
     }

@@ -12,6 +12,12 @@ module.exports = {
     const letterAr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
                         'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
                         'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    const idRandomizer = (Math.ceil(Math.random()*100000) + 
+    Math.ceil(Math.random()*Date.now()) + 
+    lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
+    Math.ceil(Math.random()*1000000) + 
+    letterAr[Math.ceil(Math.random()*letterAr.length)]).toString();
   //-------------------------------
     try{
       // const imageFile = await cloudinary.uploader.upload(request.body.imgURL);
@@ -20,13 +26,9 @@ module.exports = {
           charFruit: request.body.charFruit, charhaki: request.body.charHaki,
           charRank: request.body.charRank,
           imgURL: request.body.imgURL,
-          id: Math.ceil(Math.random()*100000) + 
-            Math.ceil(Math.random()*Date.now()) + 
-            lettersArr[Math.ceil(Math.random()*lettersArr.length)] + 
-            Math.ceil(Math.random()*1000000) + 
-            letterAr[Math.ceil(Math.random()*letterAr.length)].toString(),
-            pirate: request.body.pirate,
-            marine: request.body.marine,
+          id: idRandomizer,
+          pirate: request.body.pirate,
+          marine: request.body.marine,
           description: [{
             charDesc: "",
             bounty: request.body.bounty,
@@ -37,7 +39,8 @@ module.exports = {
             altCharImg: ""
           }],
           superAdmin: request.body.superAdmin,
-          userID: request.body.userID,                
+          userID: request.body.userID,  
+          userName: request.user.userName,              
         })
         console.log('Character added!');
         response.redirect('/');

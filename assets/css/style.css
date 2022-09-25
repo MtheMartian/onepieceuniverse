@@ -220,6 +220,19 @@ button:hover{
   background: rgba(88, 87, 87, 0.4);
   opacity: 1;
 }
+/*Card Creator*/
+.madeBy{
+  position: absolute;
+  bottom: -7%;
+  left: 7%;
+}
+
+.cardCreator{
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: rgb(70, 253, 253);
+  letter-spacing: 1px;
+}
 
 
 /*----------Forms-------------*/
@@ -483,6 +496,11 @@ button:hover{
   display: flex;
   align-items: center;
   column-gap: 7%;
+}
+
+.whoPosted a{
+  text-decoration: none;
+  color: white;
 }
 
 .userPic{

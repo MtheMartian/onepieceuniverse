@@ -70,6 +70,9 @@
                     <%}%>
                 <%}%>
             </div>
+            <div class="madeBy">
+              <a href="/home/userprofile/<%=info[i].userID%>" class="cardCreator"></a>
+            </div>
           </div>
           <%}%>
         <%}%>
@@ -127,6 +130,9 @@
                     <%}%>
                 <%}%>
             </div>
+            <div class="madeBy">
+              <a href="/home/userprofile/<%=info[i].userID%>" class="cardCreator"></a>
+            </div>
           </div>
           <%}%>
         <%}%>
@@ -183,6 +189,9 @@
                       <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
                     <%}%>
                 <%}%>
+            </div>
+            <div class="madeBy">
+              <a href="/home/userprofile/<%=info[i].userID%>" class="cardCreator"></a>
             </div>
           </div>
           <%}%>
@@ -245,11 +254,13 @@
       <div id="commentsTitle">
         <span>Comments</span>
       </div>
-      <form action="/home/postcomment" method="POST" id="postCommentForm">
-        <input type="text" name="comment" id="comment" placeholder="Comment...">
-        <input type="text" name="cardID" id="cardID" class="hidden" value="">
-        <button type="submit" id="postComment">Post</button>
-      </form>
+      <%if(typeof user !== 'undefined'){%>
+        <form action="/home/postcomment" method="POST" id="postCommentForm">
+          <input type="text" name="comment" id="comment" placeholder="Comment...">
+          <input type="text" name="cardID" id="cardID" class="hidden" value="">
+          <button type="submit" id="postComment">Post</button>
+        </form>
+      <%}%>
       <div id="comments">
       </div>
     </section>
