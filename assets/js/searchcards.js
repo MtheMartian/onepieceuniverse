@@ -58,7 +58,7 @@ async function appendCardsToPage(searchCards){
   for(let i = 0; i < cards.length; i++){
     if(cards[i].charName.toLowerCase().includes(searchCards) || cards[i].charhaki.hakiUsageLevel.toLowerCase().includes(searchCards) 
         || cards[i].charRank.toLowerCase().includes(searchCards) || cards[i].charAge.toLowerCase().includes(searchCards) 
-        || cards[i].charFruit.fruitName.toLowerCase().includes(searchCards) || cards[i].charName.toLowerCase().includes(searchCards)){
+        || cards[i].charFruit.fruitName.toLowerCase().includes(searchCards) || cards[i].charFruit.fruitType.toLowerCase().includes(searchCards)){
       const characterCard = cardSection.appendChild(div.cloneNode());
       characterCard.className = 'characterCard';
       characterCard.id = cards[i].id;
@@ -104,7 +104,7 @@ async function appendCardsToPage(searchCards){
       typeSpan.className = "typeSpan";
       typeSpan.textContent = "Type:";
       const charFruitType = cardFruitType.appendChild(span.cloneNode());
-      charFruitType.textContent = cards[i].charFruit.fruitName;
+      charFruitType.textContent = cards[i].charFruit.fruitType;
       const cardBounty = cardInfo.appendChild(div.cloneNode());
       cardBounty.className = "cardBounty";
       const bounty = cardBounty.appendChild(image.cloneNode());
@@ -233,7 +233,11 @@ Array.from(characterCard.charInfo).forEach((element) =>{
 });
 
 function closeSeeMore(){
-  location.reload();
+  document.getElementById('characterAbilitiesDesc').innerHTML = "";
+  document.getElementById('comments').innerHTML = "";
+  document.getElementById('characterMoreInfo').classList.add('hidden');
+  generalStuff.overlay.classList.add('hidden');
+  customSeeMore.isItOpen = false;
 }
 async function seeMore(event){
   const characters = await fetchCharacters();
@@ -253,7 +257,6 @@ async function seeMore(event){
   }
   await addCommentsToSection();
   // await addComments(characterCard.characterId);
-  showCardEditButtonsBasedOnUsers();
   console.log(event);
   if(customSeeMore.isItOpen){
     
@@ -366,24 +369,6 @@ async function whosStronger(){
   }
 }
 //-------------------------Users and cards----------------------------------------
-async function showCardEditButtonsBasedOnUsers(){
-  const characters = await fetchCharacters();
-  if(document.getElementById('userID') !== null){
-    const userID = document.getElementById('userID').textContent;
-    let cardUserID = "";
-    const superAdmin ="391390167862gh354062i";
-    for(let i = 0; i < characters.length; i++){
-      if(characters[i].id == characterCard.characterId){
-        cardUserID = characters[i].userID;
-        break;
-      }
-    }
-    if(userID == cardUserID || userID == superAdmin){
-      document.querySelector('#editSeeMoreButton').classList.remove('hidden');
-    }
-  }
-  }
-
   async function createdBy(){
     const cardCreators = Array.from(document.querySelectorAll('.cardCreator'));
     const users = await fetchCharacters();
@@ -679,11 +664,8 @@ async function reloadCommentSection(){
 }
 
 //----------------- Search Engine ------------------------------
-document.getElementById('searchCards').addEventListener('keyup', searchForCards);
+document.getElementById('searchBar').addEventListener('keyup', searchForCards);
 async function searchForCards(){
-  const cardSection = document.querySelector('.cardSection');
-  cardSection.innerHTML = "";
-  const searchCards = document.getElementById('searchCards').value;
-  let newStr = "";
+  const searchCards = document.getElementById('searchBar').value;
     appendCardsToPage(searchCards.toLowerCase());
 }

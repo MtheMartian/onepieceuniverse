@@ -174,52 +174,6 @@ button:hover{
   box-shadow: 0px 0px 35px rgba(243, 243, 243, 1);
 }
 
-#pirateTitle > h1, #marinesTitle > h1, #othersTitle > h1{
-  font-family: Acme, Arial;
-  font-size: 4rem;
-  margin: 0 0 0 0;
-  color: black;
-}
-
-/*Upload Image*/
-.characterCardUploadImg{
-  z-index: 1;
-  background: rgb(0, 0, 0);
-  width: 100%;
-  height: 10%;
-  position: absolute;
-  top: -11%;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-left: 3%;
-  padding-right: 3%;
-  border-radius: 10px;
-  color: white;
-}
-
-.characterCardUploadImg button{
-  font-size: 1.5rem;
-}
-
-.changeImageBox{
-  position: absolute;
-  width: 93%;
-  height: 42%;
-  top: 10.5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  opacity: 0;
-  color: azure;
-}
-
-.changeImageBox:hover{
-  background: rgba(88, 87, 87, 0.4);
-  opacity: 1;
-}
 /*Card Creator*/
 .madeBy{
   position: absolute;
@@ -236,7 +190,7 @@ button:hover{
 
 
 /*----------Forms-------------*/
-.updateCard, .addCharacter, .updateSeeMore{
+ .addCharacter{
   background: rgba(37, 37, 37, 1);
   display: flex;
   position: absolute;
@@ -256,7 +210,7 @@ button:hover{
   z-index: 1;
 }
 
-.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
+.closeIt, .closeSeeMore{
   border: none;
   font-family: Montserrat ExtraBold, Arial;
   color: white;
@@ -267,7 +221,7 @@ button:hover{
   transition: color 0.15s;
 }
 
-.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
+.closeIt:hover,.closeSeeMore:hover{
   color: red;
 }
 
@@ -287,21 +241,6 @@ button:hover{
 #isPirate, #isMarine{
   width: 5%;
   cursor: pointer;
-}
-
-/* Card Update Form */
-.updateCard{
-  top: 10% !important;
-  padding: 2% 1% 0 1% !important;
-  height: 80% !important;
-}
-/* Update See More Form */
-.updateSeeMore{
-  padding: 3% 1% 2% 1% !important;
-  height: 75% !important;
-  row-gap: 3rem;
-  top: 10%;
-  border: 2px solid black;
 }
 
 .optionGrouping{
@@ -343,18 +282,11 @@ button:hover{
   box-shadow: inset 0px 0px 7px rgba(0, 64, 107, 0.7);
 }
 
-#updateSeeMoreBtn{
-  padding-left: 5%;
-}
 
 #abilityDescription, #charDescription{
   height: 90%;
   padding: 1rem;
   font-family: Arial;
-}
-
-.changeViewType{
-  font-size: 1.5rem;
 }
 
 /*----------------More info on character-----------------*/
@@ -405,11 +337,6 @@ button:hover{
 #editSeeMoreButton, .closeSeeMore{
   position: absolute;
   top: 0; 
-}
-
-#editSeeMoreButton{
-  left: -47%;
-  margin-top: 2%;
 }
 
 .closeSeeMore{
@@ -628,5 +555,33 @@ button:hover{
   background: grey;
   padding: 1%;
   border-radius: 10px;
+}
+/*----------------Searbar------------------------*/
+#searchBar{
+  font-family: Arial;
+  font-size: 1.5rem;
+  width: 30%;
+  padding: 0.5%;
+  padding-left: 1%;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 2px rgb(247, 157, 23);
+  outline: none;
+  color: black;
+  transition: box-shadow 0.15s;
+}
+
+#searchBar::placeholder{
+  color: black;
+}
+
+#searchBar:hover{
+  box-shadow: inset 0 0 5px rgba(247, 157, 23, 0.7);
+}
+
+#searchBar:focus{
+  box-shadow: inset 0 0 5px rgba(247, 157, 23, 1);
 }
 
