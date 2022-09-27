@@ -36,4 +36,12 @@ module.exports = {
       console.log(err);
     }  
   },
+  getSearchCardsPage: (request, response) =>{
+    response.render('searchcards.ejs', {user: request.user});
+  },
+  getCurrentSignedInUser: (request, response) =>{
+    if(request.user !== null){
+      response.send(request.user);
+    }
+  }
 }

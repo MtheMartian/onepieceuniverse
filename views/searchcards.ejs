@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/searchcards.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+  <title>One Piece Universe</title>
+</head>
+<body>
+  <main>
+  <section id="homePage">
+    <section id="searchedCards">
+      <div id="pirateTitle">
+        <input id="searchCards" type="text" placeholder="Search..."></input>
+      </div>
+      <section class="cardSection">
+        
+      </section>
+    </section>
+  </section>
+  </main>
+  <%if(typeof user !== 'undefined'){%>
+    <div class="hidden addCharacter">
+      <input type="text" placeholder="Character Name" id="charName" class="createChar">
+      <input type="text" placeholder="Character Age" id="charAge" class="createChar">
+      <input type="text" placeholder="Fruit Name" id="charFruit" class="createChar">
+      <input type="text" placeholder="Fruit Type" id="charFruitType" class="createChar">
+      <input type="text" placeholder="Haki Strength" id="charHaki" class="createChar">
+      <input type="text" placeholder="Haki Type" id="charHakiType" class="createChar">
+      <input type="text" placeholder="Current Rank" id="charRank" class="createChar">
+      <input type="text" placeholder="Image URL" id="imgURL" class="createChar">
+      <!-- <input type="file" placeholder= "Image" id="imgURL" class="createChar" accept="image/*"> -->
+      <input type="text" placeholder="Bounty" id="bounty" class="createChar">
+      <input type="text" placeholder="General location (e.g. Grand Line)" id="location" class="createChar">
+      <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocation" class="createChar">
+      <input type="text" placeholder="Number of abilities" id="numAbilities" class="createChar">
+      <label for="isPirate">Pirate</label><input type="checkbox" id="isPirate" class="createChar">
+      <label for="isMarine">Marine</label><input type="checkbox" id="isMarine" class="createChar">
+      <button id="addCharBtn">Submit</button>
+      <button class="closeIt">X</button>
+    </div>
+    <span id="userID" class="hidden"><%=user.userID%></span>
+  <%}%>
+  <%if(typeof user === 'undefined'){%>
+    <a href="/page/signin" id="signInFirst"></a>
+  <%}%>
+  <div class="updateCard hidden">
+    <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
+    <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
+    <input type="text" id="charFruitU" class="cardDisplayInfo" placeholder="Fruit Name">
+    <input type="text" id="charFruitTypeU" class="cardDisplayInfo" placeholder="Fruit Type">
+    <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength">
+    <input type="text" id="charHakiTypeU" class="cardDisplayInfo" placeholder="Haki Type">
+    <input type="text" placeholder="Current Rank" id="charRankU" class="cardDisplayInfo">
+    <input type="text" placeholder="General location (e.g. Grand Line)" id="locationU" class="cardDisplayInfo">
+    <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocationU" class="cardDisplayInfo">
+    <input type="text" placeholder="Bounty" id="bountyU" class="cardDisplayInfo">
+    <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
+    <button id="updateCardBtn">Update</button>
+    <button id="deleteCard" type="submit">Remove</button>
+    <button class="closeIt">X</button>
+  </div>
+  <div id="characterMoreInfo" class="hidden">
+    <div id="characterSummary">
+      <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
+      <p id="charDesc"></p>
+      <button id="editSeeMoreButton" class="hidden">Edit</button>
+      <button class="closeSeeMore">X</button>
+    </div>
+    <div id="characterAbilitiesDesc">
+    </div>
+    <section id="commentSection">
+      <div id="commentsTitle">
+        <span>Comments</span>
+      </div>
+      <%if(typeof user !== 'undefined'){%>
+        <form action="/home/postcomment" method="POST" id="postCommentForm">
+          <input type="text" name="comment" id="comment" placeholder="Comment...">
+          <input type="text" name="cardID" id="cardID" class="hidden" value="">
+          <button type="submit" id="postComment">Post</button>
+        </form>
+      <%}%>
+      <div id="comments">
+      </div>
+    </section>
+  </div>
+  <div class="updateSeeMore hidden" id="editSeeMoreForm">
+    <div id="abilitySection">
+      <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Character Image URL">
+      <textarea id="charDescription" class="cardDisplayInfo" 
+        placeholder="Character Description" cols="33" rows="5">
+      </textarea>
+    </div>
+    <div class="optionGrouping">
+      <button id="updateSeeMoreBtn">Update</button>
+      <button id="updateSeeMoreExitBtn">X</button>
+    </div>
+  </div>
+  <header id="header">
+    <section id="leftSection">
+      <a href="/">One Piece Realm</a>
+    </section>
+    <section id="rightSection">
+      <button id="createChar">
+        Create
+        <div class="tooltip">Create a card</div>
+      </button>
+      <%if(typeof user === 'undefined'){%>
+        <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
+      <%}%>
+      <%if(typeof user !== 'undefined'){%>
+        <div id="profilePictureContainer">
+          <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
+          <div class="tooltip">Profile</div>
+          <div id="profileMenu" class="">
+            <div id="currentUser">
+              <img id="profilePictureInMenu" src="<%=user.profilePicture%>" alt="Profile">
+              <span><%=user.userName%></span>
+            </div>
+            <div id="actualMenu">
+              <div id="myProfile">
+                <a href="/myprofile">My Profile</a>
+              </div>
+              <div id="helpContainer">
+                <a id="help">Help</a>
+              </div>
+            </div>
+            <div id="signOutSection">
+              <a href="/signout"><button class="signOut">Sign Out</button></a>
+            </div>
+          </div>
+        </div>
+      <%}%>
+    </section>
+  </header>
+    <div id="overlay" class="hidden"></div>
+    <div class="dontmindme hidden"></div>
+  <script src="/js/searchcards.js"></script>
+</body>
+</html>
