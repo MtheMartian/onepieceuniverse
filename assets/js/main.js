@@ -143,7 +143,11 @@ Array.from(characterCard.charInfo).forEach((element) =>{
 });
 
 function closeSeeMore(){
-  location.reload();
+  document.getElementById('characterAbilitiesDesc').innerHTML = "";
+  document.getElementById('comments').innerHTML = "";
+  document.getElementById('characterMoreInfo').classList.add('hidden');
+  generalStuff.overlay.classList.add('hidden');
+  customSeeMore.isItOpen = false;
 }
 async function seeMore(event){
   const characters = await fetchCharacters();
@@ -695,7 +699,7 @@ function openUploadImageForm(event){
 //--------------------- Get comments and replies ------------------------------
 async function getComments(){
   try{
-    const response = await fetch('/comments',{
+    const response = await fetch(`/comments/${characterCard.characterId}`,{
       method: 'get'
     });
     const comments = response.json();
@@ -745,11 +749,9 @@ async function addCommentsToSection(){
   const a = document.createElement('a');
   const commentsArr = await getComments();
   const repliesArr = await getReplies();
-  const characters = await fetchCharacters();
 
   for(let i = 0; i < commentsArr.length; i++){
-    if(commentsArr[commentsArr.length-1-i].cardID == characterCard.characterId){
-      const commentContainer = commentsDiv.appendChild(div.cloneNode());
+    const commentContainer = commentsDiv.appendChild(div.cloneNode());
     commentContainer.className = 'commentContainer';
     commentContainer.id = `comment${commentsArr.length-1-i}`;
 
@@ -847,7 +849,6 @@ async function addCommentsToSection(){
       }
     }
   }
-  }
   setTimeout(numberOfReplies, 100);
   // await addComments(characterCard.characterId);
   Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
@@ -902,7 +903,7 @@ function numberOfReplies(){
 async function reloadCommentSection(){
   setTimeout(async () =>{
     document.getElementById('comment').value = "";
-    $('#comments').load(' #comments>*');
+    document.getElementById('comments').innerHTML = "";
     await addCommentsToSection();
   }, 500);
 }

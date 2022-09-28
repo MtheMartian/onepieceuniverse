@@ -19,7 +19,7 @@ module.exports = {
   },
   getComments: async (request, response) =>{
     try{
-      const comments = await Comments.find().lean();
+      const comments = await Comments.find({cardID: request.params.cardID}).lean();
       response.send(comments);
     }
     catch(err){

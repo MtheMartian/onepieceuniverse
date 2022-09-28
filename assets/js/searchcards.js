@@ -445,7 +445,7 @@ function lol(){
 //--------------------- Get comments and replies ------------------------------
 async function getComments(){
   try{
-    const response = await fetch('/comments',{
+    const response = await fetch(`/comments/${characterCard.characterId}`,{
       method: 'get'
     });
     const comments = response.json();
@@ -469,15 +469,6 @@ async function getReplies(){
   }
 }
 //----------------------- Add comments/replies to see more ----------------------------
-// async function addComments(cardID){
-//   const comments = await getComments();
-//   for(let i = 0; i < comments.length; i++){
-//     if(comments[i].cardID == cardID){
-//       document.getElementById(`comment${i}`).classList.remove('hidden');
-//     }
-//   }
-// }
-
 if(document.getElementById('postComment') !== null){
   document.getElementById('postComment').addEventListener('click', reloadCommentSection);
 }
@@ -495,11 +486,9 @@ async function addCommentsToSection(){
   const a = document.createElement('a');
   const commentsArr = await getComments();
   const repliesArr = await getReplies();
-  const characters = await fetchCharacters();
 
   for(let i = 0; i < commentsArr.length; i++){
-    if(commentsArr[commentsArr.length-1-i].cardID == characterCard.characterId){
-      const commentContainer = commentsDiv.appendChild(div.cloneNode());
+    const commentContainer = commentsDiv.appendChild(div.cloneNode());
     commentContainer.className = 'commentContainer';
     commentContainer.id = `comment${commentsArr.length-1-i}`;
 
@@ -597,7 +586,6 @@ async function addCommentsToSection(){
       }
     }
   }
-  }
   setTimeout(numberOfReplies, 100);
   // await addComments(characterCard.characterId);
   Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
@@ -652,7 +640,8 @@ function numberOfReplies(){
 async function reloadCommentSection(){
   setTimeout(async () =>{
     document.getElementById('comment').value = "";
-    $('#comments').load(' #comments>*');
+    // $('#comments').load(' #comments>*');
+    document.getElementById('comments').innerHTML = "";
     await addCommentsToSection();
   }, 500);
 }

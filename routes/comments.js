@@ -5,7 +5,7 @@ const commentsController = require('../controllers/comments');
 const {ensureAuthenticated} = require('../config/auth');
 
 router.post('/home/postcomment', ensureAuthenticated, commentsController.postComment);
-router.get('/comments', commentsController.getComments);
+router.get('/comments/:cardID', commentsController.getComments);
 router.put('/home/likecomment/:id', ensureAuthenticated, commentsController.likeComment);
 
 module.exports = router;

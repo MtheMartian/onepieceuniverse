@@ -164,10 +164,50 @@ button:hover{
 
 .supreme{
   box-shadow: 0px 0px 35px rgba(255, 0, 0, 1);
+  animation: glow 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
+}
+
+@keyframes glow{
+  0% {
+    box-shadow: 0px 0px 2px rgba(255, 0, 0, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(255, 0, 0, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(255, 0, 0, 1);
+  }
 }
 
 .legendary{
   box-shadow: 0px 0px 35px rgba(179, 32, 247, 1);
+  animation: glow2 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
+}
+
+@keyframes glow2{
+  0% {
+    box-shadow: 0px 0px 2px rgba(179, 32, 247, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(179, 32, 247, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(179, 32, 247, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(179, 32, 247, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(179, 32, 247, 1);
+  }
 }
 
 .mighty{
