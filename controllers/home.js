@@ -39,6 +39,23 @@ module.exports = {
   getSearchCardsPage: (request, response) =>{
     response.render('searchcards.ejs', {user: request.user});
   },
+  searchCards: async (request, response) =>{
+    try{
+      let results = [];
+      const cards = await Character.find().lean();
+      for(let i = 0; i < cards.length; i++){
+        if(cards[i].charName.toLowerCase().includes(request.query.entry) || cards[i].charhaki.hakiUsageLevel.toLowerCase().includes(request.query.entry) 
+          || cards[i].charRank.toLowerCase().includes(request.query.entry) || cards[i].charAge.toLowerCase().includes(request.query.entry) 
+          || cards[i].charFruit.fruitName.toLowerCase().includes(request.query.entry) || cards[i].charFruit.fruitType.toLowerCase().includes(request.query.entry)){
+          results.push(cards[i]);
+        }
+      }
+      response.send(results);
+    }
+    catch(err){
+      console.log(`Messed up somewhere! ${err}`);
+    }
+  },
   getCurrentSignedInUser: (request, response) =>{
     if(request.user !== null){
       response.send(request.user);

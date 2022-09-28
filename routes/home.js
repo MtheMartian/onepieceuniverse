@@ -7,5 +7,6 @@ router.get('/home', homeController.getIndex);
 router.get('/getinfo', homeController.getInfo);
 router.get('/home/searchcards', homeController.getSearchCardsPage);
 router.get('/home/currentuser', homeController.getCurrentSignedInUser);
+router.get('/home/search', homeController.searchCards);
 
 module.exports = router;

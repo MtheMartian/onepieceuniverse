@@ -43,10 +43,9 @@ Array.from(generalButtons.xOut).forEach((element) =>{
 })
 
 //---------------- Append Cards to page ----------------------------------
-async function appendCardsToPage(searchCards){
+async function appendCardsToPage(cards){
   const cardSection = document.querySelector('.cardSection');
   cardSection.innerHTML = "";
-  const cards = await fetchCharacters();
   const div = document.createElement('div');
   const form = document.createElement('form');
   const input = document.createElement('input');
@@ -56,9 +55,6 @@ async function appendCardsToPage(searchCards){
   const a = document.createElement('a');
 
   for(let i = 0; i < cards.length; i++){
-    if(cards[i].charName.toLowerCase().includes(searchCards) || cards[i].charhaki.hakiUsageLevel.toLowerCase().includes(searchCards) 
-        || cards[i].charRank.toLowerCase().includes(searchCards) || cards[i].charAge.toLowerCase().includes(searchCards) 
-        || cards[i].charFruit.fruitName.toLowerCase().includes(searchCards) || cards[i].charFruit.fruitType.toLowerCase().includes(searchCards)){
       const characterCard = cardSection.appendChild(div.cloneNode());
       characterCard.className = 'characterCard';
       characterCard.id = cards[i].id;
@@ -124,8 +120,6 @@ async function appendCardsToPage(searchCards){
       cardCreator.className = "cardCreator";
       cardCreator.href = `/home/userprofile/${cards[i].userID}`;
     }
-  }
-
     whosStronger();
     createdBy();
   
@@ -133,7 +127,7 @@ async function appendCardsToPage(searchCards){
     element.addEventListener('click', seeMore);
   });
   customSeeMore.closeButton.addEventListener('click', closeSeeMore);
-}
+  }
 
 //-------------------------Create Character-----------------------------
 const addCharForm = document.querySelector('.addCharacter');
@@ -667,5 +661,14 @@ async function reloadCommentSection(){
 document.getElementById('searchBar').addEventListener('keyup', searchForCards);
 async function searchForCards(){
   const searchCards = document.getElementById('searchBar').value;
-    appendCardsToPage(searchCards.toLowerCase());
+  try{
+    const results = await fetch(`/home/search?entry=${searchCards.toLowerCase()}`, {
+      method: 'get'
+    });
+    const cards = await results.json();
+    appendCardsToPage(cards);
+  }
+  catch(err){
+    console.log(`Couldn't get the cards`);
+  }
 }
