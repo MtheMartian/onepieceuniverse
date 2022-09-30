@@ -12,7 +12,7 @@ header{
   column-gap: 15%;
 }
 
-/* Left Section */
+/*------------------------- Left Section -------------------------*/
 #leftSection{
   padding-left: 30%;
 }
@@ -23,7 +23,7 @@ header{
   text-decoration: none;
 }
 
-/* Right Section */
+/*------------------------ Right Section ---------------------- */
 #rightSection{
   display: flex;
   align-items: center;
@@ -149,13 +149,9 @@ header{
   width: 100%;
 }
 
-#actualMenu div{
+#myProfile, #helpContainer, #inboxContainer{
   height: 40%;
   width: 98%;
-  border-bottom: 2px solid rgb(122, 122, 122);
-}
-
-#myProfile, #helpContainer{
   align-items: center;
   padding-left: 2%;
   color: rgba(255, 255, 255, 0.7);
@@ -163,12 +159,16 @@ header{
   cursor: pointer;
 }
 
-#myProfile:hover, #helpContainer:hover{
+#myProfile, #helpContainer{
+
+}
+
+#myProfile:hover, #helpContainer:hover, #inboxContainer:hover{
   background: rgba(124, 124, 124, 0.3);
   color: rgb(231, 231, 231);
 }
 
-#myProfile:active, #helpContainer:active{
+#myProfile:active, #helpContainer:active, #inboxContainer:hover{
   background: rgba(124, 124, 124, 0.7);
 }
 
@@ -177,6 +177,55 @@ header{
   justify-content: center;
   align-items: center;
 }
+
+ /* ---------- Inbox Messages -------------- */
+  #inboxContainer{
+    position: relative;
+  }
+
+  #inbox, .new-comments{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #inbox{
+    justify-content: start;
+    align-items: flex-start;
+    position: absolute;
+    left: -207%;
+    top: -400%;
+    height: 800%;
+    width: 200%;
+    row-gap: 3rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgb(25, 25, 32);
+    padding: 5% 0 5% 5%;
+  }
+
+  .new-comments{
+    width: 95%;
+    padding-left: 2%;
+    padding-top: 2%;
+    border: 2px solid grey;
+  }
+
+  .who-commented{
+    display: flex;
+    align-items: center;
+    column-gap: 3%;
+  }
+
+  .who-commented span, .new-comment-inbox {
+    font-family: Arial;
+  }
+
+  .new-comment-inbox{
+    padding-left: 10%;
+    margin-top: 0;
+    font-size: 0.95rem;
+    
+  }
 
 /* Tooltips */
 #createChar .tooltip, 
@@ -202,5 +251,6 @@ header{
   #profilePictureContainer:hover .tooltip{
     opacity: 1;
   }
+
 
   

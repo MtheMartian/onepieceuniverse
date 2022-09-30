@@ -6,17 +6,31 @@ const User = require('../models/User');
 module.exports = {
   getIndex: async (request, response) =>{
     const users = request.user;
-    try{
-      const characters = await Character.find().lean();
-      const userComments = await Comments.find().lean();
-      const replies = await Reply.find().lean();
-      const allUsers = await User.find().lean();
-      response.render('index', {info: characters, user: users, comments: userComments, 
-        reply: replies, users: allUsers
-      });
+    let commentsForCurrentUser = [];
+    if(typeof users !== 'undefined'){
+      try{
+        const characters = await Character.find().lean();
+        const userComments = await Comments.find().lean();
+        for(let i = 0; i < userComments.length; i++){
+          for(let j = 0; j < characters.length; j++){
+            if(userComments[i].cardID == characters[j].id && 
+                users.userID == characters[j].userID){
+                  commentsForCurrentUser.push(userComments[i]);
+                }
+          }
+        }
+        const replies = await Reply.find().lean();
+        response.render('index', {info: characters, user: users, comments: commentsForCurrentUser, 
+          reply: replies,
+        });
+      }
+      catch(err){
+        console.log(`Didn't find anything! ${err}`);
+      }
     }
-    catch(err){
-      console.log(`Didn't find anything! ${err}`);
+    else{
+      const characters = await Character.find().lean();
+      response.render('index', {info: characters});
     }
   },
   getInfo: async (request, response) =>{
