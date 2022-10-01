@@ -291,6 +291,7 @@
       <%}%>
       <%if(typeof user !== 'undefined'){%>
         <div id="profilePictureContainer">
+          <div id="something-new">!</div>
           <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
           <div class="tooltip">Profile</div>
           <div id="profileMenu" class="">
@@ -306,30 +307,9 @@
                 <a id="help">Help</a>
               </div>
               <div id="inboxContainer">Inbox
-                <div id="inbox">
-                  <%if(typeof comments !== 'undefined'){%>
-                    <%for(let i = 0; i < comments.length; i++){%>
-                      <div class="new-comments" id="comment<%=comments.length-1-i%>">
-                        <div class="who-commented">
-                          <img class="userPic" src="<%=comments[comments.length-1-i].userProfilePicture%>"
-                                alt="userPic">
-                          <span><%=comments[comments.length-1-i].userName%></span>
-                        </div>
-                        <p class="new-comment-inbox"><%=comments[comments.length-1-i].comment%></p>
-                        <div class="likeReplyContainer">
-                          <form action="/home/inbox/markseen/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST"
-                            class="mark-as-seen">
-                            <button class="seen-button " type="submit">&#10003;</button>
-                          </form>
-                          <form action="/home/reply/<%=comments[comments.length-1-i]._id%>?_method=PUT" method="POST" class="postReplyForm">
-                            <input type="text" name="reply" id="reply" placeholder="Reply...">
-                            <button type="submit" class="postReply">Reply</button>
-                          </form>
-                        </div>
-                      </div>
-                    <%}%>
-                  <%}%>
-                </div>
+                <div id="inbox-notification"></div>
+              </div>
+              <div id="inbox" class="hidden">
               </div>
             </div>
             <div id="signOutSection">

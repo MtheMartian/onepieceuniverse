@@ -61,5 +61,18 @@ module.exports = {
     catch(err){
       console.log(`Couldn't Upload. ${err}`);
     }
+  },
+  markAsSeen: async (request, response) =>{
+    try{
+      await Comments.findOneAndUpdate({_id: request.params.id}, {
+        '$set': {
+          seen: true,
+        }
+      });
+      console.log('Marked as seen!');
+    }
+    catch(err){
+      console.log(`Don't know what happened! ${err}`);
+    }
   }
 }

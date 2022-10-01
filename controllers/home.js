@@ -7,6 +7,7 @@ module.exports = {
   getIndex: async (request, response) =>{
     const users = request.user;
     let commentsForCurrentUser = [];
+    let cardTitle = [];
     if(typeof users !== 'undefined'){
       try{
         const characters = await Character.find().lean();
@@ -14,14 +15,17 @@ module.exports = {
         for(let i = 0; i < userComments.length; i++){
           for(let j = 0; j < characters.length; j++){
             if(userComments[i].cardID == characters[j].id && 
-                users.userID == characters[j].userID){
+                users.userID == characters[j].userID && 
+                users.userName !== userComments[i].userName && 
+                userComments[i].seen === false){
                   commentsForCurrentUser.push(userComments[i]);
+                  cardTitle.push(characters[j].charName);
                 }
           }
         }
         const replies = await Reply.find().lean();
         response.render('index', {info: characters, user: users, comments: commentsForCurrentUser, 
-          reply: replies,
+          reply: replies, cardTitle: cardTitle,
         });
       }
       catch(err){
@@ -74,5 +78,31 @@ module.exports = {
     if(request.user !== null){
       response.send(request.user);
     }
-  }
+  },
+  getInboxComments: async (request, response) =>{
+    const users = request.user;
+    let commentsForCurrentUser = [];
+    let cardTitle = [];
+    if(typeof users !== 'undefined'){
+      try{
+        const characters = await Character.find().lean();
+        const userComments = await Comments.find().lean();
+        for(let i = 0; i < userComments.length; i++){
+          for(let j = 0; j < characters.length; j++){
+            if(userComments[i].cardID == characters[j].id && 
+                users.userID == characters[j].userID && 
+                users.userName !== userComments[i].userName && 
+                userComments[i].seen === false){
+                  commentsForCurrentUser.push(userComments[i]);
+                  cardTitle.push(characters[j].charName);
+                }
+          }
+        }
+        response.send({newComments: commentsForCurrentUser, cardTitle: cardTitle});
+      }
+      catch(err){
+        console.log(`Didn't find anything! ${err}`);
+      }
+    }
+  },
 }
