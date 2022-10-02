@@ -6,36 +6,20 @@ const User = require('../models/User');
 module.exports = {
   getIndex: async (request, response) =>{
     const users = request.user;
-    let commentsForCurrentUser = [];
-    let cardTitle = [];
-    if(typeof users !== 'undefined'){
+    let cardsBasedOnLikes = [];
+    let recentlyCreated = [];
       try{
-        const characters = await Character.find().lean();
-        const userComments = await Comments.find().lean();
-        for(let i = 0; i < userComments.length; i++){
-          for(let j = 0; j < characters.length; j++){
-            if(userComments[i].cardID == characters[j].id && 
-                users.userID == characters[j].userID && 
-                users.userName !== userComments[i].userName && 
-                userComments[i].seen === false){
-                  commentsForCurrentUser.push(userComments[i]);
-                  cardTitle.push(characters[j].charName);
-                }
-          }
-        }
-        const replies = await Reply.find().lean();
-        response.render('index', {info: characters, user: users, comments: commentsForCurrentUser, 
-          reply: replies, cardTitle: cardTitle,
+        const characters = await Character.find().lean().sort({charName: 1});
+        cardsBasedOnLikes = await Character.find().sort({'likes.numberOfLikes': -1});
+        recentlyCreated = await Character.find().sort({createdAt: -1});
+        response.render('index', {info: characters, user: users, 
+          featured: cardsBasedOnLikes,
+          recent: recentlyCreated,
         });
       }
       catch(err){
         console.log(`Didn't find anything! ${err}`);
       }
-    }
-    else{
-      const characters = await Character.find().lean();
-      response.render('index', {info: characters});
-    }
   },
   getInfo: async (request, response) =>{
     try{

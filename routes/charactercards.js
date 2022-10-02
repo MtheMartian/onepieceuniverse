@@ -8,5 +8,7 @@ router.post('/addCharacter', ensureAuthenticated, characterCardsController.creat
 router.put('/updateCard', ensureAuthenticated, characterCardsController.editCard);
 router.delete('/deletecard', ensureAuthenticated, characterCardsController.removeCard);
 router.put('/charactercard/:id/upload/image', upload.single("file"), characterCardsController.uploadCardImg);
+router.put('/character/likecard/:id', ensureAuthenticated, characterCardsController.likeCard);
+router.get('/getcharacter/:id', characterCardsController.getCharacter);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 header{
-  background: rgba(255, 0, 0, 0.9);
+  background: rgba(19, 19, 19, 0.9);
   top: 0;
   left: 0;
   right: 0;
@@ -14,12 +14,16 @@ header{
 
 /*------------------------- Left Section -------------------------*/
 #leftSection{
-  padding-left: 30%;
+  
 }
 
-#leftSection > a{
+#grand-title{
+  width: 20%;
+}
+
+#grand-title > a{
   color: white;
-  font-size: 4rem;
+  font-size: 2rem;
   text-decoration: none;
 }
 

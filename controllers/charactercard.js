@@ -67,7 +67,7 @@ module.exports = {
         },
         {
           upsert: false
-        })
+        });
         console.log(`Updated!`);
         response.redirect('/');
     }
@@ -121,5 +121,50 @@ module.exports = {
     catch(err){
       console.log(`File upload failed! ${err}`);
     }
+  },
+  likeCard: async (request, response) =>{
+    try{
+      const character = await Character.findOne({id: request.params.id}).lean();
+      if(character.likes.whoLiked.includes(request.user.userID) == false){
+        await Character.findOneAndUpdate({id: request.params.id}, {
+          '$set': {
+            'likes.numberOfLikes': ++character.likes.numberOfLikes,
+          },
+          '$push': {
+            'likes.whoLiked': request.user.userID
+          }
+        });
+      }
+      else{
+        const newWhoLikedArr = character.likes.whoLiked.filter(user =>{
+            if(user == request.user.userID){
+              return false;
+            }
+            else{
+              return true;
+            }
+          });
+        await Character.findOneAndUpdate({id: request.params.id}, {
+          '$set': {
+            'likes.numberOfLikes': --character.likes.numberOfLikes,
+            'likes.whoLiked': newWhoLikedArr,
+          }
+        });
+      }
+    console.log('Upvoted!')
+    // response.redirect('/home');
+  }
+  catch(err){
+    console.log(`Couldn't Upvote. ${err}`);
+  }
+  },
+  getCharacter: async (request, response) =>{
+    try{
+      const character = await Character.findOne({id: request.params.id});
+      response.send(character);
+    }
+    catch(err){
+      console.log(`Couldn't get requested character! ${err}`);
+    } 
   }
 }

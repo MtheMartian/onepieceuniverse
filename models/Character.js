@@ -57,6 +57,10 @@ const CharacterSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likes: {
+    type: Object,
+    default: {numberOfLikes: 0, whoLiked:[]},
+  },
   createdAt: {
     type: Date,
     default: Date.now

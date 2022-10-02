@@ -488,6 +488,12 @@ button:hover{
   font-size: 1rem;
 }
 
+#like-card-form{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
+
 /*Comment Section*/
 #commentSection{
   width: 95%;

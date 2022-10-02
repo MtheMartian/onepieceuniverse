@@ -59,7 +59,7 @@ module.exports = {
       // response.redirect('/home');
     }
     catch(err){
-      console.log(`Couldn't Upload. ${err}`);
+      console.log(`Couldn't Upvote. ${err}`);
     }
   },
   markAsSeen: async (request, response) =>{
