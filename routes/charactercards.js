@@ -10,5 +10,6 @@ router.delete('/deletecard', ensureAuthenticated, characterCardsController.remov
 router.put('/charactercard/:id/upload/image', upload.single("file"), characterCardsController.uploadCardImg);
 router.put('/character/likecard/:id', ensureAuthenticated, characterCardsController.likeCard);
 router.get('/getcharacter/:id', characterCardsController.getCharacter);
+router.get('/getsortedcards', characterCardsController.getSortedCards);
 
 module.exports = router;

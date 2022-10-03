@@ -130,6 +130,85 @@ async function createCharacter(){
   }
 }
 
+//------------------- Scroll  Featured Section ------------------------------------//
+let carouselInterval = setInterval(() =>{
+  document.getElementById('featured-cards-section').scrollLeft += 
+  document.getElementById('featured-cards-section').clientWidth;
+ }, 10000);
+
+ let carouselReset = setInterval(() =>{
+  if(document.getElementById('featured-cards-section').scrollLeft >= 
+      document.getElementById('featured-cards-section').clientWidth * 4.5){
+      document.getElementById('featured-cards-section').scrollTo({
+        left: 0,
+        behavior: 'smooth',
+    });
+    clearInterval(carouselInterval);
+    carouselInterval = setInterval(() =>{
+    document.getElementById('featured-cards-section').scrollLeft += 
+    document.getElementById('featured-cards-section').clientWidth;
+   }, 10000);
+   }
+ }, 13000);
+
+document.getElementById('scroll-left').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollLeft -= 
+  document.getElementById('featured-cards-section').clientWidth -
+  document.getElementById('featured-cards-section').clientWidth * 0.052;
+  clearInterval(carouselInterval);
+  carouselInterval = setInterval(() =>{
+    document.getElementById('featured-cards-section').scrollLeft += 
+    document.getElementById('featured-cards-section').clientWidth;
+   }, 10000);
+ });
+
+ document.getElementById('scroll-right').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollLeft += 
+  document.getElementById('featured-cards-section').clientWidth;
+  clearInterval(carouselInterval);
+  carouselInterval = setInterval(() =>{
+    document.getElementById('featured-cards-section').scrollLeft += 
+    document.getElementById('featured-cards-section').clientWidth;
+   }, 10000);
+ });
+
+ document.getElementById('first-slide').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollTo({
+    left: 0,
+    behavior: 'smooth',
+  });
+ });
+
+ document.getElementById('second-slide').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollTo({
+    left: document.getElementById('featured-cards-section').clientWidth,
+    behavior: 'smooth',
+  });
+ });
+
+ document.getElementById('third-slide').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollTo({
+    left: document.getElementById('featured-cards-section').clientWidth * 2.5,
+    behavior: 'smooth',
+  });
+ });
+
+ document.getElementById('fourth-slide').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollTo({
+    left: document.getElementById('featured-cards-section').clientWidth * 4,
+    behavior: 'smooth',
+  });
+ });
+
+ document.getElementById('fifth-slide').addEventListener('click', () =>{
+  document.getElementById('featured-cards-section').scrollTo({
+    left: document.getElementById('featured-cards-section').clientWidth * 5,
+    behavior: 'smooth',
+  });
+ });
+
+
+
 //--------------More info on the character----------------------------
 const customSeeMore = {
   closeButton: document.querySelector('.closeSeeMore'),
@@ -250,6 +329,7 @@ async function getSpecificCharacter(id){
 //------------------------Style Cards------------------------------------
 async function whosStronger(){
   const characters = Array.from(document.querySelectorAll('.characterCard'));
+  const featuredCards = Array.from(document.querySelectorAll('.featured-card'));
   if(characters.length >= 1){
     for(let i = 0; i < characters.length; i++){
       switch(characters[i].querySelector('.cardHaki > span').textContent)
@@ -264,6 +344,24 @@ async function whosStronger(){
 
         case "Mighty": 
         characters[i].classList.add('mighty');
+        break;
+      } 
+    }
+  }
+  if(featuredCards.length >= 1){
+    for(let i = 0; i < featuredCards.length; i++){
+      switch(featuredCards[i].querySelector('.featured-card-haki > span').textContent)
+      {
+        case "Supreme": 
+        featuredCards[i].classList.add('supreme');
+        break;
+
+        case "Legendary": 
+        featuredCards[i].classList.add('legendary');
+        break;
+
+        case "Mighty": 
+        featuredCards[i].classList.add('mighty');
         break;
       } 
     }
@@ -540,22 +638,24 @@ const inboxConditions = {
   isItOpen: false,
 }
 
-document.getElementById('inboxContainer').addEventListener('click', () =>{
-  if(inboxConditions.isItOpen == false && document.getElementById('inbox').childElementCount > 0){
-    const inbox = document.getElementById('inbox');
-    inbox.classList.remove('hidden');
-    document.getElementById('inboxContainer').style.background = 'rgba(124, 124, 124, 0.7)';
-    document.getElementById('inboxContainer').style.color = 'rgb(231, 231, 231)';
-    inboxConditions.isItOpen = true;
-  }
-  else{
-    const inbox = document.getElementById('inbox');
-    inbox.classList.add('hidden');
-    document.getElementById('inboxContainer').style.background = 'none';
-    document.getElementById('inboxContainer').style.color = 'rgba(255, 255, 255, 0.7)';
-    inboxConditions.isItOpen = false;
-  }
-});
+if(document.getElementById('inboxContainer') !== null){
+  document.getElementById('inboxContainer').addEventListener('click', () =>{
+    if(inboxConditions.isItOpen == false && document.getElementById('inbox').childElementCount > 0){
+      const inbox = document.getElementById('inbox');
+      inbox.classList.remove('hidden');
+      document.getElementById('inboxContainer').style.background = 'rgba(124, 124, 124, 0.7)';
+      document.getElementById('inboxContainer').style.color = 'rgb(231, 231, 231)';
+      inboxConditions.isItOpen = true;
+    }
+    else{
+      const inbox = document.getElementById('inbox');
+      inbox.classList.add('hidden');
+      document.getElementById('inboxContainer').style.background = 'none';
+      document.getElementById('inboxContainer').style.color = 'rgba(255, 255, 255, 0.7)';
+      inboxConditions.isItOpen = false;
+    }
+  });
+}
 
 async function appendCommentsToInbox(){
   const inboxComments = await getInboxComments();

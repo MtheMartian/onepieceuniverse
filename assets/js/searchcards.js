@@ -47,9 +47,6 @@ async function appendCardsToPage(cards){
   const cardSection = document.querySelector('.cardSection');
   cardSection.innerHTML = "";
   const div = document.createElement('div');
-  const form = document.createElement('form');
-  const input = document.createElement('input');
-  const button = document.createElement('button');
   const span = document.createElement('span');
   const image = document.createElement('img');
   const a = document.createElement('a');

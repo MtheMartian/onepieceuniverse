@@ -166,5 +166,17 @@ module.exports = {
     catch(err){
       console.log(`Couldn't get requested character! ${err}`);
     } 
+  },
+  getSortedCards: async (request, response) =>{
+    let cardsBasedOnLikes = [];
+    let recentlyCreated = [];
+    try{
+      cardsBasedOnLikes = await Character.find().sort({'likes.numberOfLikes': -1});
+      recentlyCreated = await Character.find().sort({createdAt: -1});
+      response.send({featured: cardsBasedOnLikes, recent: recentlyCreated});
+    }
+    catch(err){
+      console.log(`Can't do that. ${err}`);
+    }
   }
 }

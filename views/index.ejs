@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="/css/homepage_charactercard.css">
+  <link rel="stylesheet" href="/css/featured_cards.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -17,49 +19,55 @@
 <body>
   <main>
   <section id="homePage">
-    <section id="marines">
-      <div id="Featured">
-        <h1>Pirates</h1>
-      </div>
-      <section class="cardSection">
-        <%for(let i = 0; i < 5; i++){%>
-            <div class="characterCard" id="<%=featured[i].id%>">
-              <div class="cardName">
+    <div id="featured-cards-section">
+      <%for(let i = 0; i < 5; i++){%>
+        <div class="featured-cards" id="featured-card<%=i%>-background">
+            <div class="featured-card" id="<%=featured[i].id%>">
+              <div class="featured-card-name">
                 <span><%=featured[i].charName%></span>
               </div>
-              <div class="cardCharImg">
-                <img class="cardImg" src=<%=featured[i].imgURL%>>
+              <div class="featured-card-img">
+                <img class="featuredCardImg" src=<%=featured[i].imgURL%>>
               </div>
-              <div class="cardHaki">
+              <div class="featured-card-haki">
                 <span><%=featured[i].charhaki.hakiUsageLevel%></span>
               </div>
-              <div class="cardInfo">
-                <div class="cardRank">
+              <div class="featured-card-info">
+                <div class="featuredCardRank">
                   <span>Rank:</span><span><%=featured[i].charRank%></span>
                 </div>
-                <div class="cardAge">
+                <div class="featured-card-age">
                   <span><%=featured[i].charAge%> years old</span>
                 </div>
-                <div class="cardFruitName">
+                <div class="featured-card-fruitname">
                   <img class="fruitImg" src="images/fruit.webp"><span><%=featured[i].charFruit.fruitName%></span>
                 </div>
-                <div class="cardFruitType">
+                <div class="featured-card-fruittype">
                   <span class="typeSpan">Type:</span><span><%=featured[i].charFruit.fruitType%></span>
                 </div>
-                <div class="cardBounty">
+                <div class="featured-card-bounty">
                   <img class="bounty" src="images/Beli.webp"><span><%=featured[i].description[0].bounty.bountyAmount%></span>
                 </div>
                 <div class="seeMore">
                   <span class="characterInfo">See more</span>
                 </div>
-            </div>
+              </div>
             <div class="madeBy">
               <a href="/home/userprofile/<%=featured[i].userID%>" class="cardCreator"><%=featured[i].userName%></a>
             </div>
           </div>
-        <%}%>
-      </section>
-    </section>
+        </div>
+      <%}%>
+      </div>
+    <nav id="featured-navigation">
+      <a id="first-slide">o</a>
+      <a id="second-slide">o</a>
+      <a id="third-slide">o</a>
+      <a id="fourth-slide">o</a>
+      <a id="fifth-slide">o</a>
+    </nav>
+    <button id="scroll-left">&#8592;</button>
+    <button id="scroll-right">&#8594;</button>
     <section id="pirates">
       <div id="pirateTitle">
         <h1>Pirates</h1>

@@ -1,0 +1,173 @@
+/*--------------Character Cards------------------*/
+
+#featured-cards-section{
+background: black;
+margin-top: 0;
+min-height: 600px;
+width: 100%;
+display: flex;
+justify-content: start;
+align-items: center;
+overflow: hidden;
+scroll-snap-type: x mandatory;
+scroll-behavior: smooth;
+position: relative;
+}
+
+.cardInfo, .characterCard{
+  display: flex;
+  color: black;
+  flex-direction: column;
+}
+
+.cardInfo{
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.featured-card{
+  width: 20%;
+  min-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  padding: 0.6rem 1rem 0.6rem 1rem;
+  border: 1px solid black;
+  background-image: url("/images/rocks.webp");
+  position: relative;
+  margin-bottom: 7.5%;
+}
+
+.featured-card-info, .featured-card-name, .featuredCardImg, .featured-card-haki{
+  border: 2px solid goldenrod;
+  background-image: url("/images/marble.webp");
+  width: 23rem;
+}
+
+.featured-card-info{
+  width: 99%;
+  font-size: 1rem;
+  line-height: 180%;
+  position: relative;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-left: -1%;
+}
+
+.featured-card-name, .featured-card-haki{
+  width: 103%;
+  padding: 0.5% 0 0.5% 1.5%;
+  border-radius: 10px;
+  margin-left: -2.7%;
+}
+
+.featured-card-name span, .featured-card-haki span{
+  font-size: 1.3rem;
+}
+
+.featured-card-img{
+  margin-left: -1.2%;
+}
+
+.featured-card-img > img{
+  width: 100.5%;
+  height: 14rem;
+  object-fit: cover;
+  object-position: top;
+  margin-bottom: -2%;
+}
+
+.featured-cards{
+  min-height: 100%;
+  min-width: 100%;
+  padding: 7% 0 0 42%;
+  background: rgba(12, 12, 12, 0.9);
+  scroll-snap-align: start;
+}
+
+.fruitImg{
+  width: 5%;
+  margin-right: 0.5%;
+}
+
+.featured-card-fruitname, .featured-card-fruittype, 
+.featured-card-bounty, .featuredCardRank{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: 3px;
+}
+
+.characterInfo{
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.characterInfo:hover{
+  color: rgb(101, 204, 238);
+}
+
+.supreme{
+  box-shadow: 0px 0px 35px rgba(255, 0, 0, 1);
+  animation: glow 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
+}
+
+@keyframes glow{
+  0% {
+    box-shadow: 0px 0px 2px rgba(255, 0, 0, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(255, 0, 0, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(255, 0, 0, 1);
+  }
+}
+
+.legendary{
+  box-shadow: 0px 0px 35px rgba(179, 32, 247, 1);
+  animation: glow2 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
+}
+
+@keyframes glow2{
+  0% {
+    box-shadow: 0px 0px 2px rgba(179, 32, 247, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(179, 32, 247, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(179, 32, 247, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(179, 32, 247, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(179, 32, 247, 1);
+  }
+}
+
+.mighty{
+  box-shadow: 0px 0px 35px rgba(243, 243, 243, 1);
+}
+
+/*Card Creator*/
+.madeBy{
+  position: absolute;
+  bottom: -7%;
+  left: 7%;
+}
+
+.cardCreator{
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: rgb(70, 253, 253);
+  letter-spacing: 1px;
+}
