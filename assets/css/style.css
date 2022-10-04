@@ -30,10 +30,9 @@ main{
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 100%;
+  width: 98%;
   height: 90%;
-  margin-top: -1%;
-  column-gap: 20%;
+  column-gap: 10%;
 }  
 
 button{
@@ -64,12 +63,13 @@ button:hover{
 }
 
 #featured-card1-background, #featured-card3-background{
-  background:rgb(37, 37, 37);
+  /* background:rgb(49, 59, 70); */
+  background-image: url('/images/carousel_background6.webp');
 }
 
 #scroll-left{
   position: absolute;
-  left: 35%;
+  left: 36%;
   top: 35%;
 }
 

@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="/css/homepage_charactercard.css">
-  <link rel="stylesheet" href="/css/featured_cards.css">
+  <link rel="stylesheet" href="/css/home_page/homepage_charactercard.css">
+  <link rel="stylesheet" href="/css/home_page/featured_cards.css">
+  <link rel="stylesheet" href="/css/home_page/recently_created_cards.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -18,7 +19,6 @@
 </head>
 <body>
   <main>
-  <section id="homePage">
     <div id="featured-cards-section">
       <%for(let i = 0; i < 5; i++){%>
         <div class="featured-cards" id="featured-card<%=i%>-background">
@@ -59,20 +59,21 @@
         </div>
       <%}%>
       </div>
-    <nav id="featured-navigation">
-      <a id="first-slide">o</a>
-      <a id="second-slide">o</a>
-      <a id="third-slide">o</a>
-      <a id="fourth-slide">o</a>
-      <a id="fifth-slide">o</a>
-    </nav>
-    <button id="scroll-left">&#8592;</button>
-    <button id="scroll-right">&#8594;</button>
-    <section id="pirates">
-      <div id="pirateTitle">
-        <h1>Pirates</h1>
+      <nav id="featured-navigation">
+        <a id="first-slide">o</a>
+        <a id="second-slide">o</a>
+        <a id="third-slide">o</a>
+        <a id="fourth-slide">o</a>
+        <a id="fifth-slide">o</a>
+      </nav>
+      <button id="scroll-left">&#8592;</button>
+      <button id="scroll-right">&#8594;</button>
+  <section id="homePage">
+    <section id="recently-created">
+      <div class="section-title">
+        <h1>Recently Created</h1>
       </div>
-      <section class="cardSection">
+      <section id="recently-created-section">
         <%for(let i = 0; i < 10; i++){%>
             <div class="characterCard" id="<%=recent[i].id%>">
               <div class="cardName">
@@ -110,10 +111,11 @@
           </div>
         <%}%>
       </section>
+      <div id="hide-scroll-bar"></div>
     </section>
-    <section id="pirates">
-      <div id="pirateTitle">
-        <h1>Pirates</h1>
+    <section id="all-cards">
+      <div class="section-title">
+        <h1>All</h1>
       </div>
       <section class="cardSection">
         <%for(let i = 0; i < info.length; i++){%>
