@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/forms.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/searchcards.css">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +20,12 @@
 <body>
   <main>
   <section id="homePage">
-    <section id="searchedCards">
-        <input id="searchBar" type="text" placeholder="Search..."></input>
-      <section class="cardSection"> 
-      </section>
+    <section id="search-cards">
+        <input id="searchBar" type="text" placeholder="Search...">
+        </input>
+        <button id="clear-search">X</button>
+    </section>
+    <section class="cardSection"> 
     </section>
   </section>
   </main>
@@ -49,27 +54,10 @@
   <%if(typeof user === 'undefined'){%>
     <a href="/page/signin" id="signInFirst"></a>
   <%}%>
-  <div class="updateCard hidden">
-    <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
-    <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
-    <input type="text" id="charFruitU" class="cardDisplayInfo" placeholder="Fruit Name">
-    <input type="text" id="charFruitTypeU" class="cardDisplayInfo" placeholder="Fruit Type">
-    <input type="text" id="charHakiU" class="cardDisplayInfo" placeholder="Haki Strength">
-    <input type="text" id="charHakiTypeU" class="cardDisplayInfo" placeholder="Haki Type">
-    <input type="text" placeholder="Current Rank" id="charRankU" class="cardDisplayInfo">
-    <input type="text" placeholder="General location (e.g. Grand Line)" id="locationU" class="cardDisplayInfo">
-    <input type="text" placeholder="Specific location (e.g. Zou)" id="specificLocationU" class="cardDisplayInfo">
-    <input type="text" placeholder="Bounty" id="bountyU" class="cardDisplayInfo">
-    <input type="text" id="imgURLU" class="cardDisplayInfo" placeholder="Image URL">
-    <button id="updateCardBtn">Update</button>
-    <button id="deleteCard" type="submit">Remove</button>
-    <button class="closeIt">X</button>
-  </div>
   <div id="characterMoreInfo" class="hidden">
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
-      <button id="editSeeMoreButton" class="hidden">Edit</button>
       <button class="closeSeeMore">X</button>
     </div>
     <div id="characterAbilitiesDesc">
@@ -89,55 +77,7 @@
       </div>
     </section>
   </div>
-  <div class="updateSeeMore hidden" id="editSeeMoreForm">
-    <div id="abilitySection">
-      <input type="text" id="bountyImgURL" class="cardDisplayInfo" placeholder="Character Image URL">
-      <textarea id="charDescription" class="cardDisplayInfo" 
-        placeholder="Character Description" cols="33" rows="5">
-      </textarea>
-    </div>
-    <div class="optionGrouping">
-      <button id="updateSeeMoreBtn">Update</button>
-      <button id="updateSeeMoreExitBtn">X</button>
-    </div>
-  </div>
-  <header id="header">
-    <section id="leftSection">
-      <a href="/">One Piece Realm</a>
-    </section>
-    <section id="rightSection">
-      <button id="createChar">
-        Create
-        <div class="tooltip">Create a card</div>
-      </button>
-      <%if(typeof user === 'undefined'){%>
-        <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
-      <%}%>
-      <%if(typeof user !== 'undefined'){%>
-        <div id="profilePictureContainer">
-          <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
-          <div class="tooltip">Profile</div>
-          <div id="profileMenu" class="">
-            <div id="currentUser">
-              <img id="profilePictureInMenu" src="<%=user.profilePicture%>" alt="Profile">
-              <span><%=user.userName%></span>
-            </div>
-            <div id="actualMenu">
-              <div id="myProfile">
-                <a href="/myprofile">My Profile</a>
-              </div>
-              <div id="helpContainer">
-                <a id="help">Help</a>
-              </div>
-            </div>
-            <div id="signOutSection">
-              <a href="/signout"><button class="signOut">Sign Out</button></a>
-            </div>
-          </div>
-        </div>
-      <%}%>
-    </section>
-  </header>
+  <%-include('./partials/header.ejs')%>
     <div id="overlay" class="hidden"></div>
     <div class="dontmindme hidden"></div>
   <script src="/js/searchcards.js"></script>

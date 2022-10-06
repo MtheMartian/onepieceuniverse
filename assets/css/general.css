@@ -1,0 +1,73 @@
+/*--------------------General-----------------------*/
+body{
+  /* background-image: url('/images/maptexture.webp'); */
+  background: rgb(73, 73, 73);
+  overflow: hidden;
+}
+
+html{
+  font-family: Secular One, Arial;
+  font-weight: 700;
+}
+
+button, #addCharBtn{
+  cursor: pointer;
+}
+
+main{
+  position: fixed;
+  top: 8.1%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+ #homePage{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 98%;
+  height: 90%;
+  column-gap: 10%;
+}  
+
+button{
+  border: none;
+  font-family: Secular One, Arial;
+  color: azure;
+  transition: color 0.15s;
+  background: rgba(0, 0, 0, 0);
+  font-size: 2rem;
+}
+
+button:hover{
+  color: rgb(136, 136, 255);
+}
+
+/*-------------Stuff---------------------*/
+.hidden{
+  display: none !important;
+}
+
+#overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/*------------------Users--------------------*/
+#signIn{
+  position: absolute;
+  top: 11%;
+  right: 2%;
+  background: grey;
+  padding: 1%;
+  border-radius: 10px;
+}

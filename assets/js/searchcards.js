@@ -658,3 +658,11 @@ async function searchForCards(){
     console.log(`Couldn't get the cards`);
   }
 }
+
+document.getElementById('clear-search').addEventListener('click', () => {
+  document.getElementById('searchBar').value = "";
+  searchForCards();
+})
+
+//---------------------------- Page Styling ---------------------------//
+document.getElementById('search-container').classList.add('hidden');

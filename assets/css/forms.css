@@ -1,0 +1,121 @@
+/*----------Forms-------------*/
+.updateCard, .addCharacter, .updateSeeMore{
+  background: rgba(37, 37, 37, 1);
+  display: flex;
+  position: absolute;
+  top: 4%;
+  left: 30%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 35%;
+  height: 90%;
+  row-gap: 1rem;
+  border-radius: 8px;
+  overflow-y: scroll;
+  font-family: Secular One, Arial;
+  color: white;
+  padding: 1% 1% 1% 1%;
+  z-index: 1;
+}
+
+.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
+  border: none;
+  font-family: Montserrat ExtraBold, Arial;
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  right: 3%;
+  top: 2%;
+  transition: color 0.15s;
+}
+
+.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
+  color: red;
+}
+
+.cardDisplayInfo, .createChar{
+  height: 2rem;
+  width: 30rem;
+  border-radius: 20px;
+  padding: 0 0 0 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  transition: box-shadow 0.15s;
+}
+
+.cardDisplayInfo:hover, .createChar:hover{
+  box-shadow: inset 0px 0px 7px rgba(250, 121, 1, 0.9);
+}
+/* Create Character Card Form */
+#isPirate, #isMarine{
+  width: 5%;
+  cursor: pointer;
+}
+
+/* Card Update Form */
+.updateCard{
+  top: 10% !important;
+  padding: 2% 1% 0 1% !important;
+  height: 80% !important;
+}
+/* Update See More Form */
+.updateSeeMore{
+  padding: 3% 1% 2% 1% !important;
+  height: 75% !important;
+  row-gap: 3rem;
+  top: 10%;
+  border: 2px solid black;
+}
+
+.optionGrouping{
+  position: fixed;
+  background: grey;
+  height: 5%;
+  width: 37%;
+  margin-left: 0.88%;
+  margin-top: -5.5%;
+  border-radius: 1px;
+  border: 2px solid black;
+  border-bottom: none;
+}
+
+#abilitySection, .abilityContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.abilityContainers, #abilitySection{
+  row-gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1%;
+}
+
+.updateSeeMoreFormInputs, #bountyImgURL{
+  height: 5rem !important;
+  width: 97%;
+  transition: box-shadow 0.15s;
+}
+
+.updateSeeMoreFormInputs:hover, #bountyImgURL:hover, 
+#abilityDescription:hover, #charDescription:hover {
+  box-shadow: inset 0px 0px 7px rgba(0, 64, 107, 0.7);
+}
+
+#updateSeeMoreBtn{
+  padding-left: 5%;
+}
+
+#abilityDescription, #charDescription{
+  height: 90%;
+  padding: 1rem;
+  font-family: Arial;
+}
+
+.changeViewType{
+  font-size: 1.5rem;
+}

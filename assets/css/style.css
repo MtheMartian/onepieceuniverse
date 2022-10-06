@@ -1,82 +1,68 @@
-/*--------------------General-----------------------*/
-body{
-  /* background-image: url('/images/maptexture.webp'); */
-  background: rgb(73, 73, 73);
-  overflow: hidden;
+/*--------------------- Card Styling -------------------------------*/
+.supreme{
+  box-shadow: 0px 0px 35px rgba(255, 0, 0, 1);
+  animation: glow 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
 }
 
-html{
-  font-family: Secular One, Arial;
-  font-weight: 700;
+@keyframes glow{
+  0% {
+    box-shadow: 0px 0px 2px rgba(255, 0, 0, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(255, 0, 0, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(255, 0, 0, 1);
+  }
 }
 
-button, #addCharBtn{
-  cursor: pointer;
+.legendary{
+  box-shadow: 0px 0px 35px rgba(179, 32, 247, 1);
+  animation: glow2 3s ease-out infinite alternate;
+  transition: box-shadow 0.15s;
 }
 
-main{
-  position: fixed;
-  top: 8.1%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+@keyframes glow2{
+  0% {
+    box-shadow: 0px 0px 2px rgba(179, 32, 247, 1);
+  }
+  15%{
+    box-shadow: 0px 0px 10px rgba(179, 32, 247, 1);
+  }
+  30%{
+    box-shadow: 0px 0px 15px rgba(179, 32, 247, 1);
+  }
+  50%{
+    box-shadow: 0px 0px 25px rgba(179, 32, 247, 1);
+  }
+  100% {
+    box-shadow: 0px 0px 55px rgba(179, 32, 247, 1);
+  }
 }
 
- #homePage{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  width: 98%;
-  height: 90%;
-  column-gap: 10%;
-}  
-
-button{
-  border: none;
-  font-family: Secular One, Arial;
-  color: azure;
-  transition: color 0.15s;
-  background: rgba(0, 0, 0, 0);
-  font-size: 2rem;
+.mighty{
+  box-shadow: 0px 0px 35px rgb(0, 132, 255);
 }
 
-button:hover{
-  color: rgb(136, 136, 255);
-}
-
-/*----------- Featured Cards Carousel -----------------*/
-#featured-navigation{
+/*Card Creator*/
+.madeBy{
   position: absolute;
-  top: 80%;
-  left: 50%;
-  z-index: 1;
+  bottom: -7%;
+  left: 7%;
 }
 
-#featured-navigation a{
+.cardCreator{
   text-decoration: none;
-  color: orange;
-  cursor: pointer;
-}
-
-#featured-card1-background, #featured-card3-background{
-  /* background:rgb(49, 59, 70); */
-  background-image: url('/images/carousel_background6.webp');
-}
-
-#scroll-left{
-  position: absolute;
-  left: 36%;
-  top: 35%;
-}
-
-#scroll-right{
-  position: absolute;
-  right: 32%;
-  top: 35%;
+  font-size: 0.8rem;
+  color: rgb(70, 253, 253);
+  letter-spacing: 1px;
 }
 
 /*Upload Image*/
@@ -117,130 +103,6 @@ button:hover{
 .changeImageBox:hover{
   background: rgba(88, 87, 87, 0.4);
   opacity: 1;
-}
-
-
-
-/*----------Forms-------------*/
-.updateCard, .addCharacter, .updateSeeMore{
-  background: rgba(37, 37, 37, 1);
-  display: flex;
-  position: absolute;
-  top: 4%;
-  left: 30%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 35%;
-  height: 90%;
-  row-gap: 1rem;
-  border-radius: 8px;
-  overflow-y: scroll;
-  font-family: Secular One, Arial;
-  color: white;
-  padding: 1% 1% 1% 1%;
-  z-index: 1;
-}
-
-.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
-  border: none;
-  font-family: Montserrat ExtraBold, Arial;
-  color: white;
-  font-size: 2rem;
-  position: absolute;
-  right: 3%;
-  top: 2%;
-  transition: color 0.15s;
-}
-
-.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
-  color: red;
-}
-
-.cardDisplayInfo, .createChar{
-  height: 2rem;
-  width: 30rem;
-  border-radius: 20px;
-  padding: 0 0 0 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  transition: box-shadow 0.15s;
-}
-
-.cardDisplayInfo:hover, .createChar:hover{
-  box-shadow: inset 0px 0px 7px rgba(250, 121, 1, 0.9);
-}
-/* Create Character Card Form */
-#isPirate, #isMarine{
-  width: 5%;
-  cursor: pointer;
-}
-
-/* Card Update Form */
-.updateCard{
-  top: 10% !important;
-  padding: 2% 1% 0 1% !important;
-  height: 80% !important;
-}
-/* Update See More Form */
-.updateSeeMore{
-  padding: 3% 1% 2% 1% !important;
-  height: 75% !important;
-  row-gap: 3rem;
-  top: 10%;
-  border: 2px solid black;
-}
-
-.optionGrouping{
-  position: fixed;
-  background: grey;
-  height: 5%;
-  width: 37%;
-  margin-left: 0.88%;
-  margin-top: -5.5%;
-  border-radius: 1px;
-  border: 2px solid black;
-  border-bottom: none;
-}
-
-#abilitySection, .abilityContainers {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-}
-
-.abilityContainers, #abilitySection{
-  row-gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 1%;
-}
-
-.updateSeeMoreFormInputs, #bountyImgURL{
-  height: 5rem !important;
-  width: 97%;
-  transition: box-shadow 0.15s;
-}
-
-.updateSeeMoreFormInputs:hover, #bountyImgURL:hover, 
-#abilityDescription:hover, #charDescription:hover {
-  box-shadow: inset 0px 0px 7px rgba(0, 64, 107, 0.7);
-}
-
-#updateSeeMoreBtn{
-  padding-left: 5%;
-}
-
-#abilityDescription, #charDescription{
-  height: 90%;
-  padding: 1rem;
-  font-family: Arial;
-}
-
-.changeViewType{
-  font-size: 1.5rem;
 }
 
 /*----------------More info on character-----------------*/
@@ -496,21 +358,6 @@ button:hover{
   margin-top: 0;
   font-size: 0.95rem;
 }
-
-/*-------------Stuff---------------------*/
-.hidden{
-  display: none !important;
-}
-
-#overlay{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
 
 /*------------------Users--------------------*/
 #signIn{
