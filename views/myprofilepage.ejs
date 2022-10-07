@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/myprofilepage.css">
-  <link rel="stylesheet" href="css/generalheader.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/card_see_more.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profilepagemenu.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,76 +18,14 @@
 <body>
   <main>
     <section id="profilePage">
-      <div id="profilePictureContainer">
-        <img id="profilePicture" src="<%=user.profilePicture%>" alt="Picture">
-        <div id="changeProfilePictureBox">
-          Edit
-        </div>
-        <form action="/myprofile/changeprofilepicture/<%=user.userID%>/upload/image?_method=PUT" 
-          method="POST" enctype="multipart/form-data" id="profilePictureUploadForm" class="hidden">
-        <input type="file" name="file" accept="image/*">
-        <button type="submit">Submit</button>
-        </form>
-      </div>
-      <section id="userSettings">
-        <section id="myCardsSection">
-          <div id="myCards">
-            <%for(let i = 0; i < character.length; i++){%>
-              <%if(character[i].userID == user.userID){%>
-                <div id="<%=character[i].id%>" class="characterCard">
-                  <div class="changeImageBox">
-                    Change
-                  </div>
-                  <form action="/myprofile/charactercard/<%=character[i].id%>/upload/image?_method=PUT" 
-                    method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
-                  <input type="file" name="file" accept="image/*">
-                  <button type="submit">Submit</button>
-                  </form>
-                  <div class="cardName">
-                    <span><%=character[i].charName%></span>
-                  </div>
-                  <div class="cardCharImg">
-                    <img class="cardImg" src=<%=character[i].imgURL%>>
-                  </div>
-                  <div class="cardHaki">
-                    <span><%=character[i].charhaki.hakiUsageLevel%></span>
-                  </div>
-                  <div class="cardInfo">
-                    <div class="cardRank">
-                      <span>Rank:</span><span><%=character[i].charRank%></span>
-                    </div>
-                    <div class="cardAge">
-                      <span><%=character[i].charAge%> years old</span>
-                    </div>
-                    <div class="cardFruitName">
-                      <img class="fruitImg" src="images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
-                    </div>
-                    <div class="cardFruitType">
-                      <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
-                    </div>
-                    <div class="cardBounty">
-                      <img class="bounty" src="images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
-                    </div>
-                    <div class="seeMore">
-                      <span class="characterInfo">See more</span>
-                    </div>
-                    <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
-                  </div>
-                </div>
-              <%}%>
-            <%}%>
-          </div> 
-        </section>
-      </section>
-      <nav id="menuContainer">
-        <div>General</div>
+      <div id="profile-page-menu">
+        <div id="general-title">General</div>
         <div><a href="/myprofile">My Profile</a></div>
         <div><a href="/myprofile/changeusername">Change Username</a></div>
         <div><a href="/myprofile/changeemail">Change Email</a></div>
         <div><a href="/myprofile/changepassword">Change Password</a></div>
-        <div><a href="/home">Home Page</a></div>
-        <div><a href="/">Welcome Page</a></div>
-      </nav>
+      </div>
+      <div id="my-profile-contents"></div>
     </section>
   </main>
   <div class="updateCard hidden">
@@ -136,11 +78,7 @@
       <button id="updateSeeMoreExitBtn">X</button>
     </div>
   </div>
-  <header id="header">
-    <section id="leftSection">
-      <a href="/">One Piece Realm</a>
-    </section>
-  </header>
+  <%-include('./partials/header.ejs')%>
   <div id="overlay" class="hidden"></div>
   <div class="dontmindme hidden"></div>
   <script src="/js/myprofilepage.js"></script>

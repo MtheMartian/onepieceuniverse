@@ -4,11 +4,11 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 22%;
+  width: 422.17px;
   height: 100%;
   position: fixed;
   right: 0;
-  top: 8%;
+  top: 12%;
   bottom: 0;
 }
 
@@ -68,15 +68,12 @@
   justify-content: start;
   align-items: center;
   row-gap: 5%;
-  width: 95%;
+  width: 100%;
   height: 100%;
   overflow-y: scroll;
-  padding: 5% 15% 20% 7%;
+  padding: 5% 15% 25% 7%;
   margin-bottom: 3%;
-  background: rgba(49, 49, 49, 0);
   border: none;
-  border-top: none;
-  border-bottom: none;
 }
 
 .fruitImg{
@@ -113,424 +110,9 @@
   color: rgb(101, 204, 238);
 }
 
-/*Upload Image*/
-.characterCardUploadImg{
-  z-index: 1;
-  background: rgb(0, 0, 0);
-  width: 100%;
-  height: 10%;
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-left: 3%;
-  padding-right: 3%;
-  border-radius: 10px;
-  color: white;
-}
 
-.characterCardUploadImg button{
-  font-size: 1.5rem;
-}
-
-.changeImageBox{
-  position: absolute;
-  width: 93%;
-  height: 42%;
-  top: 10.5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  opacity: 0;
-  color: azure;
-}
-
-.changeImageBox:hover{
-  background: rgba(88, 87, 87, 0.4);
-  opacity: 1;
-}
-
-/*----------Card Forms-------------*/
-.updateCard, .updateSeeMore{
-  background: rgba(37, 37, 37, 1);
-  display: flex;
-  position: absolute;
-  top: 4%;
-  left: 30%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 35%;
-  height: 90%;
-  row-gap: 1rem;
-  border-radius: 8px;
-  overflow-y: scroll;
-  font-family: Secular One, Arial;
-  color: white;
-  padding: 1% 1% 1% 1%;
-  z-index: 1;
-}
-
-.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
-  border: none;
-  font-family: Montserrat ExtraBold, Arial;
-  color: white;
-  font-size: 2rem;
-  position: absolute;
-  right: 3%;
-  top: 2%;
-  transition: color 0.15s;
-}
-
-.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
-  color: red;
-}
-
-.cardDisplayInfo{
-  height: 2rem;
-  width: 30rem;
-  border-radius: 20px;
-  padding: 0 0 0 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  transition: box-shadow 0.15s;
-}
-
-.cardDisplayInfo:hover{
-  box-shadow: inset 0px 0px 7px rgba(250, 121, 1, 0.9);
-}
-
-/* Card Update Form */
-.updateCard{
-  top: 10% !important;
-  padding: 2% 1% 0 1% !important;
-  height: 80% !important;
-}
-/* Update See More Form */
-.updateSeeMore{
-  padding: 3% 1% 2% 1% !important;
-  height: 75% !important;
-  row-gap: 3rem;
-  top: 10%;
-  border: 2px solid black;
-}
-
-.optionGrouping{
-  position: fixed;
-  background: grey;
-  height: 5%;
-  width: 37%;
-  margin-left: 0.88%;
-  margin-top: -5.5%;
-  border-radius: 1px;
-  border: 2px solid black;
-  border-bottom: none;
-}
-
-#abilitySection, .abilityContainers {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-}
-
-.abilityContainers, #abilitySection{
-  row-gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 1%;
-}
-
-.updateSeeMoreFormInputs, #bountyImgURL{
-  height: 5rem !important;
-  width: 97%;
-  transition: box-shadow 0.15s;
-}
-
-.updateSeeMoreFormInputs:hover, #bountyImgURL:hover, 
-#abilityDescription:hover, #charDescription:hover {
-  box-shadow: inset 0px 0px 7px rgba(0, 64, 107, 0.7);
-}
-
-#updateSeeMoreBtn{
-  padding-left: 5%;
-}
-
-#abilityDescription, #charDescription{
-  height: 90%;
-  padding: 1rem;
-  font-family: Arial;
-}
-
-.changeViewType{
-  font-size: 1.5rem;
-}
-/*----------------More info on character-----------------*/
-#characterMoreInfo{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: start;
-  height: 90%;
-  background-color: rgb(58, 58, 58);
-  color: white;
-  position: absolute;
-  top: 7%;
-  right: 15%;
-  width: 70%;
-  overflow-y: scroll;
-  scrollbar-color: blue;
-  row-gap: 5rem;
-  z-index: 1;
-}
-
-#characterAbilitiesDesc{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: start;
-  row-gap: 5rem;
-}
-
-#bountyImg{
-  width: 100%;
-  object-fit: fill;
-}
-
-#characterMoreInfo > div{
-  position: relative;
-  width: 95%;
-}
-
-#characterSummary{
-  width: 50% !important;
-}
-
-#charDesc{
-  font-size: 1.5rem;
-}
-
-#editSeeMoreButton, .closeSeeMore{
-  position: absolute;
-  top: 0; 
-}
-
-#editSeeMoreButton{
-  left: -47%;
-  margin-top: 2%;
-}
-
-.closeSeeMore{
-  right: -47%;
-  bottom: 100% !important;
-  margin-top: 2%;
-}
-
-.abilityTrailerContainer{
-  float: left;
-  width: 27rem;
-  height: 27rem;
-  margin: 0 2rem 0 0;
-}
-
-.abilityTrailer, .abilityImage{
-  width: 100%;
-  height: 100%;
-}
-
-.abilityImage{
-  object-fit: fill;
-}
-
-.abilityDiv > pre, .abilityDiv > span{
-  font-family: Secular One, Arial;
-}
-
-.abilityDiv{
-  width: 50% !important;
-}
-
-.abilityDiv > p{
-  line-height: 2rem;
-  letter-spacing: 2px;
-  font-size: 1rem;
-}
-
-/*Comment Section*/
-#commentSection{
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 5%;
-  font-family: Arial;
-  margin-bottom: 10%;
-}
-
-#commentsTitle{
-  width: 80%;
-  border-bottom: 2px solid grey;
-  font-size: 2rem;
-}
-
-#postCommentForm{
-  width: 80%;
-  margin-bottom: 1%;
-}
-
-#postComment{
-  font-size: 1.5rem;
-}
-
-#comments, .commentContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: flex-start;
-  width: 80%;
-}
-
-#comments{
-  row-gap: 7%;
-}
-
-.commentContainer{
-  width: 100%;
-  height: 80%;
-}
-
-.whoPosted{
-  display: flex;
-  align-items: center;
-  column-gap: 7%;
-}
-
-.whoPosted a{
-  text-decoration: none;
-  color: white;
-}
-
-.userPic{
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: top;
-}
-
-.cardComment{
-  padding-left: 5%;
-}
-
-.upvoteContainer{
-  padding-left: 4%;
-}
-
-.cardComment{
-  margin-top: 0;
-  font-size: 0.95rem;
-}
-
-.upvotePic{
-  width: 25px;
-}
-
-#comment, #reply{
-  width: 80%;
-  border: none;
-  outline: none;
-  outline-color: rgba(0, 0, 0, 0.7);
-  height: 50%;
-  background: rgba(0, 0, 0, 0);
-  padding: 1% 0 1% 2%;
-  font-size: 1rem;
-  color: white;
-  transition: border 0.15s;
-}
-
-#comment::placeholder, #reply::placeholder{
-  color: white;
-}
-
-#comment:hover, #reply:hover{
-  border-bottom: 1px solid white;
-}
-
-#comment:focus, #reply:focus{
-  border-bottom: 2px solid white;
-}
-
-.likeReplyContainer, .postReplyForm{
-  display: flex;
-  align-items: center;
-}
-
-.likeReplyContainer{
-  width: 100%;
-  height: 50%;
-  column-gap: 5%;
-}
-
-.postReplyForm{
-  width: 70%;
-}
-
-.postReply{
-  font-size: 1rem;
-}
-
-#reply{
-  width: 80%;
-}
-
-.replyButton{
-  cursor: pointer;
-  transition: color 0.15s;
-  margin-bottom: 3%;
-  padding-left: 4%;
-  margin-top: 1%;
-}
-
-.repliesContainer{
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-}
-
-.actualReplyContainer{
-  padding-left: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: flex-start;
-}
-
-.commentReply{
-  padding-left: 8%;
-  margin-top: 0;
-  font-size: 0.95rem;
-}
-/*-------------Stuff---------------------*/
-.hidden{
-  display: none !important;
-}
-
-#overlay{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
 /*-------------------Profile Picture------------------*/
-#profilePictureContainer{
+/* #profilePictureContainer{
   border: 2px solid rgba(17, 0, 255, 0.5);
   position: relative;
   width: 25%;
@@ -580,6 +162,59 @@
   align-items: center;
   border-radius: 10px;
   color: white;
+} */
+
+#profilePage{
+  border: 2px solid black;
+  width: 65%;
+  height: 90%;
+  margin-top: 3%;
+  margin-left: 3%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  column-gap: 3%;
+}
+
+#profile-page-menu{
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-right: 2px solid black;
+}
+
+#general-title{
+  border-top: none;
+  border-bottom: 2px solid black;
+  height: 20px ;
+}
+
+#profile-page-menu div{
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-page-menu div:hover{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#profile-page-menu div > a{
+  text-decoration: none;
+  color: white;
+}
+
+#my-profile-contents{
+  width: 70%;
+  height: 70%;
+  border: 1px solid blue;
 }
 
 
