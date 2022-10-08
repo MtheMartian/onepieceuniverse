@@ -18,14 +18,38 @@
 <body>
   <main>
     <section id="profilePage">
-      <div id="profile-page-menu">
-        <div id="general-title">General</div>
-        <div><a href="/myprofile">My Profile</a></div>
-        <div><a href="/myprofile/changeusername">Change Username</a></div>
-        <div><a href="/myprofile/changeemail">Change Email</a></div>
-        <div><a href="/myprofile/changepassword">Change Password</a></div>
+      <div id="display-name">
+        <h2><%=user.userName%></h2>
       </div>
-      <div id="my-profile-contents"></div>
+      <div id="profile-page-menu">
+        <div id="profile-picture-container">
+          <img id="profile-picture" src="<%=user.profilePicture%>" alt="Picture">
+          <div id="change-profile-picture-overlay">
+            Edit
+          </div>
+          <form action="/myprofile/changeprofilepicture/<%=user.userID%>/upload/image?_method=PUT" 
+            method="POST" enctype="multipart/form-data" id="profilePictureUploadForm" class="hidden">
+          <input type="file" name="file" accept="image/*">
+          <button type="submit">Submit</button>
+          </form>
+        </div>
+        <div class="menu"><a href="/myprofile">My Profile</a></div>
+        <div class="menu"><a href="/myprofile/changeusername">Change Username</a></div>
+        <div class="menu"><a href="/myprofile/changeemail">Change Email</a></div>
+        <div class="menu"><a href="/myprofile/changepassword">Change Password</a></div>
+      </div>
+      <div id="my-profile-contents">
+        <div id="my-profile">
+            <div id="profile-page-summary">
+              <div id="summary">
+                <p>Here you will be able to edit your profile picture,
+                  change your user settings, view your created cards and edit them.
+                  You can also upload your own card images!
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <div class="updateCard hidden">
