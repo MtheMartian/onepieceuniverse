@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/profileusersettings.css">
-  <link rel="stylesheet" href="/css/generalheader.css">
-  <link rel="stylesheet" href="/css/profilepagemenu.css">
+  <link rel="stylesheet" href="/css/user_profile/myprofileusersettings.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/user_profile/profilepagemenu.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -14,28 +15,41 @@
 <body>
   <main>
     <section id="profilePage">
-      <section id="userSettings">
-        <form action="/myprofile/email?_method=PUT" method="POST" id="emailForm">
-          <label for="email">Email</label>
-          <input type="text" name="email" id="emailInput" value="<%=user.email%>">
-          <button type="submit">Change</button>
-        </form>
-        <nav id="menuContainer">
-          <div>General</div>
-          <div><a href="/myprofile">My Profile</a></div>
-          <div><a href="/myprofile/changeusername">Change Username</a></div>
-          <div><a href="/myprofile/changeemail">Change Email</a></div>
-          <div><a href="/myprofile/changepassword">Change Password</a></div>
-          <div><a href="/home">Home Page</a></div>
-          <div><a href="/">Welcome Page</a></div>
-        </nav>
-      </section>
+      <div id="display-name">
+        <h2><%=user.userName%>'s Profile</h2>
+      </div>
+      <div id="profile-page-menu">
+        <div id="profile-picture-container">
+          <img id="profile-picture" src="<%=user.profilePicture%>" alt="Picture">
+          <div id="change-profile-picture-overlay">
+            Edit
+          </div>
+          <form action="/myprofile/changeprofilepicture/<%=user.userID%>/upload/image?_method=PUT" 
+            method="POST" enctype="multipart/form-data" id="profilePictureUploadForm" class="hidden">
+          <input type="file" name="file" accept="image/*">
+          <button type="submit">Submit</button>
+          </form>
+        </div>
+        <div class="menu" id="myprofile-menu"><a href="/myprofile">My Profile</a></div>
+        <div class="menu" id="change-username"><a href="/myprofile/changeusername">Change Username</a></div>
+        <div class="menu" id="change-email" style="background:rgba(255, 255, 255, 0.2);"><a href="/myprofile/changeemail">Change Email</a></div>
+        <div class="menu" id="change-password"><a href="/myprofile/changepassword">Change Password</a></div>
+      </div>
+      <div id="my-profile-contents">
+        <div id="my-profile">
+          <div class="change-user-settings">
+            <p class="setting-title">Current Email: <%=user.email%></p>
+            <p class="setting-description">Here you'll be able to change your email.</p>
+            <form action="/myprofile/email?_method=PUT" method="POST" id="emailForm" class="setting-form">
+              <label for="email" class="setting-label">Email: </label>
+              <input type="text" name="email" id="emailInput" class="setting-input">
+              <button type="submit">Change</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
-  <header id="header">
-    <section id="leftSection">
-      <a href="/">One Piece Realm</a>
-    </section>
-  </header>
+  <%-include('./partials/header.ejs')%>
 </body>
 </html>

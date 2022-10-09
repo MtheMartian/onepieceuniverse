@@ -1,16 +1,4 @@
-/*--------------Character Cards------------------*/
-#searchedCards{
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding-left: 10%;
-  padding-top: 5%;
-  position: relative;
-}
-
+/*------------Cards-------------*/
 .cardInfo, .characterCard{
   display: flex;
   color: black;
@@ -31,8 +19,8 @@
   background-image: url("/images/rocks.webp");
   justify-content: center;
   align-items: center;
-  margin-bottom: 20%;
   position: relative;
+  margin: 15% 0 10% 9%;
 }
 
 .cardInfo, .cardName, .cardImg, .cardHaki{
@@ -62,12 +50,14 @@
   margin-bottom: -2.5%;
 }
 
-.cardSection{
+#myCards{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   width: 100%;
-  min-height: 100%;
-  padding: 2% 3% 2% 10%;
+  height: 100%;
+  overflow-y: auto;
+  border: none;
 }
 
 .fruitImg{
@@ -104,46 +94,8 @@
   color: rgb(101, 204, 238);
 }
 
-/*----------------Search bar------------------------*/
-#search-cards{
-  width: 30%;
-  margin-bottom: 2%;
-  margin-top: 2%;
-  position: relative;
-}
-
-#searchBar{
-  font-family: Arial;
-  font-size: 1.5rem;
-  width: 80%;
-  padding: 0.5%;
-  padding-left: 1%;
-  padding-right: 20%;
-  margin-bottom: 10px;
-  border: none;
-  background: rgba(0, 0, 0, 0);
-  outline: none;
-  color: black;
-  border-bottom: 2px solid rgba(255, 166, 0, 0.4);
-}
-
-#searchBar::placeholder{
-  color: black;
-}
-
-#searchBar:hover{
-  border-bottom: 2px solid rgba(255, 166, 0, 0.7);
-}
-
-#searchBar:focus{
-  border-bottom: 3px solid rgba(255, 166, 0, 1);
-}
-
-#clear-search{
-  color: black;
-  font-size: 1.5rem;
-  position: absolute;
-  right: 0;
-  top: 3%;
+/*--------------------------- My Profile -----------------------------*/
+#myprofile-menu{
+  background: rgba(255, 255, 255, 0.2);
 }
 

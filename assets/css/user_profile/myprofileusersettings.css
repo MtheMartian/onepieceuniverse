@@ -1,0 +1,176 @@
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*---------------------------- Profile settings ---------------------------*/
+#profilePage{
+  border: 2px solid black;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  column-gap: 3%;
+  position: relative;
+}
+
+#profile-page-menu{
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-right: 2px solid black;
+  background: rgba(0, 0, 0, 1);
+}
+
+.menu{
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu:hover{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#profile-page-menu div > a{
+  text-decoration: none;
+  color: white;
+}
+
+#my-profile-contents{
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#display-name{
+  position: absolute;
+  top: 0;
+  left: 45%;
+}
+
+#display-name h2{
+  font-size: 3rem;
+  color: rgb(228, 228, 228);
+}
+
+#my-profile{
+  width: 90%;
+  height: 80%;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.5);
+  background: rgb(31, 31, 31);
+  margin-top: 7%;
+  margin-left: -5%;
+}
+
+#my-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+.change-user-settings{
+  color: rgb(196, 196, 196);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.setting-title{
+  font-size: 2rem;
+}
+
+.setting-description, .setting-label{
+  font-size: 1.5rem;
+}
+
+.setting-input{
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.setting-form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.setting-form button{
+  font-size: 1.3rem;
+}
+
+/*-------------------Profile Picture------------------*/
+#profile-picture-container{
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15%;
+}
+
+#profile-picture{
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+}
+
+#change-profile-picture-overlay{
+  position: absolute;
+  top: 14.5%;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: azure;
+  opacity: 0;
+  font-size: 2rem;
+}
+
+#change-profile-picture-overlay:hover{
+  background: rgba(88, 87, 87, 0.5);
+  opacity: 1;
+}
+
+#profilePictureUploadForm{
+  z-index: 1;
+  background: rgb(0, 0, 0);
+  width: 130%;
+  height: 20%;
+  position: absolute;
+  top: 30%;
+  right: -145%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+
+}
+
+#profilePictureUploadForm > button{
+  font-size: 1.2rem;
+}

@@ -504,10 +504,10 @@ function openUploadImageForm(event){
   }
 }
 //--------------- Change Profile Picture --------------------------------
-document.getElementById('changeProfilePictureBox').addEventListener('click', openChangeProfilePictureForm);
+document.getElementById('change-profile-picture-overlay').addEventListener('click', openChangeProfilePictureForm);
 
 function openChangeProfilePictureForm(){
-  const changeProfilePictureBox = document.getElementById('changeProfilePictureBox');
+  const changeProfilePictureBox = document.getElementById('change-profile-picture-overlay');
   const profilePictureUploadForm = document.getElementById('profilePictureUploadForm');
   if(allConditions.isUploadFormOpen == false){
     profilePictureUploadForm.classList.remove('hidden');

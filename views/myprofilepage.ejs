@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/myprofilepage.css">
+  <link rel="stylesheet" href="css/user_profile/myprofilepage.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/forms.css">
   <link rel="stylesheet" href="css/general.css">
   <link rel="stylesheet" href="css/card_see_more.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profilepagemenu.css">
+  <link rel="stylesheet" href="css/user_profile/profilepagemenu.css">
+  <link rel="stylesheet" href="css/user_profile/myprofileusersettings.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -19,7 +20,7 @@
   <main>
     <section id="profilePage">
       <div id="display-name">
-        <h2><%=user.userName%></h2>
+        <h2><%=user.userName%>'s Profile</h2>
       </div>
       <div id="profile-page-menu">
         <div id="profile-picture-container">
@@ -33,21 +34,59 @@
           <button type="submit">Submit</button>
           </form>
         </div>
-        <div class="menu"><a href="/myprofile">My Profile</a></div>
+        <div class="menu" id="myprofile-menu"><a href="/myprofile">My Profile</a></div>
         <div class="menu"><a href="/myprofile/changeusername">Change Username</a></div>
         <div class="menu"><a href="/myprofile/changeemail">Change Email</a></div>
         <div class="menu"><a href="/myprofile/changepassword">Change Password</a></div>
       </div>
       <div id="my-profile-contents">
         <div id="my-profile">
-            <div id="profile-page-summary">
-              <div id="summary">
-                <p>Here you will be able to edit your profile picture,
-                  change your user settings, view your created cards and edit them.
-                  You can also upload your own card images!
-                </p>
-              </div>
-          </div>
+            <div id="myCards">
+              <%for(let i = 0; i < character.length; i++){%>
+                <%if(character[i].userID == user.userID){%>
+                  <div id="<%=character[i].id%>" class="characterCard">
+                    <div class="changeImageBox">
+                      Change
+                    </div>
+                    <form action="/myprofile/charactercard/<%=character[i].id%>/upload/image?_method=PUT" 
+                      method="POST" enctype="multipart/form-data" class="characterCardUploadImg hidden">
+                    <input type="file" name="file" accept="image/*">
+                    <button type="submit">Submit</button>
+                    </form>
+                    <div class="cardName">
+                      <span><%=character[i].charName%></span>
+                    </div>
+                    <div class="cardCharImg">
+                      <img class="cardImg" src=<%=character[i].imgURL%>>
+                    </div>
+                    <div class="cardHaki">
+                      <span><%=character[i].charhaki.hakiUsageLevel%></span>
+                    </div>
+                    <div class="cardInfo">
+                      <div class="cardRank">
+                        <span>Rank:</span><span><%=character[i].charRank%></span>
+                      </div>
+                      <div class="cardAge">
+                        <span><%=character[i].charAge%> years old</span>
+                      </div>
+                      <div class="cardFruitName">
+                        <img class="fruitImg" src="images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
+                      </div>
+                      <div class="cardFruitType">
+                        <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
+                      </div>
+                      <div class="cardBounty">
+                        <img class="bounty" src="images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
+                      </div>
+                      <div class="seeMore">
+                        <span class="characterInfo">See more</span>
+                      </div>
+                      <button class="editCard"><img class=editImg src="images/pencil.webp"></button>
+                    </div>
+                  </div>
+                <%}%>
+              <%}%>
+            </div> 
         </div>
       </div>
     </section>

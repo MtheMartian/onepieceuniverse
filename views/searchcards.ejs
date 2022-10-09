@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/card_see_more.css">
   <link rel="stylesheet" href="/css/forms.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/searchcards.css">
@@ -58,6 +59,10 @@
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
+      <form action="" method="POST" id="like-card-form">
+        <button type="submit" id="like-card-button">^</button>
+        <span></span>
+      </form>
       <button class="closeSeeMore">X</button>
     </div>
     <div id="characterAbilitiesDesc">
@@ -80,6 +85,9 @@
   <%-include('./partials/header.ejs')%>
     <div id="overlay" class="hidden"></div>
     <div class="dontmindme hidden"></div>
+  <script src="/js/main.js"></script>
+  <script src="/js/card_see_more.js"></script>
   <script src="/js/searchcards.js"></script>
+  <script src="/js/header.js"></script>
 </body>
 </html>

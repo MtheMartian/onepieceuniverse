@@ -19,7 +19,7 @@
   z-index: 1;
 }
 
-.closeIt, .closeSeeMore, #updateSeeMoreExitBtn{
+.closeIt, #updateSeeMoreExitBtn{
   border: none;
   font-family: Montserrat ExtraBold, Arial;
   color: white;
@@ -30,7 +30,7 @@
   transition: color 0.15s;
 }
 
-.closeIt:hover,.closeSeeMore:hover, #updateSeeMoreExitBtn:hover{
+.closeIt:hover, #updateSeeMoreExitBtn:hover{
   color: red;
 }
 

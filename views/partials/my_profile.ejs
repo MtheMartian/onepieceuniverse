@@ -1,0 +1,27 @@
+<section id="profilePage">
+  <div id="display-name">
+    <h2><%=user.userName%>'s Profile</h2>
+  </div>
+  <div id="profile-page-menu">
+    <div id="profile-picture-container">
+      <img id="profile-picture" src="<%=user.profilePicture%>" alt="Picture">
+      <div id="change-profile-picture-overlay">
+        Edit
+      </div>
+      <form action="/myprofile/changeprofilepicture/<%=user.userID%>/upload/image?_method=PUT" 
+        method="POST" enctype="multipart/form-data" id="profilePictureUploadForm" class="hidden">
+      <input type="file" name="file" accept="image/*">
+      <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="menu" id="myprofile-menu"><a href="/myprofile">My Profile</a></div>
+    <div class="menu" id="change-username"><a href="/myprofile/changeusername">Change Username</a></div>
+    <div class="menu" id="change-email"><a href="/myprofile/changeemail">Change Email</a></div>
+    <div class="menu" id="change-password"><a href="/myprofile/changepassword">Change Password</a></div>
+  </div>
+  <div id="my-profile-contents">
+    <div id="my-profile">
+  
+    </div>
+  </div>
+</section>

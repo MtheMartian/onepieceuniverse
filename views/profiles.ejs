@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/profilepage.css">
-  <link rel="stylesheet" href="/css/generalheader.css">
-  <link rel="stylesheet" href="/css/profilepagemenu.css">
+  <link rel="stylesheet" href="/css/user_profile/myprofilepage.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/forms.css">
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/card_see_more.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/user_profile/myprofileusersettings.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
@@ -14,71 +18,89 @@
 <body>
   <main>
     <section id="profilePage">
-      <div id="profilePictureContainer">
-        <img id="profilePicture" src="<%=user.profilePicture%>" alt="Picture">
+      <div id="display-name">
+        <h2><%=user.userName%>'s Cards</h2>
       </div>
-      <section id="userSettings">
-        <section id="myCardsSection">
-          <div id="myCards">
-            <%for(let i = 0; i < character.length; i++){%>
-              <%if(character[i].userID == user.userID){%>
-                <div id="<%=character[i].id%>" class="characterCard">
-                  <div class="cardName">
-                    <span><%=character[i].charName%></span>
+      <div id="profile-page-menu">
+        <div id="profile-picture-container">
+          <img id="profile-picture" src="<%=user.profilePicture%>" alt="Picture">
+        </div>
+      </div>
+      <div id="my-profile-contents">
+        <div id="my-profile">
+            <div id="myCards">
+              <%for(let i = 0; i < character.length; i++){%>
+                <%if(character[i].userID == user.userID){%>
+                  <div id="<%=character[i].id%>" class="characterCard">
+                    <div class="cardName">
+                      <span><%=character[i].charName%></span>
+                    </div>
+                    <div class="cardCharImg">
+                      <img class="cardImg" src=<%=character[i].imgURL%>>
+                    </div>
+                    <div class="cardHaki">
+                      <span><%=character[i].charhaki.hakiUsageLevel%></span>
+                    </div>
+                    <div class="cardInfo">
+                      <div class="cardRank">
+                        <span>Rank:</span><span><%=character[i].charRank%></span>
+                      </div>
+                      <div class="cardAge">
+                        <span><%=character[i].charAge%> years old</span>
+                      </div>
+                      <div class="cardFruitName">
+                        <img class="fruitImg" src="/images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
+                      </div>
+                      <div class="cardFruitType">
+                        <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
+                      </div>
+                      <div class="cardBounty">
+                        <img class="bounty" src="/images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
+                      </div>
+                      <div class="seeMore">
+                        <span class="characterInfo">See more</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="cardCharImg">
-                    <img class="cardImg" src=<%=character[i].imgURL%>>
-                  </div>
-                  <div class="cardHaki">
-                    <span><%=character[i].charhaki.hakiUsageLevel%></span>
-                  </div>
-                  <div class="cardInfo">
-                    <div class="cardRank">
-                      <span>Rank:</span><span><%=character[i].charRank%></span>
-                    </div>
-                    <div class="cardAge">
-                      <span><%=character[i].charAge%> years old</span>
-                    </div>
-                    <div class="cardFruitName">
-                      <img class="fruitImg" src="/images/fruit.webp"><span><%=character[i].charFruit.fruitName%></span>
-                    </div>
-                    <div class="cardFruitType">
-                      <span class="typeSpan">Type:</span><span><%=character[i].charFruit.fruitType%></span>
-                    </div>
-                    <div class="cardBounty">
-                      <img class="bounty" src="/images/Beli.webp"><span><%=character[i].description[0].bounty.bountyAmount%></span>
-                    </div>
-                    <div class="seeMore">
-                      <span class="characterInfo">See more</span>
-                    </div>
-                  </div>
-                </div>
+                <%}%>
               <%}%>
-            <%}%>
-          </div> 
-        </section>
-      </section>
-      <nav id="menuContainer">
-        <div>General</div>
-        <div><a href="/home">Home Page</a></div>
-        <div><a href="/">Welcome Page</a></div>
-      </nav>
+            </div> 
+        </div>
+      </div>
     </section>
   </main>
   <div id="characterMoreInfo" class="hidden">
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
+      <form action="" method="POST" id="like-card-form">
+        <button type="submit" id="like-card-button">^</button>
+        <span></span>
+      </form>
       <button class="closeSeeMore">X</button>
     </div>
-  </div>
-  <header id="header">
-    <section id="leftSection">
-      <a href="/">One Piece Realm</a>
+    <div id="characterAbilitiesDesc">
+    </div>
+    <section id="commentSection">
+      <div id="commentsTitle">
+        <span>Comments</span>
+      </div>
+      <%if(typeof user !== 'undefined'){%>
+        <form action="/home/postcomment" method="POST" id="postCommentForm">
+          <input type="text" name="comment" id="comment" placeholder="Comment...">
+          <input type="text" name="cardID" id="cardID" class="hidden" value="">
+          <button type="submit" id="postComment">Post</button>
+        </form>
+      <%}%>
+      <div id="comments">
+      </div>
     </section>
-  </header>
+  </div>
+  <%-include('./partials/header.ejs')%>
   <div id="overlay" class="hidden"></div>
   <div class="dontmindme hidden"></div>
-  <script src="/js/profiles.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/header.js"></script>
+  <script src="/js/card_see_more.js"></script>
 </body>
 </html>

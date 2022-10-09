@@ -59,7 +59,7 @@ module.exports = {
     }
   },
   getCurrentSignedInUser: (request, response) =>{
-    if(request.user !== null){
+    if(typeof request.user !== 'undefined'){
       response.send(request.user);
     }
   },
