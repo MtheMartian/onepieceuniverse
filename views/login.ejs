@@ -3,23 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/log_in_page.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>Join the Realm!</title>
 </head>
 <body>
-  <h1><%=welcomeMsg%></h1>
-  <form id="signIn" class="hidden" action="/signin" method="post">
-    <%- include('./partials/messages.ejs') %>
-    <section>
-      <label for="username">Username/E-mail:</label>
-      <input type="text" placeholder="E-Mail" id="username" name="email">
-    </section>
-    <section>
-      <label for="password">Password:</label>
-      <input type="password" placeholder="Password" id="password" name="password">
-    </section>
-    <button type="submit" id="signInBtn">Sign In</button>
-    <span>New?</span><a href="/page/signup" id="signUp">Sign Up</a>
-  </form>
+  <div class="login-wrapper">
+    <img src="/images/signin_logo1.png">
+    <h1>Sign In</h1>
+    <form id="signIn" class="hidden" action="/signin" method="post">
+      <%- include('./partials/messages.ejs') %>
+      <section class="login-inputs">
+        <span class="material-symbols-outlined">
+          mail
+          </span>
+        <input type="text" placeholder="Enter Email" id="username" name="email">
+      </section>
+      <section class="login-inputs">
+        <span class="material-symbols-outlined">
+          vpn_key
+          </span>
+        <input type="password" placeholder="Enter Password" id="password" name="password">
+      </section>
+      <button type="submit" id="signInBtn">Sign In</button>
+      <section id="login-new">
+        <span>New?</span><a href="/page/signup" id="signUp">Sign Up</a>
+      </section>
+    </form>
+  </div>
   <script src="/js/loginpage.js"></script>
 </body>
 </html>

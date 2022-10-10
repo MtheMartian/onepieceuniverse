@@ -1,0 +1,108 @@
+@import url('/css/reset_css.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap');
+
+body{
+  background: linear-gradient(to right , rgb(70, 70, 70), rgb(94, 94, 94));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Secular One', Arial;
+}
+
+.signup-wrapper{
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 750px;
+  width: 450px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.signup-wrapper::before{
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.07);
+  inset: 0;
+  transform: rotate(-5deg);
+  z-index: -1;
+  height: 750px;
+  width: 450px;
+}
+
+#title{
+  font-size: calc(2rem * 0.8);
+}
+
+.signup-wrapper img{
+  width: 40%;
+}
+
+#sign-up{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.signup-inputs{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.signup-inputs input{
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.8rem 3.5rem;
+  width: 100%;
+  border-radius: 20px;
+  transition: background 0.15s;
+}
+
+.signup-inputs span{
+  position: absolute;
+  left: 20px;
+  opacity: 0.5;
+  transition: background 0.15s;
+}
+
+.signup-inputs input:hover{
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.signup-inputs input:focus{
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.signup-inputs:hover span{
+  opacity: 1;
+}
+
+#signUpButton{
+  background: rgba(255, 187, 0, 0.8);
+  padding: 0.7rem 0.3rem;
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#signUpButton:hover{
+  background: rgba(255, 187, 0, 1);
+}
+
+#signUpButton:active{
+  transform: scale(0.8);
+}

@@ -3,38 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/signup_page.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>One Piece Realm</title>
 </head>
 <body>
-  <h1>Sign Up<h1>
-<section>
-  <%- include('./partials/messages.ejs') %>
-  <form action="/signup/newuser" method="POST">
-    <label for="username">Username</label>
-    <input type="text" placeholder="Username" 
-            id="username" name="userName"
-            value="<%= typeof userName != 'undefined' ? userName: '' %>">
-  </section>
-  <section>
-    <label for="email">E-mail</label>
-    <input type="text" placeholder="E-Mail" 
-            id="email" name="email"
-            value="<%= typeof email != 'undefined' ? email: '' %>">
-  </section>
-  <section>
-    <label for="password">Password</label>
-    <input type="password" placeholder="Password" 
-            id="password" name="password"
-            value="<%= typeof password != 'undefined' ? password: '' %>">
-  </section>
-  <section>
-    <label for="confpassword">Confirm</label>
-    <input type="password" placeholder="Password" 
-            id="confpassword" name="confirmPassword"
-            value="<%= typeof confirmPassword != 'undefined' ? confirmPassword: '' %>">
-  </section>
-  <button type="submit" id="signUpButton">Sign Up</button>
-</section>
+  <div class="signup-wrapper">
+    <img src="/images/signin_logo1.png">
+    <h1 id="title">Sign Up<h1>
+    <form action="/signup/newuser" method="POST" id="sign-up">
+      <%- include('./partials/messages.ejs') %>
+      <section class="signup-inputs">
+        <span class="material-symbols-outlined">
+          person
+          </span>
+        <input type="text" placeholder="Username" 
+                id="username" name="userName"
+                value="<%= typeof userName != 'undefined' ? userName: '' %>">
+      </section>
+      <section class="signup-inputs">
+        <span class="material-symbols-outlined">
+          mail
+          </span>
+        <input type="text" placeholder="Email" 
+                id="email" name="email"
+                value="<%= typeof email != 'undefined' ? email: '' %>">
+      </section>
+      <section class="signup-inputs">
+        <span class="material-symbols-outlined">
+          vpn_key
+          </span>
+        <input type="password" placeholder="Password" 
+                id="password" name="password"
+                value="<%= typeof password != 'undefined' ? password: '' %>">
+      </section>
+      <section class="signup-inputs">
+        <span class="material-symbols-outlined">
+          lock
+          </span>
+        <input type="password" placeholder="Confirm Password" 
+                id="confpassword" name="confirmPassword"
+                value="<%= typeof confirmPassword != 'undefined' ? confirmPassword: '' %>">
+      </section>
+      <button type="submit" id="signUpButton">Sign Up</button>
+    </form>
+  </div>
 <script src="/js/signuppage.js"></script>
 </body>
 </html>

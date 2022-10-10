@@ -4,13 +4,13 @@
   align-items: center;
   flex-direction: column;
   justify-content: start;
-  height: 90%;
+  height: 100vh;
   background-color: rgb(58, 58, 58);
   color: white;
   position: absolute;
-  top: 7%;
-  right: 15%;
-  width: 70%;
+  top: 0;
+  right: 0;
+  width: 100vw;
   overflow-y: scroll;
   scrollbar-color: blue;
   row-gap: 5rem;
@@ -91,8 +91,12 @@
 
 #like-card-form{
   position: absolute;
-  top: 10%;
-  left: 5%;
+  top: 20%;
+  left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /*Comment Section*/

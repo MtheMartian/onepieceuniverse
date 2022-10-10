@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>One Piece Realm</title>
 </head>
 <body>
@@ -91,6 +92,7 @@
       </div>
     </section>
   </main>
+  <%-include('./partials/create_card.ejs')%>
   <div class="updateCard hidden">
     <input type="text" id="charNameU" class="cardDisplayInfo" placeholder="Character Name">
     <input type="text" id="charAgeU" class="cardDisplayInfo" placeholder="Character Age">
@@ -111,13 +113,15 @@
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
-      <form action="" method="POST" id="like-card-form">
-        <button type="submit" id="like-card-button">^</button>
-        <span></span>
-      </form>
       <button id="editSeeMoreButton">Edit</button>
       <button class="closeSeeMore">X</button>
     </div>
+    <form action="" method="POST" id="like-card-form">
+      <button type="submit" id="like-card-button"><span class="material-symbols-outlined">
+        thumb_up
+        </span></button>
+      <span></span>
+    </form>
     <div id="characterAbilitiesDesc">
     </div>
     <section id="commentSection">

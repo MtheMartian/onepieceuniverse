@@ -19,6 +19,14 @@
   z-index: 1;
 }
 
+.addCharacter, .updateSeeMore{
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding-top: 0.3rem;
+}
+
 .closeIt, #updateSeeMoreExitBtn{
   border: none;
   font-family: Montserrat ExtraBold, Arial;
@@ -26,7 +34,7 @@
   font-size: 2rem;
   position: absolute;
   right: 3%;
-  top: 2%;
+  top: 0;
   transition: color 0.15s;
 }
 
@@ -36,11 +44,16 @@
 
 .cardDisplayInfo, .createChar{
   height: 2rem;
-  width: 30rem;
+  width: 90%;
   border-radius: 20px;
   padding: 0 0 0 1rem;
   border: 1px solid rgba(0, 0, 0, 0.8);
+  background:rgba(255, 255, 255, 0.8);
   transition: box-shadow 0.15s;
+}
+
+.cardDisplayInfo::placeholder, .createChar::placeholder{
+  color: black;
 }
 
 .cardDisplayInfo:hover, .createChar:hover{
@@ -48,7 +61,7 @@
 }
 /* Create Character Card Form */
 #isPirate, #isMarine{
-  width: 5%;
+  width: 35px;
   cursor: pointer;
 }
 
@@ -60,18 +73,18 @@
 }
 /* Update See More Form */
 .updateSeeMore{
-  padding: 3% 1% 2% 1% !important;
-  height: 75% !important;
+  padding: 3% 0 5% 0 !important;
   row-gap: 3rem;
-  top: 10%;
+  top: 4.7%;
   border: 2px solid black;
+  height: 88vh;
 }
 
 .optionGrouping{
   position: fixed;
   background: grey;
   height: 5%;
-  width: 37%;
+  width: 100vw;
   margin-left: 0.88%;
   margin-top: -5.5%;
   border-radius: 1px;
@@ -84,7 +97,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  min-height: 50%;
+  width: 80vw;
 }
 
 .abilityContainers, #abilitySection{
@@ -112,6 +126,7 @@
 
 #abilityDescription, #charDescription{
   height: 90%;
+  width: 90%;
   padding: 1rem;
   font-family: Arial;
 }
