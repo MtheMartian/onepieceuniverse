@@ -19,18 +19,18 @@
   <main>
     <section id="profilePage">
       <div id="display-name">
-        <h2><%=user.userName%>'s Cards</h2>
+        <h2><%=users.userName%>'s Cards</h2>
       </div>
       <div id="profile-page-menu">
         <div id="profile-picture-container">
-          <img id="profile-picture" src="<%=user.profilePicture%>" alt="Picture">
+          <img id="profile-picture" src="<%=users.profilePicture%>" alt="Picture">
         </div>
       </div>
       <div id="my-profile-contents">
         <div id="my-profile">
             <div id="myCards">
               <%for(let i = 0; i < character.length; i++){%>
-                <%if(character[i].userID == user.userID){%>
+                <%if(character[i].userID == users.userID){%>
                   <div id="<%=character[i].id%>" class="characterCard">
                     <div class="cardName">
                       <span><%=character[i].charName%></span>

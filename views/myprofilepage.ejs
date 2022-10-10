@@ -111,6 +111,10 @@
     <div id="characterSummary">
       <img id="bountyImg" src="" atl="Bounty" class="hidden"></img>
       <p id="charDesc"></p>
+      <form action="" method="POST" id="like-card-form">
+        <button type="submit" id="like-card-button">^</button>
+        <span></span>
+      </form>
       <button id="editSeeMoreButton">Edit</button>
       <button class="closeSeeMore">X</button>
     </div>
@@ -144,6 +148,10 @@
   <%-include('./partials/header.ejs')%>
   <div id="overlay" class="hidden"></div>
   <div class="dontmindme hidden"></div>
+  <script src="/js/main.js"></script>
+  <script src="/js/header.js"></script>
+  <script src="/js/card_see_more.js"></script>
   <script src="/js/myprofilepage.js"></script>
+  <script src="/js/update_more_info.js"></script>
 </body>
 </html>

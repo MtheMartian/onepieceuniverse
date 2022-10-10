@@ -251,7 +251,7 @@
       <%}%>
       <%if(typeof user !== 'undefined'){%>
         <div id="profilePictureContainer">
-          <div id="something-new">!</div>
+          <div id="something-new" class="hidden">!</div>
           <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
           <div class="tooltip">Profile</div>
           <div id="profileMenu" class="">
@@ -282,9 +282,17 @@
   </header>
     <div id="overlay" class="hidden"></div>
     <div class="dontmindme hidden"></div>
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
   <script src="/js/main.js"></script>
   <script src="/js/carousel.js"></script>
   <script src="/js/header.js"></script>
   <script src="/js/card_see_more.js"></script>
+  <script>
+    $(window).on("load",function(){
+      $(".loader-wrapper").fadeOut("slow");
+    });
+  </script>
 </body>
 </html>

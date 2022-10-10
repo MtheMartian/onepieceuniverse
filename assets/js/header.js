@@ -58,6 +58,7 @@ if(document.getElementById('inboxContainer') !== null){
     if(inboxConditions.isItOpen == false && document.getElementById('inbox').childElementCount > 0){
       const inbox = document.getElementById('inbox');
       inbox.classList.remove('hidden');
+      document.getElementById('something-new').classList.add('hidden');
       document.getElementById('inboxContainer').style.background = 'rgba(124, 124, 124, 0.7)';
       document.getElementById('inboxContainer').style.color = 'rgb(231, 231, 231)';
       inboxConditions.isItOpen = true;
@@ -107,6 +108,7 @@ async function appendCommentsToInbox(){
       markedSeen.className = 'mark-as-seen';
       markedSeen.action = `/home/inbox/markseen/${inboxComments.newComments[inboxComments.newComments.length-1-i]._id}?_method=PUT`
       markedSeen.method = 'POST';
+      markedSeen.id = inboxComments.newComments[inboxComments.newComments.length-1-i]._id;
       const seenButton = markedSeen.appendChild(button.cloneNode());
       seenButton.className = 'seen-button';
       seenButton.type = 'submit';
@@ -138,18 +140,36 @@ async function appendCommentsToInbox(){
     element.addEventListener('click', reloadInboxComments);
   })
 
+  Array.from(document.querySelectorAll('.postReplyForm')).forEach(element =>{
+    element.querySelector('.postReply').addEventListener('click', () =>{
+      const markedSeenForms = Array.from(document.querySelectorAll('.mark-as-seen'));
+      setTimeout(()=>{
+        for(let i = 0; i < markedSeenForms.length; i++){
+          if(element.action.includes(markedSeenForms[i].id)){
+            markedSeenForms[i].querySelector('button').click();
+          }
+        }
+      }, 700);
+    });  
+  });
+
   if(inbox.childElementCount == 0){
     inboxNotification.classList.add('hidden');
-    somethingNew.classList.add('hidden');
-
+  }
+  else if(inbox.childElementCount > 0 && inbox.childElementCount <= 2){
+    inboxNotification.textContent = `${inbox.childElementCount}`;
+    somethingNew.classList.remove('hidden');
+    inbox.style.overflowY = 'hidden';
   }
   else if(inbox.childElementCount > 0 && inbox.childElementCount <= 9){
     inboxNotification.textContent = `${inbox.childElementCount}`;
     inboxNotification.classList.remove('hidden');
+    somethingNew.classList.remove('hidden');
   }
   else if(inbox.childElementCount > 9){
     inboxNotification.textContent = '9+';
     inboxNotification.classList.remove('hidden');
+    somethingNew.classList.remove('hidden');
   }
 }
 

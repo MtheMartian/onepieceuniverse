@@ -124,12 +124,36 @@ module.exports = {
             cloudinaryId: result.public_id
           }
         }).lean();
+        
+        await Comments.updateMany({userID: request.params.userid}, {
+          '$set': {
+            userProfilePicture: result.secure_url,
+          }
+        });
+
+        await Reply.updateMany({userID: request.params.userid}, {
+          '$set': {
+            userProfilePic: result.secure_url,
+          }
+        });
       }
       else{
         await Users.findOneAndUpdate({userID: request.params.userid},{
           '$set': {
             profilePicture: result.secure_url,
             cloudinaryId: result.public_id
+          }
+        });
+
+        await Comments.updateMany({userID: request.params.userid}, {
+          '$set': {
+            userProfilePicture: result.secure_url,
+          }
+        });
+
+        await Reply.updateMany({userID: request.params.userid}, {
+          '$set': {
+            userProfilePic: result.secure_url,
           }
         });
       }
@@ -142,10 +166,11 @@ module.exports = {
   },
   getOthersProfile: async (request, response) =>{
     try{
-      const user = await Users.findOne({userID: request.params.id}).lean();
+      const users = await Users.findOne({userID: request.params.id}).lean();
       const cards = await Characters.find().lean();
+      const currentUser = request.user;
       
-      response.render('profiles.ejs', {user: user, character: cards});
+      response.render('profiles.ejs', {users: users, character: cards, user: currentUser});
     }
     catch(err){
       console.log(`Me no get. ${err}`);
