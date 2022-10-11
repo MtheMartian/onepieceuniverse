@@ -13,6 +13,8 @@ const characterCard = {
   characterId: "",
 }
 
+let currentUser = null;
+
 const generalButtons = {
   xOut: document.querySelectorAll('.closeIt'),
   hideIt: function(event){
@@ -39,6 +41,7 @@ function unHideIt(element){
 }
 
 whosStronger();
+getCurrentLoggedUser();
 
 Array.from(generalButtons.xOut).forEach((element) =>{
   element.onclick = generalButtons.hideIt;
@@ -219,5 +222,9 @@ function clearStorageOnSignOut(){
     catch(err){
       console.log(`No user logged in! I think... ${err}`);
     }
+  }
+
+  async function getCurrentLoggedUser(){
+      currentUser = await currentSignedInUser();
   }
 

@@ -31,11 +31,10 @@ async function seeMore(event){
   const characterMoreInfoDiv = document.querySelector('#characterMoreInfo');
   const characterAbilitiesDesc = document.getElementById('characterAbilitiesDesc');
   const likeCardForm = document.getElementById('like-card-form');
-  likeCardForm.action = `/character/likecard/${characterCard.characterId}?_method=PUT`;
   const numberOfLikesOnCard = document.querySelector('#like-card-form > span');
-  if(cardIdForComment !== null){
-    cardIdForComment.value = characterCard.characterId;
-  }
+  // if(cardIdForComment !== null){
+  //   cardIdForComment.value = characterCard.characterId;
+  // }
   await addCommentsToSection();
   console.log(event);
   if(customSeeMore.isItOpen){
@@ -46,6 +45,15 @@ async function seeMore(event){
         charDesc.textContent = characters.description[0].charDesc;
 
         numberOfLikesOnCard.textContent = `${characters.likes.numberOfLikes}`;
+        if(currentUser !== null){
+          const likeButton = document.querySelector('#like-card-button > span');
+          if(characters.likes.whoLiked.includes(currentUser.userID)){
+              likeButton.style.color = "rgb(136, 136, 255)";
+          }
+          else{
+            likeButton.style.color = "rgb(255, 255, 255)";
+          }
+        }
         
         for(let j = 0; j < characters.description[0].numAbilities.length; j++){
           
@@ -93,6 +101,34 @@ for(let j = 0; j < characters.description[0].numAbilities.length; j++){
     }
   } 
 }
+document.getElementById('like-card-button').addEventListener('click', submitLikeCardForm);
+document.getElementById('like-card-button').addEventListener('click', updateCardLikes);
+async function submitLikeCardForm(){
+  try{
+    const response = await fetch(`/character/likecard/${characterCard.characterId}`, {
+      method: 'PUT'
+    });
+  }
+  catch(err){
+    console.log(`Couldn't like! ${err}`);
+  }
+}
+
+async function updateCardLikes(){
+  const numberOfLikesOnCard = document.querySelector('#like-card-form > span');
+  const likeButton = document.querySelector('#like-card-button > span');
+  numberOfLikesOnCard.innerHTML = "";
+  setTimeout(async ()=>{
+    const characters = await getSpecificCharacter(characterCard.characterId);
+    numberOfLikesOnCard.textContent = `${characters.likes.numberOfLikes}`;
+      if(characters.likes.whoLiked.includes(currentUser.userID)){
+        likeButton.style.color = "rgb(136, 136, 255)";
+      }
+      else{
+        likeButton.style.color = "rgb(255, 255, 255)";
+      }
+  }, 500);
+}
 
 //--------------------- Get comments and replies ------------------------------
 async function getComments(){
@@ -126,6 +162,28 @@ if(document.getElementById('postComment') !== null){
   document.getElementById('postComment').addEventListener('click', reloadCommentSection);
 }
 
+if(document.getElementById('postComment') !== null){
+  document.getElementById('postComment').addEventListener('click', postAComment);
+}
+
+async  function postAComment(){
+  const comment = document.getElementById('comment').value;
+  const cardID = characterCard.characterId;
+  try{
+    const response = await fetch("/home/postcomment", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'comment': comment,
+        'cardID': cardID,
+      }),
+    });
+  }
+  catch(err){
+    console.log(`Couldn't Post Comment! ${err}`);
+  }
+}
+
 async function addCommentsToSection(){
   const commentsDiv = document.getElementById('comments');
   const div = document.createElement('div');
@@ -133,6 +191,7 @@ async function addCommentsToSection(){
   const span = document.createElement('span');
   const p = document.createElement('p');
   const form = document.createElement('form');
+  const section = document.createElement('section');
   const button = document.createElement('button');
   const input = document.createElement('input');
   const a = document.createElement('a');
@@ -166,20 +225,24 @@ async function addCommentsToSection(){
     const likeReplyContainer = commentContainer.appendChild(div.cloneNode());
     likeReplyContainer.className = "likeReplyContainer";
     if(typeof currentUser !== 'undefined'){
-      const upvoteContainer = likeReplyContainer.appendChild(form.cloneNode());
-      upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
-      upvoteContainer.method = "POST";
+      const upvoteContainer = likeReplyContainer.appendChild(section.cloneNode());
+      // upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
+      // upvoteContainer.method = "POST";
       upvoteContainer.class = "upvoteContainer";
       const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
-      upvoteButton.type = "submit";
-      upvoteButton.className = "upvoteButton";
-      const upvoteButtonImage = upvoteButton.appendChild(img.cloneNode());
-      upvoteButtonImage.src = "/images/dflag.webp";
+      // upvoteButton.type = "submit";
+      upvoteButton.id = commentsArr[commentsArr.length-1-i]._id;
+      upvoteButton.className = 'upvoteButton' ;
+      const upvoteButtonImage = upvoteButton.appendChild(span.cloneNode());
+      upvoteButtonImage.textContent = 'thumb_up';
+      // upvoteButtonImage.src = "/images/dflag.webp";
       upvoteButtonImage.alt = "flag";
-      upvoteButtonImage.className = "upvotePic";
-      const numberOfLikes = upvoteContainer.appendChild(span.cloneNode());
+      upvoteButtonImage.className = "material-symbols-outlined";
+      const numberOfLikes = upvoteButton.appendChild(span.cloneNode());
+      numberOfLikes.className = 'comment-like-button';
       numberOfLikes.textContent = `${commentsArr[commentsArr.length-1-i].likes.numberOfLikes}`;
     }
+
 
     if(typeof currentUser !== 'undefined'){
         const postReplyForm = likeReplyContainer.appendChild(form.cloneNode());
@@ -252,8 +315,20 @@ async function addCommentsToSection(){
   });
   
   Array.from(document.querySelectorAll('.upvoteButton')).forEach(element =>{
-    element.addEventListener('click', reloadCommentSection);
+    element.addEventListener('click', likeAComment);
   });
+}
+
+async function likeAComment(event){
+  console.log(event);
+  const specificCommentLikeButton = document.getElementById(`${event.currentTarget.id}`);
+  const response = await fetch(`/home/likecomment/${event.currentTarget.id}`, {
+    method: 'PUT',
+  });
+  const data = await response.json();
+  if(specificCommentLikeButton.id == data._id){
+    specificCommentLikeButton.querySelector('.comment-like-button').textContent = data.likes.numberOfLikes;
+  }
 }
 
 function openReplies(event){

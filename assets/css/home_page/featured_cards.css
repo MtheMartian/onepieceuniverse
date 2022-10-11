@@ -104,6 +104,18 @@ position: relative;
   color: rgb(101, 204, 238);
 }
 
+.featured-card-likes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.featured-likes{
+  padding-top: 7px;
+}
+
 /*----------- Featured Cards Carousel -----------------*/
 #featured-navigation{
   position: absolute;

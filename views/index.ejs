@@ -58,6 +58,12 @@
               </div>
             <div class="madeBy">
               <a href="/home/userprofile/<%=featured[i].userID%>" class="cardCreator"><%=featured[i].userName%></a>
+              <div class="featured-card-likes">
+                <span class="material-symbols-outlined">
+                  thumb_up
+                  </span>
+                <span class="featured-likes"><%=featured[i].likes.numberOfLikes%></span>
+                </div>
             </div>
           </div>
         </div>
@@ -194,12 +200,12 @@
       <p id="charDesc"></p>
       <button class="closeSeeMore">X</button>
     </div>
-    <form action="" method="POST" id="like-card-form">
-      <button type="submit" id="like-card-button"><span class="material-symbols-outlined">
+    <section id="like-card-form">
+      <button id="like-card-button"><span class="material-symbols-outlined">
         thumb_up
         </span></button>
       <span></span>
-    </form>
+      </section>
     <div id="characterAbilitiesDesc">
     </div>
     <section id="commentSection">
@@ -207,11 +213,10 @@
         <span>Comments</span>
       </div>
       <%if(typeof user !== 'undefined'){%>
-        <form action="/home/postcomment" method="POST" id="postCommentForm">
-          <input type="text" name="comment" id="comment" placeholder="Comment...">
-          <input type="text" name="cardID" id="cardID" class="hidden" value="">
-          <button type="submit" id="postComment">Post</button>
-        </form>
+        <section id="postCommentForm">
+          <input type="text" id="comment" placeholder="Comment...">
+          <button id="postComment">Post</button>
+        </section>
       <%}%>
       <div id="comments">
       </div>

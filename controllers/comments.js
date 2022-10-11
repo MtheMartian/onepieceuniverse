@@ -11,7 +11,7 @@ module.exports = {
         cardID: request.body.cardID,
       })
       console.log('Comment posted!');
-      // response.redirect('/home');
+      response.end();
     }
     catch(err){
       console.log(`Couldn't post the comment! ${err}`);
@@ -56,7 +56,7 @@ module.exports = {
           });
         }
       console.log('Upvoted!')
-      // response.redirect('/home');
+       response.send(comments);
     }
     catch(err){
       console.log(`Couldn't Upvote. ${err}`);

@@ -152,7 +152,7 @@ module.exports = {
         });
       }
     console.log('Upvoted!')
-    // response.redirect('/home');
+    response.end();
   }
   catch(err){
     console.log(`Couldn't Upvote. ${err}`);
