@@ -74,10 +74,13 @@ position: relative;
 }
 
 .featured-cards{
-  min-height: 100%;
-  min-width: 100%;
-  padding: 3% 0 5% 41%;
+  min-height: 600px;
+  min-width: 100vw;
+  /* padding: 3% 0 5% 41%; */
   /* background: rgba(255, 136, 0, 0.9); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url('/images/carousel_background5.webp');
   scroll-snap-align: start;
 }
@@ -145,4 +148,15 @@ position: relative;
   position: absolute;
   right: 32%;
   top: 35%;
+}
+
+/*------------------ Responsive ------------------------------*/
+@media only screen and (max-width: 700px){
+  #scroll-left, #scroll-right{
+    display: none;
+  }
+
+  /* .featured-cards{
+    padding: 3% 0 5% 7%; 
+  } */
 }

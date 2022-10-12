@@ -44,7 +44,7 @@ button{
   font-size: 2rem;
 }
 
-button:hover{
+button:not(.upvoteButton, .upvote-reply):hover{
   color: rgb(136, 136, 255);
 }
 

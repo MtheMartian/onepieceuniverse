@@ -13,9 +13,11 @@
     <section>
       <div><a href="/home">Home </a></div>
     </section>
-    <section>
-      <div><a href="/page/signin">Sign In</a></div>
-    </section>
+    <%if(typeof user === 'undefined'){%>
+      <section>
+        <div><a href="/page/signin">Sign In</a></div>
+      </section>
+    <%}%>
  </main>
 </body>
 </html>

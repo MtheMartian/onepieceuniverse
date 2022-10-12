@@ -6,7 +6,7 @@ let carouselInterval = setInterval(() =>{
 
  let carouselReset = setInterval(() =>{
   if(document.getElementById('featured-cards-section').scrollLeft >= 
-      document.getElementById('featured-cards-section').clientWidth * 4.5){
+      document.getElementById('featured-cards-section').clientWidth * 4){
       document.getElementById('featured-cards-section').scrollTo({
         left: 0,
         behavior: 'smooth',
@@ -63,7 +63,7 @@ document.getElementById('scroll-left').addEventListener('click', () =>{
 
  document.getElementById('fourth-slide').addEventListener('click', () =>{
   document.getElementById('featured-cards-section').scrollTo({
-    left: document.getElementById('featured-cards-section').clientWidth * 4,
+    left: document.getElementById('featured-cards-section').clientWidth * 3.7,
     behavior: 'smooth',
   });
  });

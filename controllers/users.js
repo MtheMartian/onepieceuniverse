@@ -99,12 +99,18 @@ postSignIn: async (request, response, next) =>{
   })(request, response, next);
 }, 
 getSignIn: async (request, response) =>{
-  try{
-    await response.render('login.ejs', {welcomeMsg: 'Conquer the world!'})
+  const user = request.user;
+  if(typeof user === 'undefined'){
+    try{
+      await response.render('login.ejs', {user: user});
+    }
+    catch(err){
+      console.log(err);
+    }  
   }
-  catch(err){
-    console.log(err);
-  }  
+  else{
+    response.redirect('/home');
+  }
 },
 signOut: (request, response, next) =>{
   request.logout(function(err) {

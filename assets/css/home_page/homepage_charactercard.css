@@ -89,3 +89,33 @@
 .characterInfo:hover{
   color: rgb(101, 204, 238);
 }
+
+/*----------------- All Cards Responsive --------------------*/
+@media only screen and (max-width: 768px){
+  .cardSection{
+    grid-template-columns: 1fr;
+    padding: 7% 0 0 20%;
+  }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 1140px){
+  .cardSection{
+    grid-template-columns: 1fr 1fr;
+    padding: 7% 0 0 7%;
+  }
+
+  .characterCard{
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1140px) and (max-width: 1700px){
+  .cardSection{
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 7% 0 0 1%;
+  }
+
+  .characterCard{
+    margin-right: 20px;
+  }
+}

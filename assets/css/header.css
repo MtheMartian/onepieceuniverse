@@ -201,6 +201,11 @@ header{
   width: 100%;
 }
 
+#actualMenu a{
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 #myProfile, #helpContainer, #inboxContainer{
   height: 40%;
   width: 98%;

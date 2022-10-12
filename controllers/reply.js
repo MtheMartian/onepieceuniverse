@@ -56,7 +56,7 @@ module.exports = {
           });
         }
       console.log('Upvoted!')
-      // response.redirect('/home');
+      response.send(replies);
     }
     catch(err){
       console.log(`Couldn't Upload. ${err}`);
