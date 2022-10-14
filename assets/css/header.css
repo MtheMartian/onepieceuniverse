@@ -32,7 +32,7 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15%;
+  width: 90px;
   transition: background 0.15s;
 }
 
@@ -54,9 +54,9 @@ header{
 }
 
 #grand-title{
-  width: 30%;
+  width: 300px;
   padding-left: 3%;
-  margin-right: 3%;
+  margin-right: 30px;
   height: 100%;
 }
 
@@ -71,7 +71,7 @@ header{
   display: flex;
   align-items: center;
   column-gap: 15%;
-  padding-right: 3%;
+  padding-right: 60px;
 }
 
 #signInFirst{
@@ -85,7 +85,7 @@ header{
 
 #createChar, .signInBtn, .signOut{
   color: white;
-  font-size: calc(0.7vw + 0.7rem);
+  font-size: calc(2rem * 0.8);
   border: 1px solid azure;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
@@ -330,5 +330,15 @@ header{
     opacity: 1;
   }
 
+/* --------------------- Responsive Font Size ------------------------ */
+@media only screen and (max-width: 800px){
+  #createChar, .signInBtn, .signOut{
+    font-size: calc(1rem * 0.8);
+  }
+
+  #learn-more-container{
+  width: 150px;
+}
+}
 
   

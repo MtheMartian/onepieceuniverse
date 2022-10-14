@@ -44,10 +44,6 @@ button{
   font-size: 2rem;
 }
 
-button:not(.upvoteButton, .upvote-reply):hover{
-  color: rgb(136, 136, 255);
-}
-
 /*-------------Stuff---------------------*/
 .hidden{
   display: none !important;

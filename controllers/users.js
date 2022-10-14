@@ -93,7 +93,7 @@ module.exports = {
 postSignIn: async (request, response, next) =>{
   // console.log(request);
   passport.authenticate('local', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/page/signin',
     failureFlash: true
   })(request, response, next);

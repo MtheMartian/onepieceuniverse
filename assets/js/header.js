@@ -82,6 +82,7 @@ async function appendCommentsToInbox(){
   const button = document.createElement('button');
   const inbox = document.getElementById('inbox');
   const p = document.createElement('p');
+  const section = document.createElement('section');
   const input = document.createElement('input');
   const inboxNotification = document.getElementById('inbox-notification');
   const somethingNew = document.getElementById('something-new');
@@ -104,14 +105,14 @@ async function appendCommentsToInbox(){
       const userName = whoCommented.appendChild(span.cloneNode());
       userName.textContent = `${inboxComments.newComments[inboxComments.newComments.length-1-i].userName}`;
 
-      const markedSeen = newComments.appendChild(form.cloneNode());
+      const markedSeen = newComments.appendChild(section.cloneNode());
       markedSeen.className = 'mark-as-seen';
-      markedSeen.action = `/home/inbox/markseen/${inboxComments.newComments[inboxComments.newComments.length-1-i]._id}?_method=PUT`
-      markedSeen.method = 'POST';
-      markedSeen.id = inboxComments.newComments[inboxComments.newComments.length-1-i]._id;
+      // markedSeen.action = `/home/inbox/markseen/${inboxComments.newComments[inboxComments.newComments.length-1-i]._id}?_method=PUT`
+      // markedSeen.method = 'POST';
       const seenButton = markedSeen.appendChild(button.cloneNode());
       seenButton.className = 'seen-button';
-      seenButton.type = 'submit';
+      seenButton.id = inboxComments.newComments[inboxComments.newComments.length-1-i]._id;
+      // seenButton.type = 'submit';
       seenButton.textContent = '\u2713';
 
       const newCommentInbox = newComments.appendChild(p.cloneNode());
@@ -120,37 +121,42 @@ async function appendCommentsToInbox(){
 
       const likeReplyContainer = newComments.appendChild(div.cloneNode());
       likeReplyContainer.className = 'likeReplyContainer';
-      const postReplyForm = likeReplyContainer.appendChild(form.cloneNode());
+      const postReplyForm = likeReplyContainer.appendChild(section.cloneNode());
       postReplyForm.className = "postReplyForm";
-      postReplyForm.action = `/home/reply/${inboxComments.newComments[inboxComments.newComments.length-1-i]._id}?_method=PUT`;
-      postReplyForm.method = "POST";
+      // postReplyForm.action = `/home/reply/${}?_method=PUT`;
+      // postReplyForm.method = "POST";
       const reply = postReplyForm.appendChild(input.cloneNode());
       reply.type = "text";
-      reply.name = "reply";
-      reply.id = 'reply'
+      // reply.name = "reply";
+      reply.id = 'reply';
       reply.placeholder = "Reply...";
+      reply.className = `inbox-reply-input${i}`;
       const postReply = postReplyForm.appendChild(button.cloneNode());
-      postReply.type = "submit";
+      // postReply.type = "submit";
+      postReply.id = inboxComments.newComments[inboxComments.newComments.length-1-i]._id;
       postReply.className = "postReply";
       postReply.textContent = "Reply";  
     }
   }
   
   Array.from(document.querySelectorAll('.seen-button')).forEach(element =>{
+    element.addEventListener('click', markedAsSeen);
     element.addEventListener('click', reloadInboxComments);
   })
 
-  Array.from(document.querySelectorAll('.postReplyForm')).forEach(element =>{
-    element.querySelector('.postReply').addEventListener('click', () =>{
-      const markedSeenForms = Array.from(document.querySelectorAll('.mark-as-seen'));
-      setTimeout(()=>{
-        for(let i = 0; i < markedSeenForms.length; i++){
-          if(element.action.includes(markedSeenForms[i].id)){
-            markedSeenForms[i].querySelector('button').click();
-          }
-        }
-      }, 700);
-    });  
+  Array.from(document.querySelectorAll('.postReply')).forEach(element =>{
+    element.addEventListener('click', inboxPostAReply);
+    element.addEventListener('click', reloadInboxComments);
+    // element.querySelector('.postReply').addEventListener('click', () =>{
+    //   const markedSeenForms = Array.from(document.querySelectorAll('.mark-as-seen'));
+    //   setTimeout(()=>{
+    //     for(let i = 0; i < markedSeenForms.length; i++){
+    //       if(element.action.includes(markedSeenForms[i].id)){
+    //         markedSeenForms[i].querySelector('button').click();
+    //       }
+    //     }
+    //   }, 700);
+    // });  
   });
 
   if(inbox.childElementCount == 0){
@@ -173,9 +179,47 @@ async function appendCommentsToInbox(){
   }
 }
 
+async function inboxPostAReply(event){
+  console.log(event);
+  const reply = document.querySelector(`.${event.path[1].childNodes[0].className}`).value;
+  try{
+    const response = await fetch(`/home/inboxreply/${event.currentTarget.id}`, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'reply': reply,
+      })
+    });
+  }
+  catch(err){
+    console.log(`Damn. ${err}`);
+  }
+}
+
+async function markedAsSeen(event){
+  try{
+    const response = await fetch(`/home/inbox/markseen/${event.currentTarget.id}`, {
+      method: 'PUT',
+    });
+  }
+  catch(err){
+    console.log(`!!! ${err}`);
+  }
+}
+
 async function reloadInboxComments(){
   setTimeout(async () =>{
     document.getElementById('inbox').innerHTML = "";
     await appendCommentsToInbox();
   }, 500);
 }
+
+// ---------------------- Left Section ----------------------------- //
+setInterval(() =>{
+  if(document.querySelector('body').clientWidth <= 800){
+    document.querySelector('#grand-title > a').textContent = 'OP';
+  }
+  else{
+    document.querySelector('#grand-title > a').textContent = 'One Piece Realm';
+  }
+}, 1000);

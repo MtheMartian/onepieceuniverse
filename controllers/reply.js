@@ -1,4 +1,5 @@
 const Reply = require('../models/Reply');
+const Comments = require('../models/Comments');
 
 module.exports = {
   getReplies: async (request, response) =>{
@@ -12,12 +13,34 @@ module.exports = {
   },
   postReply: async (request, response) =>{
     try{
-      Reply.create({
+      await Reply.create({
         comment: request.body.reply,
         userName: request.user.userName,
         userID: request.user.userID,
         userProfilePic: request.user.profilePicture,
         commentID: request.params.id,
+      })
+      console.log('Reply posted!');
+      // response.redirect('/home');
+    }
+    catch(err){
+      console.log(`Couldn't post reply! ${err}`);
+    }
+  },
+  markAsSeenAndReply: async (request, response) =>{
+    try{
+       await Reply.create({
+        comment: request.body.reply,
+        userName: request.user.userName,
+        userID: request.user.userID,
+        userProfilePic: request.user.profilePicture,
+        commentID: request.params.id,
+      });
+
+      await Comments.findOneAndUpdate({_id: request.params.id}, {
+        '$set': {
+          seen: true,
+        }
       })
       console.log('Reply posted!');
       // response.redirect('/home');

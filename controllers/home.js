@@ -30,14 +30,6 @@ module.exports = {
       console.log(`Where they at? ${err}`);
     }
   },
-  getWelcomePage: async (request, response) =>{
-    try{
-      await response.render('welcomepage.ejs');
-    }
-    catch(err){
-      console.log(err);
-    }  
-  },
   getSearchCardsPage: (request, response) =>{
     response.render('searchcards.ejs', {user: request.user});
   },
