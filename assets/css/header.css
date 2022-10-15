@@ -66,6 +66,44 @@ header{
   text-decoration: none;
 }
 
+/*Drop down menu*/
+#left-navigation-dropdown{
+  height: 50px;
+  width: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#left-navigation-dropdown > span{
+  color: white;
+  font-size: 2rem;
+  margin-top: 25px;
+}
+
+#left-navigation-menu{
+  background: rgba(19, 19, 19, 1);
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -114px;
+  left: -40px;
+  padding: 5px;
+  font-size: calc(1rem * 0.8);
+  gap: 5px;
+}
+
+#left-navigation-menu a{
+  text-decoration: none;
+  color: white;
+}
+
 /*------------------------ Right Section ---------------------- */
 #rightSection{
   display: flex;
@@ -331,14 +369,27 @@ header{
   }
 
 /* --------------------- Responsive Font Size ------------------------ */
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1260px){
   #createChar, .signInBtn, .signOut{
     font-size: calc(1rem * 0.8);
   }
 
-  #learn-more-container{
-  width: 150px;
+  #grand-title{
+    width: 100px;
+    padding-left: 3%;
+    margin-right: 0;
+    height: 100%;
+  }
+
+  #left-navigation{
+    display: none;
+  }
 }
+
+@media only screen and (min-width: 1260px){
+  #left-navigation-dropdown{
+    display: none;
+  }
 }
 
   

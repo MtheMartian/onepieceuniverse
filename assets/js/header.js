@@ -216,10 +216,25 @@ async function reloadInboxComments(){
 
 // ---------------------- Left Section ----------------------------- //
 setInterval(() =>{
-  if(document.querySelector('body').clientWidth <= 800){
+  if(document.querySelector('body').clientWidth <= 1260){
     document.querySelector('#grand-title > a').textContent = 'OP';
   }
   else{
     document.querySelector('#grand-title > a').textContent = 'One Piece Realm';
   }
-}, 1000);
+}, 10);
+
+const conditions = {
+  isMenuOpen: false,
+}
+
+document.getElementById('left-navigation-dropdown').addEventListener('click', () =>{
+  if(conditions.isMenuOpen == false){
+    document.getElementById('left-navigation-menu').classList.remove('hidden');
+    conditions.isMenuOpen = true;
+  }
+  else{
+    document.getElementById('left-navigation-menu').classList.add('hidden');
+    conditions.isMenuOpen = false;
+  }
+})
