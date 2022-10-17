@@ -20,6 +20,8 @@ function closeSeeMore(){
 async function seeMore(event){
   characterCard.characterId = event.path[3].id;
   const characters = await getSpecificCharacter(characterCard.characterId);
+  const comments = await getComments();
+  const replies = await getReplies();
   const bountyImg = document.querySelector('#bountyImg');
   const charDesc = document.querySelector('#charDesc');
   const imagery = document.createElement('iframe');
@@ -54,6 +56,26 @@ async function seeMore(event){
             likeButton.style.color = "rgb(255, 255, 255)";
           }
         }
+
+        if(currentUser !== null){
+          const commentLikeArr = Array.from(document.querySelectorAll('.upvoteButton'));
+          for(let i = 0; i < comments.length; i++){
+            if(comments[comments.length-1-i].likes.whoLiked.includes(currentUser.userID)){
+                document.getElementById(`${commentLikeArr[i].id}`).querySelector('.material-symbols-outlined').style.color = "rgb(136, 136, 255)"; 
+            }
+          }
+        }
+
+        setTimeout(() =>{
+          if(currentUser !== null){
+            const replyLikeArr = Array.from(document.querySelectorAll('.upvote-reply'));
+            for(let i = 0; i < replies.length; i++){
+              if(replies[replies.length-1-i].likes.whoLiked.includes(currentUser.userID)){
+                  document.getElementById(`${replies[replies.length-1-i]._id}`).querySelector('.material-symbols-outlined').style.color = "rgb(136, 136, 255)"; 
+              }
+            }
+          }
+        }, 500)
         
         for(let j = 0; j < characters.description[0].numAbilities.length; j++){
           
@@ -333,7 +355,7 @@ async function addCommentsToSection(){
 
   Array.from(document.querySelectorAll('.upvote-reply')).forEach(element =>{
     element.addEventListener('click', likeAReply);
-  })
+  });
 }
 
 async function likeAComment(event){
@@ -346,6 +368,14 @@ async function likeAComment(event){
   if(specificCommentLikeButton.id == data._id){
     specificCommentLikeButton.querySelector('.comment-like-button').textContent = data.likes.numberOfLikes;
   }
+  setTimeout(() =>{
+    if(data.likes.whoLiked.includes(currentUser.userID) == false){
+        specificCommentLikeButton.querySelector('.material-symbols-outlined').style.color = "rgb(136, 136, 255)";
+    }
+    else{
+      specificCommentLikeButton.querySelector('.material-symbols-outlined').style.color = "rgb(255, 255, 255)";
+    }
+  }, 500);
 }
 
 async function likeAReply(event){
@@ -358,6 +388,14 @@ async function likeAReply(event){
   if(specificReplyLikeButton.id == data._id){
     specificReplyLikeButton.querySelector('.reply-like-button').textContent = data.likes.numberOfLikes;
   }
+  setTimeout(() =>{
+    if(data.likes.whoLiked.includes(currentUser.userID) == false){
+        specificReplyLikeButton.querySelector('.material-symbols-outlined').style.color = "rgb(136, 136, 255)";
+    }
+    else{
+      specificReplyLikeButton.querySelector('.material-symbols-outlined').style.color = "rgb(255, 255, 255)";
+    }
+  }, 500);
   }
   catch(err){
     console.log(`:( ${err}`);
