@@ -104,6 +104,5 @@ document.getElementById('clear-search').addEventListener('click', () => {
 })
 
 //---------------------------- Page Styling ---------------------------//
-document.getElementById('search-container').classList.add('hidden');
 
 

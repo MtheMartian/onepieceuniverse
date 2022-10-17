@@ -93,7 +93,7 @@ header{
   align-items: center;
   position: absolute;
   bottom: -114px;
-  left: -47px;
+  left: -50px;
   padding: 5px;
   font-size: calc(1rem * 0.8);
   gap: 5px;
@@ -169,7 +169,7 @@ header{
 }
 
 #profilePictureContainer{
-  padding: 4% 4% 4% 4%;
+  padding: 4%;
   transition: background 0.05s;
   position: relative;
 }
@@ -202,16 +202,13 @@ header{
 #profileMenu{
   position: fixed;
   top: 7.9%;
-  right: 1.35%;
+  right: 26px;
   display: flex;
   flex-direction: column;
-  /* border: 2px solid black; */
-  border-top: none;
   height: 0;
   width: 0;
   background: rgb(25, 25, 32);
   color: rgb(231, 231, 231);
-  border-bottom-left-radius: 10px;
   opacity: 0;
   font-family: Secular One, Arial;
   transition: height 0.3s, width 0.3s, opacity 0.3s;
@@ -219,7 +216,7 @@ header{
 
 .expand{
   opacity: 1 !important;
-  height: 25% !important;
+  height: 300px !important;
   width: 300px !important;
 }
 
@@ -287,10 +284,10 @@ header{
     justify-content: start;
     align-items: flex-start;
     position: absolute;
-    left: -205.3%;
-    top: 1%;
-    height: 150%;
-    width: 200%;
+    right: 100%;
+    top: 0;
+    height: 400px;
+    width: 30vw;
     row-gap: 3rem;
     overflow-y: auto;
     overflow-x: hidden;
@@ -334,8 +331,8 @@ header{
   }
 
   #inbox-notification{
-    height: 28%;
-    width: 5%;
+    height: 15px;
+    width: 15px;
     border: 2px solid red;
     border-radius: 50%;
     background: red;
@@ -395,19 +392,19 @@ header{
   }
 
   #rightSection{
-    padding-right: 25px;
+    padding-right: 18px;
   }
 
   #profileMenu{
     top: 7%;
-    right: 0.9%;
+    right: 0;
   }
 
   #inbox{
-    left: -64.8%;
-    top: 219px;
-    height: 150%;
-    width: 480px;
+    right: 0;
+    top: 100%;
+    height: 400px;
+    width: 97vw;
   }
 }
 

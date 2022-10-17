@@ -121,9 +121,12 @@ position: relative;
 
 /*----------- Featured Cards Carousel -----------------*/
 #featured-navigation{
-  position: absolute;
-  top: 80%;
-  left: 50%;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   z-index: 1;
 }
 
@@ -140,23 +143,20 @@ position: relative;
 
 #scroll-left{
   position: absolute;
-  left: 36%;
+  left: 33%;
   top: 35%;
 }
 
 #scroll-right{
   position: absolute;
-  right: 32%;
+  right: 33%;
   top: 35%;
 }
 
 /*------------------ Responsive ------------------------------*/
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 1640px){
   #scroll-left, #scroll-right{
     display: none;
   }
 
-  /* .featured-cards{
-    padding: 3% 0 5% 7%; 
-  } */
 }

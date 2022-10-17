@@ -8,10 +8,8 @@ if(document.getElementById('profilePicture') !== null){
 function openProfileMenu(){
   const profilPicContainer = document.getElementById('profilePictureContainer');
   const profileMenu = document.getElementById('profileMenu');
-  const profileTooltip = document.querySelector('#profilePictureContainer .tooltip');
   const header = document.querySelector('header');
   if(allConditions.isProfileOpen == false){
-    profileTooltip.classList.add('hidden');
     profileMenu.classList.remove('hidden');
     setTimeout(lol, '1');
     profilPicContainer.classList.add('colorMyBackground');
@@ -20,7 +18,6 @@ function openProfileMenu(){
     allConditions.isProfileOpen = true;
   }
   else{
-    profileTooltip.classList.remove('hidden');
     profileMenu.classList.add('hidden');
     setTimeout(yoho, '1');
     profilPicContainer.classList.remove('colorMyBackground');
@@ -216,7 +213,7 @@ async function reloadInboxComments(){
 
 // ---------------------- Left Section ----------------------------- //
 setInterval(() =>{
-  if(document.querySelector('body').clientWidth <= 1260){
+  if(document.querySelector('body').clientWidth <= 1340){
     document.querySelector('#grand-title > a').textContent = 'OP';
   }
   else{

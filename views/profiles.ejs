@@ -98,7 +98,96 @@
       </div>
     </section>
   </div>
-  <%-include('./partials/header.ejs')%>
+  <header id="header">
+    <section id="leftSection">
+      <div id="grand-title">
+        <a href="/"></a>
+        <div id="left-navigation-dropdown"><span>&#129171</span>
+          <div id="left-navigation-menu" class="hidden">
+            <div id="learn-more-container">
+              <a href="https://onepiece.fandom.com/wiki/One_Piece_Wiki">
+                Learn More
+              </a>
+            </div>
+            <div id="manga-container">
+              <a href="https://www.viz.com/shonenjump/chapters/one-piece">
+                Manga
+              </a>
+            </div>
+            <div id="watch-container">
+              <a href="https://beta.crunchyroll.com/series/GRMG8ZQZR/one-piece">
+                Watch
+              </a>
+            </div>
+            <div id="search-container">
+              <a href="/home/searchcards">
+                Search
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="left-navigation">
+        <div id="learn-more-container">
+          <a href="https://onepiece.fandom.com/wiki/One_Piece_Wiki">
+            Learn More
+          </a>
+        </div>
+        <div id="manga-container">
+          <a href="https://www.viz.com/shonenjump/chapters/one-piece">
+            Manga
+          </a>
+        </div>
+        <div id="watch-container">
+          <a href="https://beta.crunchyroll.com/series/GRMG8ZQZR/one-piece">
+            Watch
+          </a>
+        </div>
+        <div id="search-container">
+          <a href="/home/searchcards">
+            Search
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="rightSection">
+      <button id="createChar">
+        Create
+        <div class="tooltip">Create a card</div>
+      </button>
+      <%if(typeof user === 'undefined'){%>
+        <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
+      <%}%>
+      <%if(typeof user !== 'undefined'){%>
+        <div id="profilePictureContainer">
+          <div id="something-new" class="hidden">!</div>
+          <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
+          <div id="profileMenu" class="">
+            <div id="currentUser">
+              <img id="profilePictureInMenu" src="<%=user.profilePicture%>" alt="Profile">
+              <span><%=user.userName%></span>
+            </div>
+            <div id="actualMenu">
+              <div id="myProfile">
+                <a href="/myprofile">My Profile</a>
+              </div>
+              <div id="helpContainer">
+                <a id="help">Help</a>
+              </div>
+              <div id="inboxContainer">Inbox
+                <div id="inbox-notification"></div>
+              </div>
+              <div id="inbox" class="hidden">
+              </div>
+            </div>
+            <div id="signOutSection">
+              <a href="/signout"><button class="signOut">Sign Out</button></a>
+            </div>
+          </div>
+        </div>
+      <%}%>
+    </section>
+  </header>
   <div id="overlay" class="hidden"></div>
   <div class="dontmindme hidden"></div>
   <script src="/js/main.js"></script>

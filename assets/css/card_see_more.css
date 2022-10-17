@@ -285,3 +285,39 @@
   margin-top: 0;
   font-size: 0.95rem;
 }
+
+/* ----------------------- Responsive ------------------------------*/
+@media only screen and (max-width: 800px){
+  #comments{
+    width: 90%;
+  }
+
+  #commentSection{
+    width: 100%;
+  }
+
+  #commentsTitle{
+    width: 90%;
+  }
+
+  #likeReplyContainer{
+    width: 100%;
+  }
+
+  #reply{
+    width: 90%;
+  }
+
+  .cardComment{
+    padding-left: 12%;
+  }
+
+  .commentReply{
+    padding-left: 20%;
+  }
+
+  .abilityTrailerContainer{
+    height: 20rem;
+    width: 20rem;
+  }
+}

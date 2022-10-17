@@ -99,3 +99,16 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+/*---------------------------- Responsive -----------------------------------*/
+@media only screen and (max-width: 900px){
+  #myCards{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (min-width: 870px) and (max-width: 1600px){
+  #myCards{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+

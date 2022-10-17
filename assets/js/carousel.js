@@ -63,7 +63,7 @@ document.getElementById('scroll-left').addEventListener('click', () =>{
 
  document.getElementById('fourth-slide').addEventListener('click', () =>{
   document.getElementById('featured-cards-section').scrollTo({
-    left: document.getElementById('featured-cards-section').clientWidth * 3.7,
+    left: document.getElementById('featured-cards-section').clientWidth * 3,
     behavior: 'smooth',
   });
  });

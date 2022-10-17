@@ -68,6 +68,7 @@
   width: 100%;
   min-height: 100%;
   padding: 2% 3% 2% 10%;
+  justify-content: center;
 }
 
 .fruitImg{
@@ -145,5 +146,43 @@
   position: absolute;
   right: 0;
   top: 3%;
+}
+
+/* -------------------- Responsive --------------------------*/
+@media only screen and (max-width: 800px){
+  #search-cards{
+    width: 350px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .cardSection{
+    grid-template-columns: 1fr;
+    padding: 7% 0 0 15%;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1140px){
+  .cardSection{
+    grid-template-columns: 1fr 1fr;
+    padding: 7% 0 0 7%;
+  }
+
+  .characterCard{
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1140px) and (max-width: 1700px){
+  .cardSection{
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 7% 0 0 10%;
+  }
+
+  .characterCard{
+    margin-right: 20px;
+  }
 }
 
