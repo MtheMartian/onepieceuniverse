@@ -238,8 +238,9 @@ main{
   }
 
   #my-profile-contents{
-    width: 98%;
-    margin-left: 20px;
+    min-width: 102%;
+    margin-left: 5px;
+    padding-right: 5px;
   }
 
   .setting-title{
