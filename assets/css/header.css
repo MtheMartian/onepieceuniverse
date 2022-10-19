@@ -80,8 +80,9 @@ header{
 
 #left-navigation-dropdown > span{
   color: white;
-  font-size: 2rem;
-  margin-top: 25px;
+  font-size: 1rem;
+  margin-top: 0;
+  font-family: Arial;
 }
 
 #left-navigation-menu{
@@ -92,8 +93,8 @@ header{
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: -114px;
-  left: -50px;
+  bottom: -100px;
+  left: -10px;
   padding: 5px;
   font-size: calc(1rem * 0.8);
   gap: 5px;
