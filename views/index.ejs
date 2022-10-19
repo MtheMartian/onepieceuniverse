@@ -275,10 +275,18 @@
       </div>
     </section>
     <section id="rightSection">
-      <button id="createChar">
-        Create
-        <div class="tooltip">Create a card</div>
-      </button>
+      <%if(typeof user !== 'undefined'){%>
+        <button id="createChar">
+          Create
+          <div class="tooltip">Create a card</div>
+        </button>
+      <%}%>
+      <%if(typeof user === 'undefined'){%>
+        <button id="createChar">
+          <a href="/page/signin">Create</a>
+          <div class="tooltip">Create a card</div>
+        </button>
+      <%}%>
       <%if(typeof user === 'undefined'){%>
         <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
       <%}%>
