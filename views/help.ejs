@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/help.css">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Secular+One&display=swap" rel="stylesheet">
+  <title>Questions!</title>
+</head>
+<body>
+  <main>
+    <div id="page-title">
+      <h1>I got questions!</h1>
+    </div>
+    <ul>
+      <div class="questions-container">
+        <div class="question">
+          <h2>Can I change the number of abilities?</h2>
+        </div>
+        <div class="answer">
+          <p>No. In order to change them, you'll need to re-create the card</p>
+        </div>
+      </div>
+      <div class="questions-container">
+        <div class="question">
+          <h2>Can I change the card's picture?</h2>
+        </div>
+        <div class="answer">
+          <p>Yup. Go to "My Profile" by clicking on your profile picture 
+            and click on the cards picture.
+          </p>
+        </div>
+      </div>
+      <div class="questions-container">
+        <div class="question">
+          <h2>How do I switch between videos and images?</h2>
+        </div>
+        <div class="answer">
+          <p>After clicking on "Edit" in See More (My Profile), click on the "Click Me!" button.</p>
+        </div>
+      </div>
+      <div class="questions-container">
+        <div class="question">
+          <h2>How do I actually add a video?</h2>
+        </div>
+        <div class="answer">
+          <p>
+            1. Go to Youtube. 
+          </p>
+          <p>
+            2. Search for your video. 
+          </p>
+          <p>
+            3. Right click the on video and select "Copy embed code". 
+          </p>
+          <P>
+            4. You'll get something like this: iframe width="1903" height="792" src="https://www.youtube.com/embed/t6N5GmiSIaY" title="2022 Porsche 911 GT3 (Manual) - POV Night Drive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreeniframe. 
+          </P>
+          <p>
+            5. Use the link from src: https://www.youtube.com/embed/t6N5GmiSIaY.
+          </p>
+        </div>
+      </div>
+    </ul>
+  </main>
+  <header id="header">
+    <section id="leftSection">
+      <div id="grand-title">
+        <a href="/"></a>
+        <div id="left-navigation-dropdown"><span>&#129171</span>
+          <div id="left-navigation-menu" class="hidden">
+            <div id="learn-more-container">
+              <a href="https://onepiece.fandom.com/wiki/One_Piece_Wiki">
+                Learn More
+              </a>
+            </div>
+            <div id="manga-container">
+              <a href="https://www.viz.com/shonenjump/chapters/one-piece">
+                Manga
+              </a>
+            </div>
+            <div id="watch-container">
+              <a href="https://beta.crunchyroll.com/series/GRMG8ZQZR/one-piece">
+                Watch
+              </a>
+            </div>
+            <div id="search-container">
+              <a href="/home/searchcards">
+                Search
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="left-navigation">
+        <div id="learn-more-container">
+          <a href="https://onepiece.fandom.com/wiki/One_Piece_Wiki">
+            Learn More
+          </a>
+        </div>
+        <div id="manga-container">
+          <a href="https://www.viz.com/shonenjump/chapters/one-piece">
+            Manga
+          </a>
+        </div>
+        <div id="watch-container">
+          <a href="https://beta.crunchyroll.com/series/GRMG8ZQZR/one-piece">
+            Watch
+          </a>
+        </div>
+        <div id="search-container">
+          <a href="/home/searchcards">
+            Search
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="rightSection">
+      <%if(typeof user === 'undefined'){%>
+        <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
+      <%}%>
+      <%if(typeof user !== 'undefined'){%>
+        <div id="profilePictureContainer">
+          <div id="something-new" class="hidden">!</div>
+          <img id="profilePicture" src="<%=user.profilePicture%>" alt="Profile">
+          <div id="profileMenu" class="">
+            <div id="currentUser">
+              <img id="profilePictureInMenu" src="<%=user.profilePicture%>" alt="Profile">
+              <span><%=user.userName%></span>
+            </div>
+            <div id="actualMenu">
+              <div id="myProfile">
+                <a href="/myprofile">My Profile</a>
+              </div>
+              <div id="helpContainer">
+                <a id="help" href="/home/help">Help</a>
+              </div>
+              <div id="inboxContainer">Inbox
+                <div id="inbox-notification"></div>
+              </div>
+              <div id="inbox" class="hidden">
+              </div>
+            </div>
+            <div id="signOutSection">
+              <a href="/signout"><button class="signOut">Sign Out</button></a>
+            </div>
+          </div>
+        </div>
+      <%}%>
+    </section>
+  </header>
+  <div id="overlay" class="hidden"></div>
+  <div class="dontmindme hidden"></div>
+  <script src="/js/main.js"></script>
+  <script src="/js/header.js"></script>
+</body>
+</html>

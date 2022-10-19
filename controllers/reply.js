@@ -4,7 +4,7 @@ const Comments = require('../models/Comments');
 module.exports = {
   getReplies: async (request, response) =>{
     try{
-      const replies = await Reply.find().lean();
+      const replies = await Reply.find({cardID: request.params.id}).lean();
       response.send(replies);
     }
     catch(err){
@@ -19,6 +19,7 @@ module.exports = {
         userID: request.user.userID,
         userProfilePic: request.user.profilePicture,
         commentID: request.params.id,
+        cardID: request.body.cardID,
       })
       console.log('Reply posted!');
       // response.redirect('/home');

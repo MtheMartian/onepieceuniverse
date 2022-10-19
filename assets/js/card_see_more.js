@@ -57,7 +57,7 @@ async function seeMore(event){
           }
         }
 
-        if(currentUser !== null){
+        if(currentUser !== null && comments.length > 0){
           const commentLikeArr = Array.from(document.querySelectorAll('.upvoteButton'));
           for(let i = 0; i < comments.length; i++){
             if(comments[comments.length-1-i].likes.whoLiked.includes(currentUser.userID)){
@@ -67,7 +67,7 @@ async function seeMore(event){
         }
 
         setTimeout(() =>{
-          if(currentUser !== null){
+          if(currentUser !== null && replies.length > 0){
             const replyLikeArr = Array.from(document.querySelectorAll('.upvote-reply'));
             for(let i = 0; i < replies.length; i++){
               if(replies[replies.length-1-i].likes.whoLiked.includes(currentUser.userID)){
@@ -168,7 +168,7 @@ async function getComments(){
 
 async function getReplies(){
   try{
-    const response = await fetch('/replies',{
+    const response = await fetch(`/replies/${characterCard.characterId}`,{
       method: 'get'
     });
     const replies = response.json();
@@ -411,6 +411,7 @@ async function postAReply(event){
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         'reply': reply,
+        'cardID': characterCard.characterId,
       })
     });
   }

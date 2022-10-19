@@ -81,4 +81,8 @@ module.exports = {
       }
     }
   },
+  getHelp: (request, response) =>{
+    const user = request.user;
+    response.render('help.ejs', {user: user});
+  }
 }

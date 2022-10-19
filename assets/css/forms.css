@@ -3,15 +3,10 @@
   background: rgba(37, 37, 37, 1);
   display: flex;
   position: absolute;
-  top: 4%;
-  left: 30%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 35%;
-  height: 90%;
   row-gap: 1rem;
-  border-radius: 8px;
   overflow-y: scroll;
   font-family: Secular One, Arial;
   color: white;
@@ -19,7 +14,7 @@
   z-index: 1;
 }
 
-.addCharacter, .updateSeeMore{
+.addCharacter, .updateSeeMore, .updateCard{
   width: 100vw;
   height: 100vh;
   left: 0;
@@ -67,17 +62,13 @@
 
 /* Card Update Form */
 .updateCard{
-  top: 10% !important;
-  padding: 2% 1% 0 1% !important;
-  height: 80% !important;
+  padding: 50px 1% 0 1% !important;
 }
 /* Update See More Form */
 .updateSeeMore{
   padding: 3% 0 5% 0 !important;
-  row-gap: 3rem;
+  row-gap: 0;
   top: 4.7%;
-  border: 2px solid black;
-  height: 88vh;
 }
 
 .optionGrouping{
@@ -98,7 +89,8 @@
   justify-content: flex-start;
   align-items: center;
   min-height: 50%;
-  width: 80vw;
+  width: 40vw;
+  margin-bottom: 120px;
 }
 
 .abilityContainers, #abilitySection{
@@ -173,4 +165,28 @@
 .changeImageBox:hover{
   background: rgba(88, 87, 87, 0.4);
   opacity: 1;
+}
+
+/* --------------------------- Responsive ------------------------------ */
+@media only screen and (max-width: 800px){
+  #abilitySection, .abilityContainers {
+    width: 90vw;
+    margin-bottom: 100px;
+  }
+
+  .updateSeeMore{
+    margin-bottom: 900px;
+  }
+
+  .optionGrouping{
+    top: 24px;
+    margin-left: 16px;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px){
+  .optionGrouping{
+    top: 22px;
+    margin-left: 2px;
+  }
 }

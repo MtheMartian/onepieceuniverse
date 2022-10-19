@@ -121,3 +121,14 @@ body{
 #login-new a:hover{
   text-decoration: underline;
 }
+
+/* --------------------------- Responsive ---------------------------------- */
+@media only screen and (max-width: 800px){
+  .login-wrapper{
+    width: 380px;
+  }
+
+  .login-wrapper:before{
+    width: 380px;
+  }
+}
