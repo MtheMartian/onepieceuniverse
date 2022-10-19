@@ -2,7 +2,7 @@
 let carouselInterval = setInterval(() =>{
   document.getElementById('featured-cards-section').scrollLeft += 
   document.getElementById('featured-cards-section').clientWidth;
- }, 10000);
+ }, 7000);
 
  let carouselReset = setInterval(() =>{
   if(document.getElementById('featured-cards-section').scrollLeft >= 
@@ -15,9 +15,9 @@ let carouselInterval = setInterval(() =>{
     carouselInterval = setInterval(() =>{
     document.getElementById('featured-cards-section').scrollLeft += 
     document.getElementById('featured-cards-section').clientWidth;
-   }, 10000);
+   }, 7000);
    }
- }, 13000);
+ }, 10000);
 
 document.getElementById('scroll-left').addEventListener('click', () =>{
   document.getElementById('featured-cards-section').scrollLeft -= 
@@ -27,7 +27,7 @@ document.getElementById('scroll-left').addEventListener('click', () =>{
   carouselInterval = setInterval(() =>{
     document.getElementById('featured-cards-section').scrollLeft += 
     document.getElementById('featured-cards-section').clientWidth;
-   }, 10000);
+   }, 7000);
  });
 
  document.getElementById('scroll-right').addEventListener('click', () =>{
@@ -37,7 +37,7 @@ document.getElementById('scroll-left').addEventListener('click', () =>{
   carouselInterval = setInterval(() =>{
     document.getElementById('featured-cards-section').scrollLeft += 
     document.getElementById('featured-cards-section').clientWidth;
-   }, 10000);
+   }, 7000);
  });
 
  document.getElementById('first-slide').addEventListener('click', () =>{
