@@ -175,10 +175,6 @@
   object-position: top;
 }
 
-.cardComment{
-  padding-left: 5%;
-}
-
 .upvoteContainer{
   padding-left: 4%;
 }
@@ -186,6 +182,7 @@
 .cardComment{
   margin-top: 0;
   font-size: 0.95rem;
+  padding-left: 50px;
 }
 
 .upvotePic{
@@ -281,7 +278,7 @@
 }
 
 .commentReply{
-  padding-left: 8%;
+  padding-left: 50px;
   margin-top: 0;
   font-size: 0.95rem;
 }

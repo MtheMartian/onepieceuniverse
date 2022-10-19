@@ -114,7 +114,7 @@
     </section>
     <section id="rightSection">
       <button id="createChar">
-        Create
+        <a href="/myprofile">Create</a>
         <div class="tooltip">Create a card</div>
       </button>
       <%if(typeof user === 'undefined'){%>
@@ -134,7 +134,7 @@
                 <a href="/myprofile">My Profile</a>
               </div>
               <div id="helpContainer">
-                <a id="help">Help</a>
+                <a id="help" href="/home/help">Help</a>
               </div>
               <div id="inboxContainer">Inbox
                 <div id="inbox-notification"></div>
@@ -150,6 +150,8 @@
       <%}%>
     </section>
   </header>
+  <div id="overlay" class="hidden"></div>
+  <div class="dontmindme hidden"></div>
   <script src="/js/main.js"></script>
   <script src="/js/header.js"></script>
   <script src="/js/myprofilepage.js"></script>

@@ -139,6 +139,11 @@ header{
   opacity: 1;
 }
 
+#createChar a{
+  text-decoration: none;
+  color: white;
+}
+
 .signInBtn{
   width: 150%;
 }

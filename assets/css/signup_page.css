@@ -107,6 +107,13 @@ body{
   transform: scale(0.8);
 }
 
+#send-home{
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color:rgba(255, 187, 0, 1);
+}
+
 /* -------------------------- Responsive --------------------------------- */
 @media only screen and (max-width: 800px){
   .signup-wrapper{

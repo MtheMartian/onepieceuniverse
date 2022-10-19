@@ -43,6 +43,16 @@
       </div>
       <div class="questions-container">
         <div class="question">
+          <h2>Where can I edit my stuff?</h2>
+        </div>
+        <div class="answer">
+          <p>Click on your profile picture and select "My Profile". 
+            In there, you'll be able to edit everything.
+          </p>
+        </div>
+      </div>
+      <div class="questions-container">
+        <div class="question">
           <h2>How do I actually add a video?</h2>
         </div>
         <div class="answer">
@@ -118,6 +128,10 @@
       </div>
     </section>
     <section id="rightSection">
+      <button id="createChar">
+        <a href="/myprofile">Create</a>
+        <div class="tooltip">Create a card</div>
+      </button>
       <%if(typeof user === 'undefined'){%>
         <a href="/page/signin"><button class="signInBtn">Sign In</button></a>
       <%}%>

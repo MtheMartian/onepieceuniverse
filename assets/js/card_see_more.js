@@ -34,9 +34,6 @@ async function seeMore(event){
   const characterAbilitiesDesc = document.getElementById('characterAbilitiesDesc');
   const likeCardForm = document.getElementById('like-card-form');
   const numberOfLikesOnCard = document.querySelector('#like-card-form > span');
-  // if(cardIdForComment !== null){
-  //   cardIdForComment.value = characterCard.characterId;
-  // }
   await addCommentsToSection();
   console.log(event);
   if(customSeeMore.isItOpen){
@@ -115,7 +112,6 @@ for(let j = 0; j < characters.description[0].numAbilities.length; j++){
   let arrayGalore = characters.description[0].numAbilities[j].viewType;
     if(arrayGalore === "Video"){
       document.getElementById(`image${j}`).classList.add('hidden');
-      //document.getElementById(`trailer${j}`).classList.remove('hidden');
     }
     else if(arrayGalore === "Image"){
       document.getElementById(`trailer${j}`).classList.add('hidden');
@@ -253,19 +249,14 @@ async function addCommentsToSection(){
     //Likes and reply form
     const likeReplyContainer = commentContainer.appendChild(div.cloneNode());
     likeReplyContainer.className = "likeReplyContainer";
-    if(typeof currentUser !== 'undefined'){
+    if(currentUser !== null){
       const upvoteContainer = likeReplyContainer.appendChild(section.cloneNode());
-      // upvoteContainer.action = `/home/likecomment/${commentsArr[commentsArr.length-1-i]._id}?_method=PUT`;
-      // upvoteContainer.method = "POST";
       upvoteContainer.class = "upvoteContainer";
       const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
-      // upvoteButton.type = "submit";
       upvoteButton.id = commentsArr[commentsArr.length-1-i]._id;
       upvoteButton.className = 'upvoteButton' ;
       const upvoteButtonImage = upvoteButton.appendChild(span.cloneNode());
       upvoteButtonImage.textContent = 'thumb_up';
-      // upvoteButtonImage.src = "/images/dflag.webp";
-      // upvoteButtonImage.alt = "flag";
       upvoteButtonImage.className = "material-symbols-outlined";
       const numberOfLikes = upvoteButton.appendChild(span.cloneNode());
       numberOfLikes.className = 'comment-like-button';
@@ -273,19 +264,15 @@ async function addCommentsToSection(){
     }
 
 
-    if(typeof currentUser !== 'undefined'){
+    if(currentUser !== null){
         const postReplyForm = likeReplyContainer.appendChild(section.cloneNode());
         postReplyForm.className = "postReplyForm";
-        // postReplyForm.action = `/home/reply/${}?_method=PUT`;
-        // postReplyForm.method = "POST";
         const reply = postReplyForm.appendChild(input.cloneNode());
         reply.type = "text";
-        // reply.name = "reply";
         reply.id = "reply";
         reply.placeholder = "Reply...";
         reply.className = `reply-input-${i}`;
         const postReply = postReplyForm.appendChild(button.cloneNode());
-        // postReply.type = "submit";
         postReply.className = "postReply";
         postReply.textContent = "Reply";  
         postReply.id = commentsArr[commentsArr.length-1-i]._id;
@@ -317,19 +304,14 @@ async function addCommentsToSection(){
         const commentReply = actualReplyContainer.appendChild(p.cloneNode());
         commentReply.className = "commentReply";
         commentReply.textContent = repliesArr[repliesArr.length-1-j].comment;
-        if(typeof currentUser !== 'undefined'){
+        if(currentUser !== null){
           const upvoteContainer = actualReplyContainer.appendChild(section.cloneNode());
-          // upvoteContainer.action = 
-          // upvoteContainer.method = "POST";
           upvoteContainer.class = "upvoteContainer";
           const upvoteButton = upvoteContainer.appendChild(button.cloneNode());
           upvoteButton.id = repliesArr[repliesArr.length-1-j]._id;
-          // upvoteButton.type = "submit";
           upvoteButton.className = "upvote-reply";
           const upvoteButtonImage = upvoteButton.appendChild(span.cloneNode());
           upvoteButtonImage.textContent = 'thumb_up';
-          // upvoteButtonImage.src = "/images/dflag.webp";
-          // upvoteButtonImage.alt = "flag";
           upvoteButtonImage.className = "material-symbols-outlined";
           const numberOfLikes = upvoteButton.appendChild(span.cloneNode());
           numberOfLikes.className = 'reply-like-button'
@@ -339,7 +321,6 @@ async function addCommentsToSection(){
     }
   }
   setTimeout(numberOfReplies, 100);
-  // await addComments(characterCard.characterId);
   Array.from(document.querySelectorAll('.replyButton')).forEach(element =>{
     element.addEventListener('click', openReplies);
   });
