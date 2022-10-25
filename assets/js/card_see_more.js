@@ -119,24 +119,28 @@ for(let j = 0; j < characters.description[0].numAbilities.length; j++){
     }
   } 
 }
+
 document.getElementById('like-card-button').addEventListener('click', submitLikeCardForm);
 document.getElementById('like-card-button').addEventListener('click', updateCardLikes);
 async function submitLikeCardForm(){
-  try{
-    const response = await fetch(`/character/likecard/${characterCard.characterId}`, {
-      method: 'PUT'
-    });
-  }
-  catch(err){
-    console.log(`Couldn't like! ${err}`);
+  if(currentUser !== null){
+    try{
+      const response = await fetch(`/character/likecard/${characterCard.characterId}`, {
+        method: 'PUT'
+      });
+    }
+    catch(err){
+      console.log(`Couldn't like! ${err}`);
+    }
   }
 }
 
 async function updateCardLikes(){
-  const numberOfLikesOnCard = document.querySelector('#like-card-form > span');
-  const likeButton = document.querySelector('#like-card-button > span');
-  numberOfLikesOnCard.innerHTML = "";
-  setTimeout(async ()=>{
+  if(currentUser !== null){
+    const numberOfLikesOnCard = document.querySelector('#like-card-form > span');
+    const likeButton = document.querySelector('#like-card-button > span');
+    numberOfLikesOnCard.innerHTML = "";
+    setTimeout(async ()=>{
     const characters = await getSpecificCharacter(characterCard.characterId);
     numberOfLikesOnCard.textContent = `${characters.likes.numberOfLikes}`;
       if(characters.likes.whoLiked.includes(currentUser.userID)){
@@ -145,7 +149,8 @@ async function updateCardLikes(){
       else{
         likeButton.style.color = "rgb(255, 255, 255)";
       }
-  }, 500);
+    }, 500);
+  }
 }
 
 //--------------------- Get comments and replies ------------------------------
