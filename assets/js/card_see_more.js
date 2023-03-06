@@ -18,7 +18,7 @@ function closeSeeMore(){
   customSeeMore.isItOpen = false;
 }
 async function seeMore(event){
-  characterCard.characterId = event.path[3].id;
+  characterCard.characterId = event.currentTarget.parentNode.parentNode.parentNode.id;
   const characters = await getSpecificCharacter(characterCard.characterId);
   const comments = await getComments();
   const replies = await getReplies();
