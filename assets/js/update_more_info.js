@@ -204,9 +204,8 @@ characterCard.updateForm.classList.add('hidden');
 
 
 function getCardId(event){
-  characterCard.characterId = event.path[3].id
+  characterCard.characterId = event.currentTarget.parentElement.parentElement.id
   addInfoToEdit();
-  console.log(event);
   unHideIt(characterCard.updateForm);
 }
 

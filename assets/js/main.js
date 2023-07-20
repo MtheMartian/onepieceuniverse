@@ -18,8 +18,7 @@ let currentUser = null;
 const generalButtons = {
   xOut: document.querySelectorAll('.closeIt'),
   hideIt: function(event){
-    console.log(event);
-    event.path[1].classList.add('hidden');
+    event.currentTarget.parentElement.classList.add('hidden');
     generalStuff.overlay.classList.add('hidden');
   },
 }
