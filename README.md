@@ -1,4 +1,9 @@
 # <a href="https://oprealm.herokuapp.com/">One Piece Realm</a>
+### How?
+* This was built using EJS and vanilla JS for the frontend.
+* NodeJS for the backend with a combination of: Cloudinary (media storage), express, passport (authentication)
+  and MongoDB for the database.
+
 ### Cards
 * Users are able to create cards of any characters from One Piece or edit their own.
 * Anything specific to the character can also be added to the card (e.g. abilities, name, bounty, etc.).
